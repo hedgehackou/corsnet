@@ -1,3 +1,16 @@
 {
-  "message": "привет"
+  "install": {
+    "setupDatabase": "Настройка базы данных",
+    "enterDatabaseParams": "Введите параметры базы данных MySQL которую будет использовать сайт",
+    "server": "Сервер",
+    "databaseName": "Имя базы данных",
+    "login": "Логин",
+    "password": "Пароль",
+    "next": "Далее",
+    "create": "Создать"
+  },
+  "languages": {
+    "russian": "RU",
+    "english": "EN"
+  }
 }

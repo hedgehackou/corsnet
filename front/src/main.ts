@@ -3,8 +3,11 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import i18n from "./i18n";
+import Loading from "vue-loading-overlay";
 
 Vue.config.productionTip = false;
+
+Vue.use(Loading);
 
 new Vue({
   router,

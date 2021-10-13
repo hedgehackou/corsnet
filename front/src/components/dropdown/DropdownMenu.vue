@@ -9,17 +9,14 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator";
 
 @Component({
   name: "app-dropdown-menu",
-  props: {
-    size: String,
-  },
 })
 export default class DropdownMenu extends Vue {
+  @Prop({ type: String, default: null }) readonly size: string | undefined;
   private dropdownMenuElement: HTMLElement | null = null;
-  public size: string | null = null;
 
   public mounted(): void {
     this.dropdownMenuElement = this.$refs.dropdownMenu as HTMLElement;

@@ -1,5 +1,16 @@
 {
   "install": {
-    "index": "test"
+    "setupDatabase": "Setup database",
+    "enterDatabaseParams": "Enter Mysql params which site will use",
+    "server": "Server",
+    "databaseName": "Database name",
+    "login": "Login",
+    "password": "Password",
+    "next": "Next",
+    "create": "Create"
+  },
+  "languages": {
+    "russian": "RU",
+    "english": "EN"
   }
 }

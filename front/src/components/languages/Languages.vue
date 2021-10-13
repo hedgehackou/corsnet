@@ -49,7 +49,7 @@ export default class Languages extends Vue {
 
   get flagIcon() {
     if (this.selectedLanguage === "ru") {
-      return "flag-icon-de";
+      return "flag-icon-ru";
     }
     return "flag-icon-us";
   }
