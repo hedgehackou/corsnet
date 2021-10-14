@@ -12,8 +12,6 @@
           <div class="d-flex langs">
             <Languages />
           </div>
-          <!-- /.card-header -->
-          <!-- form start -->
           <form>
             <div class="card-body">
               <div class="row">
@@ -21,28 +19,50 @@
                   <div class="form-group">
                     <label>{{ $t("install.server") }}</label>
                     <input
-                      type="email"
+                      v-model="databaseParams.host"
                       class="form-control"
                       placeholder="localhost"
+                    />
+                    <FormErrorListPrinter
+                      :error-list="databaseParamsErrors.host"
                     />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>{{ $t("install.databaseName") }}</label>
-                    <input class="form-control" />
+                    <input
+                      v-model="databaseParams.database"
+                      class="form-control"
+                    />
+                    <FormErrorListPrinter
+                      :error-list="databaseParamsErrors.database"
+                    />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>{{ $t("install.login") }}</label>
-                    <input class="form-control" />
+                    <input
+                      v-model="databaseParams.username"
+                      class="form-control"
+                    />
+                    <FormErrorListPrinter
+                      :error-list="databaseParamsErrors.username"
+                    />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>{{ $t("install.password") }}</label>
-                    <input class="form-control" />
+                    <input
+                      type="password"
+                      v-model="databaseParams.password"
+                      class="form-control"
+                    />
+                    <FormErrorListPrinter
+                      :error-list="databaseParamsErrors.password"
+                    />
                   </div>
                 </div>
               </div>
@@ -50,7 +70,11 @@
 
             <div class="card-footer">
               <div class="d-flex">
-                <button @click="nextStep" class="btn btn-success ml-auto">
+                <button
+                  type="button"
+                  @click="nextStep"
+                  class="btn btn-success ml-auto"
+                >
                   {{ $t("install.next") }}
                 </button>
               </div>
@@ -65,6 +89,7 @@
 <script lang="ts">
 import { Vue } from "vue-property-decorator";
 import Languages from "@/components/languages/Languages.vue";
+import FormErrorListPrinter from "@/components/form/FormErrorListPrinter.vue";
 import StoreModule from "@/store/StoreModule";
 import { InstallStoreModule } from "@/modules/install/store/InstallStore";
 
@@ -80,6 +105,7 @@ const installStore = namespace("InstallStoreModule");
 @Component({
   components: {
     Languages,
+    FormErrorListPrinter,
   },
 })
 export default class Install extends Vue {
@@ -87,22 +113,52 @@ export default class Install extends Vue {
   public SECOND_STEP = 2;
   public THIRD_STEP = 3;
 
+  public databaseDefaultParams = {
+    host: null,
+    database: null,
+    username: null,
+    password: null,
+  };
+  public databaseParams = { ...this.databaseDefaultParams };
+  public databaseParamsErrors = { ...this.databaseParams };
+
   public appElement: HTMLElement | null = null;
   public currentStep = this.FIRST_STEP;
 
   @installStore.Action("connectToDatabase")
-  connectToDatabase!: (payload: any) => any;
+  connectToDatabase!: (payload: any) => Promise<any>;
 
-  public nextStep(): void {
-    switch (this.currentStep) {
-      case this.FIRST_STEP:
-        return;
-      case this.SECOND_STEP:
-        return;
-      case this.THIRD_STEP:
-        return;
+  public async nextStep() {
+    let loader = this.$loading.show();
+    this.databaseParamsErrors = { ...this.databaseDefaultParams };
+    try {
+      switch (this.currentStep) {
+        case this.FIRST_STEP:
+          let {
+            data: { status },
+          } = await this.connectToDatabase(this.databaseParams);
+          if (status) {
+            this.$toast.success(
+              this.$t("install.successDatabaseConnection") as string
+            );
+          } else {
+            this.$toast.error(
+              this.$t("install.errorDatabaseConnection") as string
+            );
+          }
+          return;
+        case this.SECOND_STEP:
+          return;
+        case this.THIRD_STEP:
+          return;
+      }
+      this.currentStep += 1;
+    } catch (errors) {
+      this.$toast.error(this.$t("install.errorDatabaseConnection") as string);
+      this.databaseParamsErrors = errors.response.data.errors;
+    } finally {
+      loader.hide();
     }
-    this.currentStep += 1;
   }
 
   public mounted() {

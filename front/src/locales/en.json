@@ -7,7 +7,9 @@
     "login": "Login",
     "password": "Password",
     "next": "Next",
-    "create": "Create"
+    "create": "Create",
+    "errorDatabaseConnection": "Error database connection",
+    "successDatabaseConnection": "Success database connection"
   },
   "languages": {
     "russian": "RU",

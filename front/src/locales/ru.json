@@ -7,7 +7,9 @@
     "login": "Логин",
     "password": "Пароль",
     "next": "Далее",
-    "create": "Создать"
+    "create": "Создать",
+    "errorDatabaseConnection": "Ошибка соединения с базой",
+    "successDatabaseConnection": "Успешное соединение с базой"
   },
   "languages": {
     "russian": "RU",
