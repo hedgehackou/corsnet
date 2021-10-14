@@ -50,7 +50,7 @@
 
             <div class="card-footer">
               <div class="d-flex">
-                <button type="submit" class="btn btn-success ml-auto">
+                <button @click="nextStep" class="btn btn-success ml-auto">
                   {{ $t("install.next") }}
                 </button>
               </div>
@@ -78,7 +78,24 @@ StoreModule.registerMany({
   },
 })
 export default class Install extends Vue {
-  private appElement: HTMLElement | null = null;
+  public FIRST_STEP = 1;
+  public SECOND_STEP = 2;
+  public THIRD_STEP = 3;
+
+  public appElement: HTMLElement | null = null;
+  public currentStep = this.FIRST_STEP;
+
+  public nextStep(): void {
+    switch (this.currentStep) {
+      case this.FIRST_STEP:
+        return;
+      case this.SECOND_STEP:
+        return;
+      case this.THIRD_STEP:
+        return;
+    }
+    this.currentStep += 1;
+  }
 
   public mounted() {
     this.appElement = document.getElementById("app") as HTMLElement;

@@ -2,6 +2,7 @@ import { Module } from "vuex";
 import { InstallState } from "@/modules/install/store/types";
 import { GetterTree, ActionTree, MutationTree } from "vuex";
 import { RootState } from "@/store/types";
+import Vue from "vue";
 
 const state: InstallState = {};
 
