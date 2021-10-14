@@ -63,14 +63,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Vue } from "vue-property-decorator";
 import Languages from "@/components/languages/Languages.vue";
 import StoreModule from "@/store/StoreModule";
 import { InstallStoreModule } from "@/modules/install/store/InstallStore";
 
+import Component from "vue-class-component";
+import { namespace } from "vuex-class";
+
 StoreModule.registerMany({
   InstallStoreModule,
 });
+
+const installStore = namespace("InstallStoreModule");
 
 @Component({
   components: {
@@ -84,6 +89,9 @@ export default class Install extends Vue {
 
   public appElement: HTMLElement | null = null;
   public currentStep = this.FIRST_STEP;
+
+  @installStore.Action("connectToDatabase")
+  connectToDatabase!: (payload: any) => any;
 
   public nextStep(): void {
     switch (this.currentStep) {

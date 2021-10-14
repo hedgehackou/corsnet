@@ -10,11 +10,20 @@ const getters: GetterTree<InstallState, RootState> = {};
 
 const mutations: MutationTree<InstallState> = {};
 
-const actions: ActionTree<InstallState, RootState> = {};
+const actions: ActionTree<InstallState, RootState> = {
+  async connectToDatabase(options, payload) {
+    const response = await Vue.axios.post(
+      `${process.env.VUE_APP_API_URL}/connect-to-database`,
+      payload
+    );
+    return response.data;
+  },
+};
 
 export const InstallStoreModule: Module<InstallState, RootState> = {
   state,
   getters,
   mutations,
   actions,
+  namespaced: true,
 };
