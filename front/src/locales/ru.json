@@ -9,7 +9,11 @@
     "next": "Далее",
     "create": "Создать",
     "errorDatabaseConnection": "Ошибка соединения с базой",
-    "successDatabaseConnection": "Успешное соединение с базой"
+    "successDatabaseConnection": "Успешное соединение с базой",
+    "setupSmtp": "Настройка SMTP",
+    "host": "Хост",
+    "port": "Порт",
+    "encryption": "Шифрование"
   },
   "languages": {
     "russian": "RU",

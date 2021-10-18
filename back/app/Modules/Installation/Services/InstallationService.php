@@ -43,4 +43,33 @@ class InstallationService extends AbstractService
             return false;
         }
     }
+
+    public function setupSmtp(array $data): bool
+    {
+        SettingsHelper::setEnv([
+            'MAIL_PORT' => $data['port'],
+            'MAIL_HOST' => $data['host'],
+            'MAIL_USERNAME' => $data['login'],
+            'MAIL_PASSWORD' => $data['password'],
+            'MAIL_ENCRYPTION' => $data['encryption'],
+        ]);
+
+        $customConfig = array_merge(config('mail.mailers.smtp'), [
+            "host" => $data['host'],
+            "port" => $data['port'],
+            "username" => $data['username'],
+            "password" => $data['password'],
+            "encryption" => $data['encryption'],
+        ]);
+
+        config([
+            'mail.mailers.test' => $customConfig,
+            'mail.default' => 'test',
+        ]);
+        try {
+            return true;
+        } catch (\Exception $exception) {
+            return false;
+        }
+    }
 }

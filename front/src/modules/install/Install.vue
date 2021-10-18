@@ -2,7 +2,7 @@
   <div class="container install">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <div class="card card-primary">
+        <div class="card card-primary" v-if="currentStep === FIRST_STEP">
           <div class="card-header">
             <h3 class="card-title">
               {{ $t("install.setupDatabase") }}
@@ -81,6 +81,97 @@
             </div>
           </form>
         </div>
+        <div class="card card-primary" v-if="currentStep === SECOND_STEP">
+          <div class="card-header">
+            <h3 class="card-title">
+              {{ $t("install.setupSmtp") }}
+            </h3>
+            <div class="ml-auto"></div>
+          </div>
+          <div class="d-flex langs">
+            <Languages />
+          </div>
+          <form>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>{{ $t("install.host") }}</label>
+                    <input
+                      placeholder="smtp.mailtrap.io"
+                      v-model="smtpParams.host"
+                      class="form-control"
+                    />
+                    <FormErrorListPrinter :error-list="smtpParamsErrors.host" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>{{ $t("install.port") }}</label>
+                    <input
+                      placeholder="2525"
+                      v-model="smtpParams.port"
+                      class="form-control"
+                    />
+                    <FormErrorListPrinter :error-list="smtpParamsErrors.port" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>{{ $t("install.encryption") }}</label>
+                    <input
+                      placeholder="tls"
+                      type="password"
+                      v-model="smtpParams.encryption"
+                      class="form-control"
+                    />
+                    <FormErrorListPrinter
+                      :error-list="smtpParamsErrors.encryption"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>{{ $t("install.login") }}</label>
+                    <input
+                      type="password"
+                      v-model="smtpParams.login"
+                      class="form-control"
+                    />
+                    <FormErrorListPrinter
+                      :error-list="smtpParamsErrors.login"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>{{ $t("install.password") }}</label>
+                    <input
+                      type="password"
+                      v-model="smtpParams.password"
+                      class="form-control"
+                    />
+                    <FormErrorListPrinter
+                      :error-list="smtpParamsErrors.password"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <div class="d-flex">
+                <button
+                  type="button"
+                  @click="nextStep"
+                  class="btn btn-success ml-auto"
+                >
+                  {{ $t("install.next") }}
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -119,14 +210,28 @@ export default class Install extends Vue {
     username: null,
     password: null,
   };
+  public smtpDefaultParams = {
+    host: null,
+    login: null,
+    password: null,
+    port: null,
+    encryption: null,
+  };
+
   public databaseParams = { ...this.databaseDefaultParams };
   public databaseParamsErrors = { ...this.databaseParams };
 
+  public smtpParams = { ...this.smtpDefaultParams };
+  public smtpParamsErrors = { ...this.smtpDefaultParams };
+
   public appElement: HTMLElement | null = null;
-  public currentStep = this.FIRST_STEP;
+  public currentStep = 2; //this.FIRST_STEP
 
   @installStore.Action("connectToDatabase")
   connectToDatabase!: (payload: any) => Promise<any>;
+
+  @installStore.Action("setupSmtp")
+  setupSmtp!: (payload: any) => Promise<any>;
 
   public async nextStep() {
     let loader = this.$loading.show();
