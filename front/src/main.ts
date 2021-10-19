@@ -9,6 +9,7 @@ import VueAxios from "vue-axios";
 import VueToast from "vue-toast-notification";
 
 Vue.config.productionTip = false;
+axios.defaults.baseURL = process.env.VUE_APP_BASE_API_URL;
 
 Vue.use(Loading);
 Vue.use(VueAxios, axios);

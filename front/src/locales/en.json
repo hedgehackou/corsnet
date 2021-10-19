@@ -13,7 +13,16 @@
     "setupSmtp": "Setup SMTP",
     "host": "Host",
     "port": "Port",
-    "encryption": "Encryption"
+    "encryption": "Encryption",
+    "settings": "Settings",
+    "networkName": "Network name",
+    "adminAccount": "Admin account",
+    "successSmtpConnection": "Success smtp connection",
+    "errorSmtpConnection": "Error smtp connection",
+    "email": "Email",
+    "name": "Name",
+    "passwordConfirmation": "Password confirmation",
+    "installSuccess": "Installation completed successfully"
   },
   "languages": {
     "russian": "RU",

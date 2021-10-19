@@ -6,11 +6,35 @@ namespace App\Modules\Installation\Services;
 
 use App\Base\Helpers\SettingsHelper;
 use App\Base\Services\AbstractService;
+use App\Models\User;
+use App\Modules\Settings\Models\Setting;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class InstallationService extends AbstractService
 {
+    /**
+     * @param array $data
+     */
+    public function installation(array $data)
+    {
+        Artisan::call('migrate', ['--force' => true, '--seed' => true]);
+        DB::transaction(function () use ($data) {
+            Setting::create([
+                'network_name' => $data['network_name'],
+            ]);
+            User::create([
+                'email' => $data['email'],
+                'name' => $data['name'],
+                'is_admin' => true,
+                'password' => Hash::make($data['password'])
+            ]);
+        });
+    }
+
     /**
      * @param array $data
      *
@@ -44,6 +68,11 @@ class InstallationService extends AbstractService
         }
     }
 
+    /**
+     * @param array $data
+     *
+     * @return bool
+     */
     public function setupSmtp(array $data): bool
     {
         SettingsHelper::setEnv([
@@ -51,15 +80,15 @@ class InstallationService extends AbstractService
             'MAIL_HOST' => $data['host'],
             'MAIL_USERNAME' => $data['login'],
             'MAIL_PASSWORD' => $data['password'],
-            'MAIL_ENCRYPTION' => $data['encryption'],
+            'MAIL_ENCRYPTION' => $data['encryption'] ?? 'null',
         ]);
 
         $customConfig = array_merge(config('mail.mailers.smtp'), [
             "host" => $data['host'],
             "port" => $data['port'],
-            "username" => $data['username'],
+            "username" => $data['login'],
             "password" => $data['password'],
-            "encryption" => $data['encryption'],
+            "encryption" => $data['encryption'] ?? 'null',
         ]);
 
         config([
@@ -67,6 +96,7 @@ class InstallationService extends AbstractService
             'mail.default' => 'test',
         ]);
         try {
+            Mail::mailer()->getSwiftMailer()->getTransport()->start();
             return true;
         } catch (\Exception $exception) {
             return false;

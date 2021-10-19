@@ -13,9 +13,29 @@ const mutations: MutationTree<InstallState> = {};
 const actions: ActionTree<InstallState, RootState> = {
   async connectToDatabase(options, payload) {
     const response = await Vue.axios.post(
-      `${process.env.VUE_APP_API_URL}/connect-to-database`,
+      `install/connect-to-database`,
       payload
     );
+    return response.data;
+  },
+  async setupSmtp(options, payload) {
+    const response = await Vue.axios.post(`install/setup-smtp`, payload);
+
+    return response.data;
+  },
+  async addSettings(options, payload) {
+    const response = await Vue.axios.post(`install/add-settings`, payload);
+
+    return response.data;
+  },
+  async addAdminParams(options, payload) {
+    const response = await Vue.axios.post(`install/add-admin`, payload);
+
+    return response.data;
+  },
+  async installation(options, payload) {
+    const response = await Vue.axios.post(`install/installation`, payload);
+
     return response.data;
   },
 };

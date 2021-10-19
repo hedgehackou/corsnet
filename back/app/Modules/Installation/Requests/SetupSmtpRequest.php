@@ -14,7 +14,7 @@ class SetupSmtpRequest extends AbstractFormRequest
             'host' => ['required', 'string'],
             'port' => ['required', 'string'],
             'login' => ['required', 'string'],
-            'encryption' => ['required', 'string'],
+            'encryption' => ['nullable', 'string'],
             'password' => ['required', 'string'],
         ];
     }

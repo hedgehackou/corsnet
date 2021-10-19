@@ -13,7 +13,16 @@
     "setupSmtp": "Настройка SMTP",
     "host": "Хост",
     "port": "Порт",
-    "encryption": "Шифрование"
+    "encryption": "Шифрование",
+    "settings": "Настройки",
+    "networkName": "Имя сети",
+    "adminAccount": "Аккаунт администратора",
+    "successSmtpConnection": "Успешное smtp соединение",
+    "errorSmtpConnection": "Ошибка smtp соединения",
+    "email": "Email",
+    "name": "Имя",
+    "passwordConfirmation": "Подтверждение пароля",
+    "installSuccess": "Установка успешно завершена"
   },
   "languages": {
     "russian": "RU",

@@ -8,4 +8,17 @@ module.exports = {
       enableBridge: false,
     },
   },
+  configureWebpack: {
+    devServer: {
+      overlay: false,
+      proxy: {
+        "^/api": {
+          target: process.env.VUE_APP_PROXY_API_URL,
+          ws: true,
+          secure: false,
+          changeOrigin: true,
+        },
+      },
+    },
+  },
 };

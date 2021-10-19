@@ -22,6 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group([
     'middleware' => ['cors'],
 ], function ($router) {
-    Route::post('connect-to-database', 'App\Modules\Installation\Controllers\InstallationController@connectToDatabase');
+    Route::post('install/connect-to-database', 'App\Modules\Installation\Controllers\InstallationController@connectToDatabase');
+    Route::post('install/setup-smtp', 'App\Modules\Installation\Controllers\InstallationController@setupSmtp');
+    Route::post('install/add-settings', 'App\Modules\Installation\Controllers\InstallationController@addSettings');
+    Route::post('install/installation', 'App\Modules\Installation\Controllers\InstallationController@installation');
 });
 
