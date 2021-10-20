@@ -74,4 +74,14 @@ class InstallationController extends AbstractController
 
         return response()->json();
     }
+
+    /**
+     * @return JsonResponse
+     */
+    public function isProjectInstalled(): JsonResponse
+    {
+        return response()->json([
+           'status' => (bool) env('IS_INSTALLED')
+        ]);
+    }
 }

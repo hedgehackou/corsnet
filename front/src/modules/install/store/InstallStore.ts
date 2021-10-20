@@ -11,6 +11,11 @@ const getters: GetterTree<InstallState, RootState> = {};
 const mutations: MutationTree<InstallState> = {};
 
 const actions: ActionTree<InstallState, RootState> = {
+  async isProjectInstalled() {
+    const response = await Vue.axios.get(`install/is-project-installed`);
+
+    return response.data;
+  },
   async connectToDatabase(options, payload) {
     const response = await Vue.axios.post(
       `install/connect-to-database`,

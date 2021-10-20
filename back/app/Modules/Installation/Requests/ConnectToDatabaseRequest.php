@@ -8,7 +8,7 @@ use App\Base\Requests\AbstractFormRequest;
 
 class ConnectToDatabaseRequest extends AbstractFormRequest
 {
-    public function rules()
+    public function rules(): array
     {
         return [
             'host' => ['required', 'string'],

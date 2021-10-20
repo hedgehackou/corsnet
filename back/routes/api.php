@@ -26,5 +26,6 @@ Route::group([
     Route::post('install/setup-smtp', 'App\Modules\Installation\Controllers\InstallationController@setupSmtp');
     Route::post('install/add-settings', 'App\Modules\Installation\Controllers\InstallationController@addSettings');
     Route::post('install/installation', 'App\Modules\Installation\Controllers\InstallationController@installation');
+    Route::get('install/is-project-installed', 'App\Modules\Installation\Controllers\InstallationController@isProjectInstalled');
 });
 

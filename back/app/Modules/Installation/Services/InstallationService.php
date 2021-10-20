@@ -33,6 +33,9 @@ class InstallationService extends AbstractService
                 'password' => Hash::make($data['password'])
             ]);
         });
+        SettingsHelper::setEnv([
+            'IS_INSTALLED' => 1,
+        ]);
     }
 
     /**

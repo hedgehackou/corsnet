@@ -8,7 +8,7 @@ use App\Base\Requests\AbstractFormRequest;
 
 class AddSettingsRequest extends AbstractFormRequest
 {
-    public function rules()
+    public function rules(): array
     {
         return [
             'network_name' => ['required', 'string'],

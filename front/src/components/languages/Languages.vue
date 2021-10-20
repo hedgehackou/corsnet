@@ -54,10 +54,12 @@ export default class Languages extends Vue {
     return "flag-icon-us";
   }
 
-  public changeLanguage(langCode: string) {
-    if (this.$i18n.locale !== langCode) {
-      this.$i18n.locale = langCode;
-      this.selectedLanguage = langCode;
+  public changeLanguage(locale: string) {
+    if (this.$i18n.locale !== locale) {
+      this.$i18n.locale = locale;
+      this.selectedLanguage = locale;
+      const to = this.$router.resolve({ params: { locale } });
+      this.$router.push(to.location);
     }
   }
 }
