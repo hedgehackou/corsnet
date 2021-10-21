@@ -8,6 +8,9 @@ use App\Base\Requests\AbstractFormRequest;
 
 class SetupSmtpRequest extends AbstractFormRequest
 {
+    /**
+     * @return array
+     */
     public function rules(): array
     {
         return [

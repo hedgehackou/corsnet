@@ -8,6 +8,9 @@ use App\Base\Requests\AbstractFormRequest;
 
 class InstallationRequest extends AbstractFormRequest
 {
+    /**
+     * @return array
+     */
     public function rules(): array
     {
         return [

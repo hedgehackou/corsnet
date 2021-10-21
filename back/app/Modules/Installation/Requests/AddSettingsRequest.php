@@ -8,6 +8,9 @@ use App\Base\Requests\AbstractFormRequest;
 
 class AddSettingsRequest extends AbstractFormRequest
 {
+    /**
+     * @return \string[][]
+     */
     public function rules(): array
     {
         return [

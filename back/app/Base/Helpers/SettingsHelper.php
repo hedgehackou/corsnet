@@ -11,7 +11,7 @@ class SettingsHelper
         foreach ($items as $key => $value) {
             $path = app()->environmentFilePath();
 
-            $escaped = preg_quote('='.env($key), '/');
+            $escaped = preg_quote('=' . env($key), '/');
 
             file_put_contents($path, preg_replace(
                 "/^{$key}{$escaped}/m",
@@ -21,4 +21,3 @@ class SettingsHelper
         }
     }
 }
-
