@@ -1,0 +1,31 @@
+{
+  "install": {
+    "setupDatabase": "Setup database",
+    "enterDatabaseParams": "Enter Mysql params which site will use",
+    "server": "Server",
+    "databaseName": "Database name",
+    "login": "Login",
+    "password": "Password",
+    "next": "Next",
+    "create": "Create",
+    "errorDatabaseConnection": "Error database connection",
+    "successDatabaseConnection": "Success database connection",
+    "setupSmtp": "Setup SMTP",
+    "host": "Host",
+    "port": "Port",
+    "encryption": "Encryption",
+    "settings": "Settings",
+    "networkName": "Network name",
+    "adminAccount": "Admin account",
+    "successSmtpConnection": "Success smtp connection",
+    "errorSmtpConnection": "Error smtp connection",
+    "email": "Email",
+    "name": "Name",
+    "passwordConfirmation": "Password confirmation",
+    "installSuccess": "Installation completed successfully"
+  },
+  "languages": {
+    "russian": "RU",
+    "english": "EN"
+  }
+}

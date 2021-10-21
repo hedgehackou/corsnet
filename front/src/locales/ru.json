@@ -1,0 +1,31 @@
+{
+  "install": {
+    "setupDatabase": "Настройка базы данных",
+    "enterDatabaseParams": "Введите параметры базы данных MySQL которую будет использовать сайт",
+    "server": "Сервер",
+    "databaseName": "Имя базы данных",
+    "login": "Логин",
+    "password": "Пароль",
+    "next": "Далее",
+    "create": "Создать",
+    "errorDatabaseConnection": "Ошибка соединения с базой",
+    "successDatabaseConnection": "Успешное соединение с базой",
+    "setupSmtp": "Настройка SMTP",
+    "host": "Хост",
+    "port": "Порт",
+    "encryption": "Шифрование",
+    "settings": "Настройки",
+    "networkName": "Имя сети",
+    "adminAccount": "Аккаунт администратора",
+    "successSmtpConnection": "Успешное smtp соединение",
+    "errorSmtpConnection": "Ошибка smtp соединения",
+    "email": "Email",
+    "name": "Имя",
+    "passwordConfirmation": "Подтверждение пароля",
+    "installSuccess": "Установка успешно завершена"
+  },
+  "languages": {
+    "russian": "RU",
+    "english": "EN"
+  }
+}
