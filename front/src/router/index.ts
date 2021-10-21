@@ -3,7 +3,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 import Install from "@/modules/install/Install.vue";
 import Index from "@/modules/index/Index.vue";
 import { NavigationGuardNext, Route } from "vue-router/types/router";
-//import store from "@/store/index";
+import store from "@/store/index";
 import i18n from "@/i18n";
 
 Vue.use(VueRouter);
@@ -64,16 +64,16 @@ router.push = async function (location: any) {
 
 router.beforeEach(async (to: Route, from: Route, next: NavigationGuardNext) => {
   next();
-  // await store.dispatch("InstallStore/isProjectInstalled").then(({ status }) => {
-  //   if (status || to.name === "install") {
-  //     if (status && to.name === "install") {
-  //       next({ name: "index" });
-  //     }
-  //     next();
-  //   } else {
-  //     next({ name: "install" });
-  //   }
-  // });
+  await store.dispatch("InstallStore/isProjectInstalled").then(({ status }) => {
+    if (status || to.name === "install") {
+      if (status && to.name === "install") {
+        next({ name: "index", params: { locale: i18n.locale } });
+      }
+      next();
+    } else {
+      next({ name: "install", params: { locale: i18n.locale } });
+    }
+  });
 });
 
 export default router;

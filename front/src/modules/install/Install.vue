@@ -418,6 +418,10 @@ export default class Install extends Vue {
         ...this.settingParams,
       });
       this.$toast.success(this.$t("install.installSuccess") as string);
+      await this.$router.push({
+        name: "index",
+        params: { locale: this.$i18n.locale },
+      });
     } catch (e) {
       this.installationParamsErrors = e.response.data.errors;
     }
