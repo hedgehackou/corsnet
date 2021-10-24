@@ -485,16 +485,14 @@ export default class Install extends Vue {
 </script>
 
 <style lang="scss">
-.install {
-  .langs {
-    display: flex;
-    li {
-      margin-left: auto;
-      list-style-type: none;
-      button {
-        border: 1px solid rgba(0, 0, 0, 0.125);
-        background: rgba(0, 0, 0, 0.03);
-      }
+.langs {
+  display: flex;
+  li {
+    margin-left: auto;
+    list-style-type: none;
+    button {
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      background: rgba(0, 0, 0, 0.03);
     }
   }
 }

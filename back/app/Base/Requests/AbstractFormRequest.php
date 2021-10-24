@@ -9,6 +9,11 @@ use Illuminate\Support\Str;
 
 abstract class AbstractFormRequest extends FormRequest
 {
+    public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
+    {
+        parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *

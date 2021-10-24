@@ -14,14 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+    'middleware' => ['auth:sanctum'],
+], function ($router) {
+    Route::post('auth/fetch-profile', 'App\Modules\Auth\Controllers\AuthController@fetchProfile');
 });
-
 
 Route::group([
     'middleware' => ['cors'],
 ], function ($router) {
+    //Auth
+    Route::post('auth/login', 'App\Modules\Auth\Controllers\AuthController@login');
+    //Install
     Route::post('install/connect-to-database', 'App\Modules\Installation\Controllers\InstallationController@connectToDatabase');
     Route::post('install/setup-smtp', 'App\Modules\Installation\Controllers\InstallationController@setupSmtp');
     Route::post('install/add-settings', 'App\Modules\Installation\Controllers\InstallationController@addSettings');

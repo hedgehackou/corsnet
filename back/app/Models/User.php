@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
+ * @property int $id
  * @property string $name
  * @property string $email
  * @property string $password
@@ -51,4 +52,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_admin' => 'boolean',
     ];
+
+    /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return !!$this->is_admin;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUser(): bool
+    {
+        return !$this->is_admin;
+    }
 }

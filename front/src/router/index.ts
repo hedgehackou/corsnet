@@ -5,6 +5,7 @@ import Index from "@/modules/index/Index.vue";
 import { NavigationGuardNext, Route } from "vue-router/types/router";
 import store from "@/store/index";
 import i18n from "@/i18n";
+import Login from "@/modules/auth/login/Login.vue";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,13 @@ const routes: Array<RouteConfig> = [
         path: "",
         name: "index",
         component: Index,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "login",
+        name: "login",
+        component: Login,
+        meta: { guest: true },
       },
       {
         path: "install",
@@ -63,7 +71,7 @@ router.push = async function (location: any) {
 };
 
 router.beforeEach(async (to: Route, from: Route, next: NavigationGuardNext) => {
-  next();
+  await store.dispatch("AuthStore/fetchProfile");
   await store.dispatch("InstallStore/isProjectInstalled").then(({ status }) => {
     if (status || to.name === "install") {
       if (status && to.name === "install") {
@@ -74,6 +82,30 @@ router.beforeEach(async (to: Route, from: Route, next: NavigationGuardNext) => {
       next({ name: "install", params: { locale: i18n.locale } });
     }
   });
+});
+
+router.beforeEach(async (to: Route, from: Route, next: NavigationGuardNext) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (store.getters["AuthStore/isAuthorized"]) {
+      next();
+      return;
+    }
+    next({ name: "login", params: { locale: i18n.locale } });
+  } else {
+    next();
+  }
+});
+
+router.beforeEach((to: Route, from: Route, next: NavigationGuardNext) => {
+  if (to.matched.some((record) => record.meta.guest)) {
+    if (store.getters["AuthStore/isAuthorized"]) {
+      next({ name: "index", params: { locale: i18n.locale } });
+      return;
+    }
+    next();
+  } else {
+    next();
+  }
 });
 
 export default router;

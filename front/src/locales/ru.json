@@ -27,5 +27,12 @@
   "languages": {
     "russian": "RU",
     "english": "EN"
+  },
+  "auth": {
+    "signInToStart": "Войдите, чтобы начать сессию",
+    "forgotPassword": "Забыли пароль",
+    "signIn": "Логин",
+    "loginSuccess": "Вход выполнен успешно",
+    "loginError": "Ошибка авторизации"
   }
 }
