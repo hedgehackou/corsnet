@@ -6,6 +6,7 @@ import { NavigationGuardNext, Route } from "vue-router/types/router";
 import store from "@/store/index";
 import i18n from "@/i18n";
 import Login from "@/modules/auth/login/Login.vue";
+import axios from "axios";
 
 Vue.use(VueRouter);
 
@@ -18,6 +19,8 @@ const routes: Array<RouteConfig> = [
     beforeEnter: (to, from, next) => {
       const locale = to.params.locale;
       const supportedLocales = ["ru", "en"];
+      //@ts-ignore
+      axios.defaults.headers["Accept-Language"] = locale;
       if (!supportedLocales.includes(locale)) {
         return next("en");
       }

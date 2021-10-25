@@ -57,6 +57,8 @@ export default class Languages extends Vue {
   public changeLanguage(locale: string) {
     if (this.$i18n.locale !== locale) {
       this.$i18n.locale = locale;
+      //@ts-ignore
+      this.axios.defaults.headers["Accept-Language"] = locale;
       this.selectedLanguage = locale;
       const to = this.$router.resolve({ params: { locale } });
       this.$router.push(to.location);

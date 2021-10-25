@@ -11,6 +11,13 @@ abstract class AbstractFormRequest extends FormRequest
 {
     public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
     {
+        $lang = request()->header('accept-language', 'en');
+        if (!in_array($lang, ['en', 'ru'])) {
+            $lang = 'en';
+        }
+
+        app()->setLocale($lang);
+
         parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
     }
 
