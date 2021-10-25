@@ -102,6 +102,10 @@ export default class Login extends Vue {
   }
 
   public unmounted(): void {
+    this.removeAppClass();
+  }
+
+  public removeAppClass() {
     (this.appElement as HTMLElement).classList.remove("login-page");
   }
 
@@ -114,7 +118,13 @@ export default class Login extends Vue {
       });
       localStorage.setItem("auth_token", token);
       localStorage.setItem("auth_abilities", abilities);
+      this.axios.defaults.headers = {
+        //@ts-ignore
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      };
       this.$toast.success(this.$t("auth.loginSuccess") as string);
+      this.removeAppClass();
       await this.$router.push({ name: "index" });
     } catch (error: any) {
       this.loginErrors = error.response.data.errors;

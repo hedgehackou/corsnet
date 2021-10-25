@@ -13,7 +13,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
   name: "FormErrorListPrinter",
 })
 export default class FormErrorListPrinter extends Vue {
-  @Prop({ type: Array, required: false, default: [] })
+  @Prop({ type: Array, required: false, default: () => [] })
   readonly errorList: any;
 }
 </script>

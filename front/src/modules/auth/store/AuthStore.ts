@@ -28,7 +28,7 @@ const actions: ActionTree<AuthState, RootState> = {
   async login(options, payload) {
     const response = await Vue.axios.post(`auth/login`, payload);
 
-    return (response.data as any).data;
+    return response.data;
   },
   async fetchProfile({ commit }) {
     try {

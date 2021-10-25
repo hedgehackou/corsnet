@@ -1,11 +1,18 @@
 <template>
-  <div class="w-100">Index page</div>
+  <div class="wrapper">
+    <AppHeader />
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import Header from "@/modules/main/header/Header.vue";
 
-@Component({})
+@Component({
+  components: {
+    AppHeader: Header,
+  },
+})
 export default class Index extends Vue {}
 </script>
 

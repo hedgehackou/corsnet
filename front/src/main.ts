@@ -10,6 +10,13 @@ import VueToast from "vue-toast-notification";
 
 Vue.config.productionTip = false;
 axios.defaults.baseURL = process.env.VUE_APP_BASE_API_URL;
+if (localStorage.getItem("auth_token")) {
+  axios.defaults.headers = {
+    // @ts-ignore
+    Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+    Accept: "application/json",
+  };
+}
 
 Vue.use(Loading);
 Vue.use(VueAxios, axios);
