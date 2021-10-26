@@ -1,67 +1,42 @@
 <template>
   <div class="login-box">
-    <Languages class="lang-module" />
-    <!-- /.login-logo -->
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
         <a href="#" class="h1"><b>Admin</b>LTE</a>
       </div>
       <div class="card-body">
-        <p class="login-box-msg">{{ $t("auth.signInToStart") }}</p>
-
-        <form @submit.prevent="loginByAuth">
-          <div class="input-group mb-1 mt-2">
-            <input
-              type="email"
-              class="form-control"
-              placeholder="Email"
-              v-model="email"
-            />
+        <p class="login-box-msg">
+          {{ $t("auth.resetPassword") }}
+        </p>
+        <form>
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Email" />
             <div class="input-group-append">
               <div class="input-group-text">
-                <span class="fa fa-envelope"></span>
+                <span class="fas fa-envelope"></span>
               </div>
             </div>
           </div>
-          <form-error-list-printer :error-list="loginErrors.email" />
-          <div class="input-group mb-1 mt-3">
-            <input
-              type="password"
-              class="form-control"
-              placeholder="Password"
-              v-model="password"
-            />
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fa fa-lock"></span>
-              </div>
-            </div>
-          </div>
-          <form-error-list-printer :error-list="loginErrors.password" />
-
           <div class="row">
-            <!-- /.col -->
             <div class="col-12">
-              <button class="mt-4 btn btn-primary w-100" type="submit">
-                {{ $t("auth.signIn") }}
+              <button type="submit" class="btn btn-primary btn-block">
+                {{ $t("auth.send") }}
               </button>
             </div>
             <!-- /.col -->
           </div>
         </form>
-
-        <p class="mb-0 mt-2">
+        <p class="mt-3 mb-1">
           <router-link
-            :to="{ name: 'forgot-password', params: { locale: $i18n.locale } }"
+            :to="{ name: 'login', params: { locale: $i18n.locale } }"
+            >{{ $t("auth.signIn") }}</router-link
           >
-            {{ $t("auth.forgotPassword") }}
-          </router-link>
         </p>
       </div>
-      <!-- /.card-body -->
+      <!-- /.login-card-body -->
     </div>
-    <!-- /.card -->
   </div>
+  <!-- /.login-box -->
 </template>
 
 <script lang="ts">
@@ -85,10 +60,10 @@ const authStore = namespace("AuthStoreModule");
     FormErrorListPrinter,
   },
 })
-export default class Login extends Vue {
+export default class ForgotPassword extends Vue {
   private appElement: HTMLElement | null = null;
-  public email = "";
-  public password = "";
+  public email: string = "";
+  public password: string = "";
 
   public loginErrors = {
     email: null,

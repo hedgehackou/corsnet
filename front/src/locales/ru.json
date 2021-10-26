@@ -33,6 +33,8 @@
     "forgotPassword": "Забыли пароль",
     "signIn": "Логин",
     "loginSuccess": "Вход выполнен успешно",
-    "loginError": "Ошибка авторизации"
+    "loginError": "Ошибка авторизации",
+    "resetPassword": "Восстановить пароль",
+    "send": "Отправить"
   }
 }

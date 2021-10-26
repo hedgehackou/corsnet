@@ -33,6 +33,8 @@
     "forgotPassword": "Forgot password",
     "signIn": "Sign in",
     "loginSuccess": "Login has been successfully",
-    "loginError": "Auth error"
+    "loginError": "Auth error",
+    "resetPassword": "Reset password",
+    "send": "Send"
   }
 }

@@ -7,6 +7,7 @@ import store from "@/store/index";
 import i18n from "@/i18n";
 import Login from "@/modules/auth/login/Login.vue";
 import axios from "axios";
+import ForgotPassword from "@/modules/auth/forgot-password/ForgotPassword.vue";
 
 Vue.use(VueRouter);
 
@@ -40,6 +41,12 @@ const routes: Array<RouteConfig> = [
         path: "login",
         name: "login",
         component: Login,
+        meta: { guest: true },
+      },
+      {
+        path: "forgot-password",
+        name: "forgot-password",
+        component: ForgotPassword,
         meta: { guest: true },
       },
       {
