@@ -44,6 +44,11 @@ const actions: ActionTree<AuthState, RootState> = {
       commit("auth", false);
     }
   },
+  async resetPassword(options, payload) {
+    const response = await Vue.axios.post(`auth/reset-password`, payload);
+
+    return response.data;
+  },
 };
 
 export const AuthStoreModule: Module<AuthState, RootState> = {

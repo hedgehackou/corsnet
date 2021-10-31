@@ -37,6 +37,9 @@
     "resetPassword": "Восстановить пароль",
     "send": "Отправить",
     "resetPasswordError": "Ошибка восстановления пароля",
-    "resetPasswordLinkSent": "Ссылка на восстановление пароля отправлена успешно"
+    "resetPasswordLinkSent": "Ссылка на восстановление пароля отправлена успешно",
+    "newPassword": "Новый пароль",
+    "confirmNewPassword": "Подтверждение нового пароля",
+    "passwordResetSuccessfully": "Пароль сброшен успешно"
   }
 }

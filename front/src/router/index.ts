@@ -8,6 +8,7 @@ import i18n from "@/i18n";
 import Login from "@/modules/auth/login/Login.vue";
 import axios from "axios";
 import ForgotPassword from "@/modules/auth/forgot-password/ForgotPassword.vue";
+import ResetPassword from "@/modules/auth/reset-password/ResetPassword.vue";
 
 Vue.use(VueRouter);
 
@@ -48,6 +49,11 @@ const routes: Array<RouteConfig> = [
         name: "forgot-password",
         component: ForgotPassword,
         meta: { guest: true },
+      },
+      {
+        path: "reset-password/:token",
+        name: "reset-password",
+        component: ResetPassword,
       },
       {
         path: "install",

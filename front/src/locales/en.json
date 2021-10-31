@@ -37,6 +37,9 @@
     "resetPassword": "Reset password",
     "send": "Send",
     "resetPasswordError": "Reset password error",
-    "resetPasswordLinkSent": "Reset password link sent successfully"
+    "resetPasswordLinkSent": "Reset password link sent successfully",
+    "newPassword": "New password",
+    "confirmNewPassword": "New password confirmation",
+    "passwordResetSuccessfully": "Password reset successfully"
   }
 }
