@@ -25,6 +25,8 @@ Route::group([
 ], function ($router) {
     //Auth
     Route::post('auth/login', 'App\Modules\Auth\Controllers\AuthController@login');
+    Route::post('auth/send-reset-link', 'App\Modules\Auth\Controllers\AuthController@sendResetLink');
+    Route::post('auth/reset-password', 'App\Modules\Auth\Controllers\AuthController@resetPassword');
     //Install
     Route::post('install/connect-to-database', 'App\Modules\Installation\Controllers\InstallationController@connectToDatabase');
     Route::post('install/setup-smtp', 'App\Modules\Installation\Controllers\InstallationController@setupSmtp');

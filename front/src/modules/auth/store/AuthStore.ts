@@ -30,10 +30,14 @@ const actions: ActionTree<AuthState, RootState> = {
 
     return response.data;
   },
+  async sendResetLink(options, payload) {
+    const response = await Vue.axios.post(`auth/send-reset-link`, payload);
+
+    return response.data;
+  },
   async fetchProfile({ commit }) {
     try {
       const response = await Vue.axios.post(`auth/fetch-profile`);
-      console.log("response", response.data);
       commit("auth", true);
       commit("user", response.data);
     } catch (e) {

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Modules\Auth\Notifications\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -67,5 +68,13 @@ class User extends Authenticatable
     public function isUser(): bool
     {
         return !$this->is_admin;
+    }
+
+    /**
+     * @param string $token
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 }

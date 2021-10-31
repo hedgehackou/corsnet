@@ -10,7 +10,12 @@
         </p>
         <form>
           <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Email" />
+            <input
+              v-model="email"
+              type="email"
+              class="form-control"
+              placeholder="Email"
+            />
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -19,7 +24,11 @@
           </div>
           <div class="row">
             <div class="col-12">
-              <button type="submit" class="btn btn-primary btn-block">
+              <button
+                @click="sendResetLink"
+                type="button"
+                class="btn btn-primary btn-block"
+              >
                 {{ $t("auth.send") }}
               </button>
             </div>
@@ -63,15 +72,13 @@ const authStore = namespace("AuthStoreModule");
 export default class ForgotPassword extends Vue {
   private appElement: HTMLElement | null = null;
   public email: string = "";
-  public password: string = "";
 
   public loginErrors = {
     email: null,
-    password: null,
   };
 
-  @authStore.Action("login")
-  loginAction!: (payload: any) => Promise<any>;
+  @authStore.Action("sendResetLink")
+  sendResetLinkAction!: (payload: any) => Promise<any>;
 
   public mounted(): void {
     this.appElement = document.getElementById("app") as HTMLElement;
@@ -86,20 +93,10 @@ export default class ForgotPassword extends Vue {
     (this.appElement as HTMLElement).classList.remove("login-page");
   }
 
-  public async loginByAuth(): Promise<void> {
+  public async sendResetLink(): Promise<void> {
     let loader = this.$loading.show();
     try {
-      const { token, abilities } = await this.loginAction({
-        email: this.email,
-        password: this.password,
-      });
-      localStorage.setItem("auth_token", token);
-      localStorage.setItem("auth_abilities", abilities);
-      this.axios.defaults.headers = {
-        //@ts-ignore
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-      };
+      await this.sendResetLinkAction({ email: this.email });
       this.$toast.success(this.$t("auth.loginSuccess") as string);
       this.removeAppClass();
       await this.$router.push({ name: "index" });
