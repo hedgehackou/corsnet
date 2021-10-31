@@ -9,7 +9,7 @@
           {{ $t("auth.resetPassword") }}
         </p>
         <form>
-          <div class="input-group mb-3">
+          <div class="input-group">
             <input
               v-model="email"
               type="email"
@@ -22,6 +22,10 @@
               </div>
             </div>
           </div>
+          <form-error-list-printer
+            class="mb-3"
+            :error-list="resetPasswordErrors.email"
+          />
           <div class="row">
             <div class="col-12">
               <button
@@ -73,9 +77,7 @@ export default class ForgotPassword extends Vue {
   private appElement: HTMLElement | null = null;
   public email: string = "";
 
-  public loginErrors = {
-    email: null,
-  };
+  public resetPasswordErrors = { email: null };
 
   @authStore.Action("sendResetLink")
   sendResetLinkAction!: (payload: any) => Promise<any>;
@@ -95,14 +97,18 @@ export default class ForgotPassword extends Vue {
 
   public async sendResetLink(): Promise<void> {
     let loader = this.$loading.show();
+    this.resetPasswordErrors = { email: null };
     try {
       await this.sendResetLinkAction({ email: this.email });
-      this.$toast.success(this.$t("auth.loginSuccess") as string);
+      this.$toast.success(this.$t("auth.resetPasswordLinkSent") as string);
       this.removeAppClass();
-      await this.$router.push({ name: "index" });
+      await this.$router.push({
+        name: "login",
+        params: { locale: this.$i18n.locale },
+      });
     } catch (error: any) {
-      this.loginErrors = error.response.data.errors;
-      this.$toast.error(this.$t("auth.loginError") as string);
+      this.resetPasswordErrors = error.response.data.errors;
+      this.$toast.error(this.$t("auth.resetPasswordError") as string);
     } finally {
       loader.hide();
     }

@@ -35,6 +35,8 @@
     "loginSuccess": "Login has been successfully",
     "loginError": "Auth error",
     "resetPassword": "Reset password",
-    "send": "Send"
+    "send": "Send",
+    "resetPasswordError": "Reset password error",
+    "resetPasswordLinkSent": "Reset password link sent successfully"
   }
 }
