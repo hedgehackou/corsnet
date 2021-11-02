@@ -40,6 +40,12 @@
     "resetPasswordLinkSent": "Reset password link sent successfully",
     "newPassword": "New password",
     "confirmNewPassword": "New password confirmation",
-    "passwordResetSuccessfully": "Password reset successfully"
+    "passwordResetSuccessfully": "Password reset successfully",
+    "signOut": "Sign out",
+    "logoutSuccess": "Sign out has been successful"
+  },
+  "index": {
+    "dashboard": "Dashboard",
+    "profile": "Profile"
   }
 }

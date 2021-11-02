@@ -40,6 +40,12 @@
     "resetPasswordLinkSent": "Ссылка на восстановление пароля отправлена успешно",
     "newPassword": "Новый пароль",
     "confirmNewPassword": "Подтверждение нового пароля",
-    "passwordResetSuccessfully": "Пароль сброшен успешно"
+    "passwordResetSuccessfully": "Пароль сброшен успешно",
+    "signOut": "Выход",
+    "logoutSuccess": "Выход выполнен успешно"
+  },
+  "index": {
+    "dashboard": "Dashboard",
+    "profile": "Профиль"
   }
 }

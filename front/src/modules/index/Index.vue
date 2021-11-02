@@ -2,7 +2,7 @@
   <div class="wrapper">
     <AppHeader @toggle-menu-sidebar="toggleMenuSidebar" />
     <MenuSidebar />
-    <AppFooter />
+    <AppFooter v-if="false" />
     <div
       id="sidebar-overlay"
       v-if="screenSize === 'xs' && isSidebarMenuCollapsed"

@@ -16,39 +16,19 @@
         />
 
         <p>
-          <span>{{ user && user.email }}</span>
-          <small>
-            <span>{{ $t("labels.memberSince") }} </span>
-            <span>Nov. 2012</span>
-          </small>
+          <span>{{ userProfile && userProfile.email }}</span>
         </p>
       </li>
-      <!-- Menu Body -->
-      <li class="user-body">
-        <div class="row">
-          <div class="col-4 text-center">
-            <a href="#">{{ $t("labels.followers") }}</a>
-          </div>
-          <div class="col-4 text-center">
-            <a href="#">{{ $t("labels.sales") }}</a>
-          </div>
-          <div class="col-4 text-center">
-            <a href="#">{{ $t("labels.friends") }}</a>
-          </div>
-        </div>
-        <!-- /.row -->
-      </li>
-      <!-- Menu Footer-->
       <li class="user-footer">
-        <router-link
-          to="/profile"
+        <a
+          href="#"
           class="btn btn-default btn-flat"
           @click="isDropdownOpened = false"
         >
-          {{ $t("labels.profile") }}
-        </router-link>
+          {{ $t("index.profile") }}
+        </a>
         <button @click="logout" class="btn btn-default btn-flat float-right">
-          {{ $t("labels.signOut") }}
+          {{ $t("auth.signOut") }}
         </button>
       </li>
     </template>
@@ -58,6 +38,14 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Dropdown from "@/components/dropdown/Dropdown.vue";
+import StoreModule from "@/store/StoreModule";
+import { AuthStoreModule } from "@/modules/auth/store/AuthStore";
+import { namespace } from "vuex-class";
+StoreModule.registerMany({
+  AuthStoreModule,
+});
+
+const authStore = namespace("AuthStoreModule");
 
 @Component({
   components: {
@@ -65,11 +53,25 @@ import Dropdown from "@/components/dropdown/Dropdown.vue";
   },
 })
 export default class UserDropdown extends Vue {
+  @authStore.Action("logout")
+  logoutAction!: () => Promise<any>;
+
   public onToggleMenuSidebar(): void {
     this.$emit("toggle-menu-sidebar");
   }
-  get user() {
-    return {};
+  get userProfile() {
+    return this.$store.getters["AuthStore/userProfile"] || {};
+  }
+
+  async logout() {
+    await this.logoutAction();
+    this.$toast.success(this.$t("auth.logoutSuccess") as string);
+    await this.$router
+      .push({
+        name: "login",
+        params: { locale: this.$i18n.locale },
+      })
+      .catch(() => null);
   }
 }
 </script>

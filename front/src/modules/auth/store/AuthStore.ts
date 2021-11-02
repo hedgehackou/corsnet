@@ -3,6 +3,7 @@ import { AuthState } from "./types";
 import { GetterTree, ActionTree, MutationTree } from "vuex";
 import { RootState } from "@/store/types";
 import Vue from "vue";
+import axios from "axios";
 
 const state: AuthState = {
   isAuthorized: false,
@@ -13,6 +14,9 @@ const getters: GetterTree<AuthState, RootState> = {
   isAuthorized(state: AuthState) {
     return state.isAuthorized;
   },
+  userProfile(state: AuthState) {
+    return state.user;
+  },
 };
 
 const mutations: MutationTree<AuthState> = {
@@ -20,7 +24,7 @@ const mutations: MutationTree<AuthState> = {
     state.isAuthorized = value;
   },
   user(state, value) {
-    state.user = value;
+    state.user = value.data;
   },
 };
 
@@ -29,6 +33,17 @@ const actions: ActionTree<AuthState, RootState> = {
     const response = await Vue.axios.post(`auth/login`, payload);
 
     return response.data;
+  },
+  async logout({ commit }) {
+    localStorage.removeItem("auth_token");
+    localStorage.removeItem("auth_abilities");
+    commit("user", {});
+    commit("auth", false);
+    axios.defaults.headers = {
+      // @ts-ignore
+      Authorization: "",
+      Accept: "application/json",
+    };
   },
   async sendResetLink(options, payload) {
     const response = await Vue.axios.post(`auth/send-reset-link`, payload);

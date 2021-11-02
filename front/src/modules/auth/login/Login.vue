@@ -127,7 +127,10 @@ export default class Login extends Vue {
       };
       this.$toast.success(this.$t("auth.loginSuccess") as string);
       this.removeAppClass();
-      await this.$router.push({ name: "index" });
+      await this.$router.push({
+        name: "index",
+        params: { locale: this.$i18n.locale },
+      });
     } catch (error: any) {
       this.loginErrors = error.response.data.errors;
       this.$toast.error(this.$t("auth.loginError") as string);

@@ -9,7 +9,11 @@
       <p>{{ $t(menuItem.name) }}</p>
       <i v-if="isExpandable" class="right fas fa-angle-left"></i>
     </a>
-    <ul class="nav nav-treeview" v-for="item in menuItem.children">
+    <ul
+      class="nav nav-treeview"
+      :key="index"
+      v-for="(item, index) in menuItem.children"
+    >
       <li class="nav-item">
         <router-link
           :to="item.path"

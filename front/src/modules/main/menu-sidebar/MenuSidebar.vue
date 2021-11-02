@@ -14,19 +14,15 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img
-            :src="
-              user && user.picture
-                ? user.picture
-                : require('@/assets/img/default-profile.png')
-            "
+            :src="require('@/assets/img/default-profile.png')"
             class="img-circle elevation-2"
             alt="User Image"
           />
         </div>
         <div class="info">
-          <div>
-            {{ user && user.email }}
-          </div>
+          <a href="#" class="d-block">
+            {{ userProfile.email }}
+          </a>
         </div>
       </div>
 
@@ -59,14 +55,14 @@ import MenuItem from "@/modules/main/menu-item/MenuItem.vue";
 })
 export default class MenuSidebar extends Vue {
   public menu = MENU;
-  get user() {
-    return this.$store.getters["auth/user"];
+  get userProfile() {
+    return this.$store.getters["AuthStore/userProfile"] || {};
   }
 }
 
 export const MENU = [
   {
-    name: "labels.dashboard",
+    name: "index.dashboard",
     path: "/",
   },
 ];
