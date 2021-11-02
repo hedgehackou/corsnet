@@ -67,6 +67,7 @@ export default class MenuItem extends Vue {
   }
 
   public calculateIsActive(url: string) {
+    url = url.replace(/\/en|\/ru/i, "/");
     this.isMainActive = false;
     this.isOneOfChildrenActive = false;
     if (this.isExpandable) {
