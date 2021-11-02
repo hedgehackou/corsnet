@@ -22,5 +22,6 @@ module.exports = {
     "@typescript-eslint/no-inferrable-types": "off",
     "no-case-declarations": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
   },
 };
