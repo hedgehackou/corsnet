@@ -10,6 +10,7 @@ use App\Modules\Installation\Requests\ConnectToDatabaseRequest;
 use App\Modules\Installation\Requests\InstallationRequest;
 use App\Modules\Installation\Requests\SetupSmtpRequest;
 use App\Modules\Installation\Services\InstallationService;
+use App\Modules\Settings\Models\Setting;
 use Illuminate\Http\JsonResponse;
 
 class InstallationController extends AbstractController
@@ -82,6 +83,21 @@ class InstallationController extends AbstractController
     {
         return response()->json([
            'status' => (bool) env('IS_INSTALLED')
+        ]);
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function getProjectSettings(): JsonResponse
+    {
+        try {
+            /** @var Setting $setting */
+            $setting = Setting::query()->firstOrFail();
+        } catch (\Exception $exception) {}
+
+        return response()->json([
+            'data' => $setting ?? []
         ]);
     }
 }

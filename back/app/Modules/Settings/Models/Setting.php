@@ -8,6 +8,7 @@ use App\Base\Models\AbstractModel;
 
 /**
  * @property string $network_name
+ * @property string $lang
  */
 class Setting extends AbstractModel
 {
@@ -16,5 +17,6 @@ class Setting extends AbstractModel
 
     protected $fillable = [
         'network_name',
+        'lang'
     ];
 }
