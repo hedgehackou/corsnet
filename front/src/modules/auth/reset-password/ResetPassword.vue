@@ -61,7 +61,7 @@
             </div>
           </div>
           <p class="mb-0 mt-2">
-            <router-link :to="{ name: 'login', params: $i18n.locale }">
+            <router-link :to="{ name: 'login' }">
               {{ $t("auth.signIn") }}
             </router-link>
           </p>
@@ -144,7 +144,6 @@ export default class ResetPassword extends Vue {
       this.removeAppClass();
       await this.$router.push({
         name: "login",
-        params: { locale: this.$i18n.locale },
       });
     } catch (error: any) {
       this.resetPasswordErrors = error.response.data.errors;

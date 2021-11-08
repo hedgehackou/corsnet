@@ -40,10 +40,9 @@
           </div>
         </form>
         <p class="mt-3 mb-1">
-          <router-link
-            :to="{ name: 'login', params: { locale: $i18n.locale } }"
-            >{{ $t("auth.signIn") }}</router-link
-          >
+          <router-link :to="{ name: 'login' }">{{
+            $t("auth.signIn")
+          }}</router-link>
         </p>
       </div>
       <!-- /.login-card-body -->
@@ -104,7 +103,6 @@ export default class ForgotPassword extends Vue {
       this.removeAppClass();
       await this.$router.push({
         name: "login",
-        params: { locale: this.$i18n.locale },
       });
     } catch (error: any) {
       this.resetPasswordErrors = error.response.data.errors;

@@ -9,9 +9,6 @@
             </h3>
             <div class="ml-auto"></div>
           </div>
-          <div class="d-flex langs">
-            <Languages />
-          </div>
           <form>
             <div class="card-body">
               <div class="row">
@@ -87,9 +84,6 @@
               {{ $t("install.setupSmtp") }}
             </h3>
             <div class="ml-auto"></div>
-          </div>
-          <div class="d-flex langs">
-            <Languages />
           </div>
           <form>
             <div class="card-body">
@@ -174,9 +168,6 @@
             </h3>
             <div class="ml-auto"></div>
           </div>
-          <div class="d-flex langs">
-            <Languages />
-          </div>
           <form>
             <div class="card-body">
               <div class="row">
@@ -215,9 +206,6 @@
               {{ $t("install.adminAccount") }}
             </h3>
             <div class="ml-auto"></div>
-          </div>
-          <div class="d-flex langs">
-            <Languages />
           </div>
           <form>
             <div class="card-body">
@@ -420,7 +408,6 @@ export default class Install extends Vue {
       this.$toast.success(this.$t("install.installSuccess") as string);
       await this.$router.push({
         name: "index",
-        params: { locale: this.$i18n.locale },
       });
     } catch (e) {
       this.installationParamsErrors = e.response.data.errors;

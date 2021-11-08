@@ -1,6 +1,5 @@
 <template>
   <div class="login-box">
-    <Languages class="lang-module" />
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
@@ -51,9 +50,7 @@
         </form>
 
         <p class="mb-0 mt-2">
-          <router-link
-            :to="{ name: 'forgot-password', params: { locale: $i18n.locale } }"
-          >
+          <router-link :to="{ name: 'forgot-password' }">
             {{ $t("auth.forgotPassword") }}
           </router-link>
         </p>
@@ -129,7 +126,6 @@ export default class Login extends Vue {
       this.removeAppClass();
       await this.$router.push({
         name: "index",
-        params: { locale: this.$i18n.locale },
       });
     } catch (error: any) {
       this.loginErrors = error.response.data.errors;

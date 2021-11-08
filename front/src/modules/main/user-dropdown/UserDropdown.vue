@@ -69,7 +69,6 @@ export default class UserDropdown extends Vue {
     await this.$router
       .push({
         name: "login",
-        params: { locale: this.$i18n.locale },
       })
       .catch(() => null);
   }
