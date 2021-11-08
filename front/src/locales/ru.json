@@ -22,7 +22,8 @@
     "email": "Email",
     "name": "Имя",
     "passwordConfirmation": "Подтверждение пароля",
-    "installSuccess": "Установка успешно завершена"
+    "installSuccess": "Установка успешно завершена",
+    "selectLanguage": "Выбрать язык"
   },
   "languages": {
     "russian": "RU",

@@ -7,6 +7,7 @@ import store from "@/store/index";
 import Login from "@/modules/auth/login/Login.vue";
 import ForgotPassword from "@/modules/auth/forgot-password/ForgotPassword.vue";
 import ResetPassword from "@/modules/auth/reset-password/ResetPassword.vue";
+import i18n from "@/i18n";
 
 Vue.use(VueRouter);
 
@@ -64,6 +65,9 @@ router.push = async function (location: any) {
 };
 
 router.beforeEach(async (to: Route, from: Route, next: NavigationGuardNext) => {
+  store.dispatch("AuthStore/fetchSettings").then((response) => {
+    i18n.locale = response.lang;
+  });
   await store.dispatch("AuthStore/fetchProfile");
   await store.dispatch("InstallStore/isProjectInstalled").then(({ status }) => {
     if (status || to.name === "install") {

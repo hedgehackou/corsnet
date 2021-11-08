@@ -8,6 +8,7 @@ import axios from "axios";
 const state: AuthState = {
   isAuthorized: false,
   user: {},
+  settings: {},
 };
 
 const getters: GetterTree<AuthState, RootState> = {
@@ -25,6 +26,9 @@ const mutations: MutationTree<AuthState> = {
   },
   user(state, value) {
     state.user = value.data;
+  },
+  settings(state, value) {
+    state.settings = value;
   },
 };
 
@@ -50,11 +54,22 @@ const actions: ActionTree<AuthState, RootState> = {
 
     return response.data;
   },
+  async fetchSettings({ commit, state }) {
+    if (Object.keys(state.settings).length) {
+      return state.settings;
+    }
+
+    const response = await Vue.axios.get(`install/get-project-settings`);
+    commit("settings", (response.data as any).data);
+
+    return (response.data as any).data;
+  },
   async fetchProfile({ commit }) {
     try {
       const response = await Vue.axios.post(`auth/fetch-profile`);
       commit("auth", true);
       commit("user", response.data);
+      return response.data;
     } catch (e) {
       commit("auth", false);
     }

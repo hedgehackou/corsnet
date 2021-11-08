@@ -184,6 +184,18 @@
                     />
                   </div>
                 </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>{{ $t("install.selectLanguage") }}</label>
+                    <select v-model="settingParams.lang" class="form-control">
+                      <option value="ru">RU</option>
+                      <option value="en">EN</option>
+                    </select>
+                    <FormErrorListPrinter
+                      :error-list="settingParamsErrors.lang"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -339,6 +351,7 @@ export default class Install extends Vue {
   };
   public settingsDefaultParams = {
     network_name: null,
+    lang: null,
   };
 
   public installationDefaultParams = {
