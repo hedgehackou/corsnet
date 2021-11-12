@@ -41,8 +41,8 @@ server {
 8. `sudo systemctl reload nginx` - перезапускаем nginx
 9. `mkdir /var/www/corsnet`, `cd /var/www/corsnet`, `git clone git@github.com:hedgehackou/corsnet.git ./` - клонируем репозиторий
 10. Устанавливаем composer глобально по инструкции https://getcomposer.org/doc/00-intro.md
-11. Устанавливаем composer зависимости. `cd /var/www/corsnet/back && composer install`
-12. Копируем .env `cp .env.example .env`. Затем редактируем .env.
+11. Запускаем make команду. `cd /var/www/corsnet/back && make project-init`
+12. Затем редактируем .env.
 ```
     APP_NAME=Laravel - имя приложения
     APP_URL=http://localhost - адрес бекенда
