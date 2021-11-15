@@ -23,3 +23,6 @@ cs:
 
 csfix:
 	./vendor/bin/phpcbf --standard=PSR12 ./app; return 0;
+
+test:
+	./vendor/bin/phpunit
