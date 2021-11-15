@@ -18,3 +18,6 @@ Route::get('/', function () {
 });
 
 Route::get('{lang}/reset-password/{token}')->name('password.reset');
+Route::get('/{any}', 'App\Modules\FrontController\Controllers\FrontController@index')
+    ->where('any', '.*')
+    ->name('spa');

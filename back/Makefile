@@ -12,7 +12,7 @@ update:
 	# Note: If you're using queue workers, this is the place to restart them.
 	# ...
 	# Clear cache
-	php artisan optimize
+	#php artisan optimize
 
 sniff:
 	./vendor/bin/phpstan analyse

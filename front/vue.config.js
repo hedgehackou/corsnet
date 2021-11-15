@@ -1,4 +1,5 @@
 module.exports = {
+  assetsDir: "spa",
   runtimeCompiler: true,
   pluginOptions: {
     i18n: {
