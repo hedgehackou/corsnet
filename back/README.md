@@ -48,6 +48,19 @@ server {
     APP_URL=http://localhost - адрес бекенда
     FRONTEND_URL=http://localhost:8080 - адрес фронтенда
 ```
+13. Устанавливаем node js (https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04-ru)
+```
+    sudo apt update
+    cd ~
+    curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
+    sudo bash nodesource_setup.sh
+    sudo apt install nodejs
+    node -v
+    npm install -g npm@latest
+    npm -v
+```
+
+14. Устанавливаем сертфикат через certbot https://certbot.eff.org/instructions?ws=nginx&os=ubuntu-20
 
 ## Описание make команд
 
