@@ -11,6 +11,9 @@
    ```
 3. `npm install`
 
+### Выгрузка проекта в public
+`make update`
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve

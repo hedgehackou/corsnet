@@ -14,7 +14,7 @@ update:
 	# Clear cache
 	#php artisan optimize
 
-sniff:
+stan:
 	./vendor/bin/phpstan analyse
 
 cs:

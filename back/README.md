@@ -48,3 +48,14 @@ server {
     APP_URL=http://localhost - адрес бекенда
     FRONTEND_URL=http://localhost:8080 - адрес фронтенда
 ```
+
+## Описание make команд
+
+```
+    project init - инициализация проекта
+    update - обновление проекта
+    stan - php stan
+    cs - code sniffer
+    csfix - code sniffer fix
+    test - запуск тестов
+```
