@@ -22,6 +22,7 @@ class InstallationService extends AbstractService
     public function installation(array $data)
     {
         Artisan::call('migrate', ['--force' => true, '--seed' => true]);
+        Artisan::call('key:generate');
         DB::transaction(function () use ($data) {
             Setting::create([
                 'network_name' => $data['network_name'],
