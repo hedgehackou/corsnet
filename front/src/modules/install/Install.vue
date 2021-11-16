@@ -9,9 +9,6 @@
             </h3>
             <div class="ml-auto"></div>
           </div>
-          <div class="d-flex langs">
-            <Languages />
-          </div>
           <form>
             <div class="card-body">
               <div class="row">
@@ -87,9 +84,6 @@
               {{ $t("install.setupSmtp") }}
             </h3>
             <div class="ml-auto"></div>
-          </div>
-          <div class="d-flex langs">
-            <Languages />
           </div>
           <form>
             <div class="card-body">
@@ -174,9 +168,6 @@
             </h3>
             <div class="ml-auto"></div>
           </div>
-          <div class="d-flex langs">
-            <Languages />
-          </div>
           <form>
             <div class="card-body">
               <div class="row">
@@ -190,6 +181,18 @@
                     />
                     <FormErrorListPrinter
                       :error-list="settingParamsErrors.network_name"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>{{ $t("install.selectLanguage") }}</label>
+                    <select v-model="settingParams.lang" class="form-control">
+                      <option value="ru">RU</option>
+                      <option value="en">EN</option>
+                    </select>
+                    <FormErrorListPrinter
+                      :error-list="settingParamsErrors.lang"
                     />
                   </div>
                 </div>
@@ -215,9 +218,6 @@
               {{ $t("install.adminAccount") }}
             </h3>
             <div class="ml-auto"></div>
-          </div>
-          <div class="d-flex langs">
-            <Languages />
           </div>
           <form>
             <div class="card-body">
@@ -351,6 +351,7 @@ export default class Install extends Vue {
   };
   public settingsDefaultParams = {
     network_name: null,
+    lang: null,
   };
 
   public installationDefaultParams = {
@@ -420,8 +421,7 @@ export default class Install extends Vue {
       this.$toast.success(this.$t("install.installSuccess") as string);
       (this.appElement as HTMLElement).classList.remove("login-page");
       await this.$router.push({
-        name: "index",
-        params: { locale: this.$i18n.locale },
+        name: "admin-index",
       });
     } catch (e) {
       this.installationParamsErrors = e.response.data.errors;
@@ -486,16 +486,14 @@ export default class Install extends Vue {
 </script>
 
 <style lang="scss">
-.install {
-  .langs {
-    display: flex;
-    li {
-      margin-left: auto;
-      list-style-type: none;
-      button {
-        border: 1px solid rgba(0, 0, 0, 0.125);
-        background: rgba(0, 0, 0, 0.03);
-      }
+.langs {
+  display: flex;
+  li {
+    margin-left: auto;
+    list-style-type: none;
+    button {
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      background: rgba(0, 0, 0, 0.03);
     }
   }
 }

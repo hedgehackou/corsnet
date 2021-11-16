@@ -4,11 +4,31 @@ declare(strict_types=1);
 
 namespace App\Base\Requests;
 
+use App\Modules\Settings\Models\Setting;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 
 abstract class AbstractFormRequest extends FormRequest
 {
+    public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
+    {
+        try {
+            /** @var Setting $setting */
+            $setting = Setting::query()->firstOrFail();
+            $lang = $setting->lang;
+        } catch (\Exception $exception) {
+            $lang = 'en';
+        }
+        //$lang = request()->header('accept-language', 'en');
+        if (!in_array($lang, ['en', 'ru'])) {
+            $lang = 'en';
+        }
+
+        app()->setLocale($lang);
+
+        parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *

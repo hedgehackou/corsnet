@@ -1,47 +1,62 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import Install from "@/modules/install/Install.vue";
-import Index from "@/modules/index/Index.vue";
+import AdminIndex from "@/modules/index/AdminIndex.vue";
 import { NavigationGuardNext, Route } from "vue-router/types/router";
 import store from "@/store/index";
+import Login from "@/modules/auth/login/Login.vue";
+import ForgotPassword from "@/modules/auth/forgot-password/ForgotPassword.vue";
+import ResetPassword from "@/modules/auth/reset-password/ResetPassword.vue";
 import i18n from "@/i18n";
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
+  ...(process.env.NODE_ENV !== "production"
+    ? [{ path: "/", redirect: "/admin" }]
+    : []),
   {
-    path: "/:locale",
+    path: "/admin",
+    name: "admin-index",
+    component: AdminIndex,
+    meta: { requiresAuth: true },
+    children: [],
+  },
+  {
+    path: "/user",
+    name: "user-index",
     component: {
-      template: `<router-view></router-view>`,
+      template: `<div>Users page</div>`,
     },
-    beforeEnter: (to, from, next) => {
-      const locale = to.params.locale;
-      const supportedLocales = ["ru", "en"];
-      if (!supportedLocales.includes(locale)) {
-        return next("en");
-      }
-      if (i18n.locale !== locale) {
-        i18n.locale = locale;
-      }
-      return next();
-    },
-    children: [
-      {
-        path: "",
-        name: "index",
-        component: Index,
-      },
-      {
-        path: "install",
-        name: "install",
-        component: Install,
-      },
-    ],
+    meta: { requiresAuth: true },
+    children: [],
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login,
+    meta: { guest: true },
+  },
+  {
+    path: "/forgot-password",
+    name: "forgot-password",
+    component: ForgotPassword,
+    meta: { guest: true },
+  },
+  {
+    path: "/reset-password/:token",
+    name: "reset-password",
+    component: ResetPassword,
+  },
+  {
+    path: "/install",
+    name: "install",
+    component: Install,
   },
   {
     path: "*",
     redirect() {
-      return process.env.VUE_APP_I18N_LOCALE;
+      return "/";
     },
   },
 ];
@@ -63,17 +78,44 @@ router.push = async function (location: any) {
 };
 
 router.beforeEach(async (to: Route, from: Route, next: NavigationGuardNext) => {
-  next();
+  store.dispatch("AuthStore/fetchSettings").then((response) => {
+    i18n.locale = response.lang;
+  });
+  await store.dispatch("AuthStore/fetchProfile");
   await store.dispatch("InstallStore/isProjectInstalled").then(({ status }) => {
     if (status || to.name === "install") {
       if (status && to.name === "install") {
-        next({ name: "index", params: { locale: i18n.locale } });
+        next({ name: "admin-index" });
       }
       next();
     } else {
-      next({ name: "install", params: { locale: i18n.locale } });
+      next({ name: "install" });
     }
   });
+});
+
+router.beforeEach(async (to: Route, from: Route, next: NavigationGuardNext) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (store.getters["AuthStore/isAuthorized"]) {
+      next();
+      return;
+    }
+    next({ name: "login" });
+  } else {
+    next();
+  }
+});
+
+router.beforeEach((to: Route, from: Route, next: NavigationGuardNext) => {
+  if (to.matched.some((record) => record.meta.guest)) {
+    if (store.getters["AuthStore/isAuthorized"]) {
+      next({ name: "admin-index" });
+      return;
+    }
+    next();
+  } else {
+    next();
+  }
 });
 
 export default router;

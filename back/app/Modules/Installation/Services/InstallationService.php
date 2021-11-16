@@ -26,6 +26,7 @@ class InstallationService extends AbstractService
         DB::transaction(function () use ($data) {
             Setting::create([
                 'network_name' => $data['network_name'],
+                'lang' => $data['lang'],
             ]);
             User::create([
                 'email' => $data['email'],

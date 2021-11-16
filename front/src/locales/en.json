@@ -22,10 +22,31 @@
     "email": "Email",
     "name": "Name",
     "passwordConfirmation": "Password confirmation",
-    "installSuccess": "Installation completed successfully"
+    "installSuccess": "Installation completed successfully",
+    "selectLanguage": "Select language"
   },
   "languages": {
     "russian": "RU",
     "english": "EN"
+  },
+  "auth": {
+    "signInToStart": "Sign in to start your session",
+    "forgotPassword": "Forgot password",
+    "signIn": "Sign in",
+    "loginSuccess": "Login has been successfully",
+    "loginError": "Auth error",
+    "resetPassword": "Reset password",
+    "send": "Send",
+    "resetPasswordError": "Reset password error",
+    "resetPasswordLinkSent": "Reset password link sent successfully",
+    "newPassword": "New password",
+    "confirmNewPassword": "New password confirmation",
+    "passwordResetSuccessfully": "Password reset successfully",
+    "signOut": "Sign out",
+    "logoutSuccess": "Sign out has been successful"
+  },
+  "index": {
+    "dashboard": "Dashboard",
+    "profile": "Profile"
   }
 }

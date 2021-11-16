@@ -22,10 +22,31 @@
     "email": "Email",
     "name": "Имя",
     "passwordConfirmation": "Подтверждение пароля",
-    "installSuccess": "Установка успешно завершена"
+    "installSuccess": "Установка успешно завершена",
+    "selectLanguage": "Выбрать язык"
   },
   "languages": {
     "russian": "RU",
     "english": "EN"
+  },
+  "auth": {
+    "signInToStart": "Войдите, чтобы начать сессию",
+    "forgotPassword": "Забыли пароль",
+    "signIn": "Логин",
+    "loginSuccess": "Вход выполнен успешно",
+    "loginError": "Ошибка авторизации",
+    "resetPassword": "Восстановить пароль",
+    "send": "Отправить",
+    "resetPasswordError": "Ошибка восстановления пароля",
+    "resetPasswordLinkSent": "Ссылка на восстановление пароля отправлена успешно",
+    "newPassword": "Новый пароль",
+    "confirmNewPassword": "Подтверждение нового пароля",
+    "passwordResetSuccessfully": "Пароль сброшен успешно",
+    "signOut": "Выход",
+    "logoutSuccess": "Выход выполнен успешно"
+  },
+  "index": {
+    "dashboard": "Dashboard",
+    "profile": "Профиль"
   }
 }
