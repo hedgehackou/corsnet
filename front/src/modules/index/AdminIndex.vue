@@ -27,7 +27,7 @@ import Footer from "@/modules/main/footer/Footer.vue";
     watchLayoutChanges: (value) => value,
   },
 })
-export default class Index extends Vue {
+export default class AdminIndex extends Vue {
   private appElement: HTMLElement | null = null;
 
   public toggleMenuSidebar(): void {

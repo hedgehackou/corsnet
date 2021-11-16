@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import Install from "@/modules/install/Install.vue";
-import Index from "@/modules/index/Index.vue";
+import AdminIndex from "@/modules/index/AdminIndex.vue";
 import { NavigationGuardNext, Route } from "vue-router/types/router";
 import store from "@/store/index";
 import Login from "@/modules/auth/login/Login.vue";
@@ -12,11 +12,24 @@ import i18n from "@/i18n";
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
+  ...(process.env.NODE_ENV !== "production"
+    ? [{ path: "/", redirect: "/admin" }]
+    : []),
   {
-    path: "/",
-    name: "index",
-    component: Index,
+    path: "/admin",
+    name: "admin-index",
+    component: AdminIndex,
     meta: { requiresAuth: true },
+    children: [],
+  },
+  {
+    path: "/user",
+    name: "user-index",
+    component: {
+      template: `<div>Users page</div>`,
+    },
+    meta: { requiresAuth: true },
+    children: [],
   },
   {
     path: "/login",
@@ -72,7 +85,7 @@ router.beforeEach(async (to: Route, from: Route, next: NavigationGuardNext) => {
   await store.dispatch("InstallStore/isProjectInstalled").then(({ status }) => {
     if (status || to.name === "install") {
       if (status && to.name === "install") {
-        next({ name: "index" });
+        next({ name: "admin-index" });
       }
       next();
     } else {
@@ -96,7 +109,7 @@ router.beforeEach(async (to: Route, from: Route, next: NavigationGuardNext) => {
 router.beforeEach((to: Route, from: Route, next: NavigationGuardNext) => {
   if (to.matched.some((record) => record.meta.guest)) {
     if (store.getters["AuthStore/isAuthorized"]) {
-      next({ name: "index" });
+      next({ name: "admin-index" });
       return;
     }
     next();

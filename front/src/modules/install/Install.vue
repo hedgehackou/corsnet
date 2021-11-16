@@ -420,7 +420,7 @@ export default class Install extends Vue {
       });
       this.$toast.success(this.$t("install.installSuccess") as string);
       await this.$router.push({
-        name: "index",
+        name: "admin-index",
       });
     } catch (e) {
       this.installationParamsErrors = e.response.data.errors;

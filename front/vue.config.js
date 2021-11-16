@@ -1,5 +1,5 @@
 module.exports = {
-  assetsDir: "spa",
+  assetsDir: process.env.NODE_ENV === "production" ? "spa" : "",
   runtimeCompiler: true,
   pluginOptions: {
     i18n: {

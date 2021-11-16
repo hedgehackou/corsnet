@@ -16,5 +16,8 @@ return [
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'verification_required' => 'You need to verify your email address',
+    'failed_to_register_user' => 'Failed to register user',
+    'login_restriction' => 'You are denied access to your personal account',
+    'credentials_incorrect' => 'Invalid credentials',
 ];
