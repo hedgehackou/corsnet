@@ -13,8 +13,6 @@ jobs:
         working-directory: ./back
     steps:
       - uses: actions/checkout@v2
-      - name: Change dir
-        run: cd ./back
       - name: List
         run: ls -a && composer -V
       - name: Copy .env
