@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Installation\Requests;
 
 use App\Base\Requests\AbstractFormRequest;
+use App\Modules\Installation\Rules\UniqueEmailRule;
 use Illuminate\Validation\Rule;
 
 class InstallationRequest extends AbstractFormRequest
@@ -17,8 +18,8 @@ class InstallationRequest extends AbstractFormRequest
         return [
             'network_name' => ['required', 'string'],
             'name' => ['required', 'string'],
+            'email' => ['required', 'string', 'email', new UniqueEmailRule()],
             'lang' => ['required', 'string', Rule::in(['ru', 'en'])],
-            'email' => ['required', 'string', 'email', 'unique:users,email'],
             'password' => ['required', 'min:6', 'max:16', 'string', 'confirmed'],
         ];
     }

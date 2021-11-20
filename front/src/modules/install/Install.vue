@@ -419,6 +419,7 @@ export default class Install extends Vue {
         ...this.settingParams,
       });
       this.$toast.success(this.$t("install.installSuccess") as string);
+      (this.appElement as HTMLElement).classList.remove("login-page");
       await this.$router.push({
         name: "admin-index",
       });
