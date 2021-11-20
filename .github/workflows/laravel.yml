@@ -9,6 +9,8 @@ jobs:
   laravel-tests:
     runs-on: ubuntu-latest
     steps:
+      - name: List
+        run: ls -a
       - name: Change dir
         run: cd ./back
       - uses: actions/checkout@v2
