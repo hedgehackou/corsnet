@@ -9,11 +9,11 @@ jobs:
   laravel-tests:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: List
         run: ls -a
       - name: Change dir
         run: cd ./back
-      - uses: actions/checkout@v2
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
       - name: Install Dependencies
