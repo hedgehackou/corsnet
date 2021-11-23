@@ -42,7 +42,8 @@ jobs:
       - run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add .
+          git status
+          git add back/*
           git commit --allow-empty -m "Build front-end assets"
           git push -f origin deploy
         working-directory: ./
@@ -53,4 +54,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          script: 'cd /var/www/corsnet && ./deploy.sh'
+          script: 'cd /var/www/corsnet && sudo bash ./deploy.sh'
