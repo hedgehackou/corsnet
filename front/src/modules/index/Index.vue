@@ -2,6 +2,9 @@
   <div class="wrapper">
     <AppHeader @toggle-menu-sidebar="toggleMenuSidebar" />
     <MenuSidebar />
+    <div class="content-wrapper">
+      <router-view></router-view>
+    </div>
     <AppFooter v-if="false" />
     <div
       id="sidebar-overlay"
@@ -27,7 +30,7 @@ import Footer from "@/modules/main/footer/Footer.vue";
     watchLayoutChanges: (value) => value,
   },
 })
-export default class AdminIndex extends Vue {
+export default class Index extends Vue {
   private appElement: HTMLElement | null = null;
 
   public toggleMenuSidebar(): void {
