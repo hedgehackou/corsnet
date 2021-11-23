@@ -8,10 +8,13 @@ on:
 jobs:
   laravel-tests:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./back
     steps:
-      - name: Change dir
-        run: cd ./back
       - uses: actions/checkout@v2
+      - name: List
+        run: ls -a && composer -V
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
       - name: Install Dependencies
@@ -24,7 +27,25 @@ jobs:
         run: vendor/bin/phpunit
   deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./front
     steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: deploy
+      - name: Set up Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+      - run: make update
+      - run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit --allow-empty -m "Build front-end assets"
+          git push -f origin deploy
+        working-directory: ./
       - name: Deploy to production
         uses: appleboy/ssh-action@master
         with:
