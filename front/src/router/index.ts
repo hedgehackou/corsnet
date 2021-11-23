@@ -29,7 +29,7 @@ const routes: Array<RouteConfig> = [
         meta: { requiresAuth: true },
       },
       {
-        path: "",
+        path: "invitations",
         name: "admin-invitations",
         component: AdminDashboard,
         meta: { requiresAuth: true },
@@ -75,7 +75,7 @@ const routes: Array<RouteConfig> = [
   {
     path: "*",
     redirect() {
-      return "/";
+      return "/admin";
     },
   },
 ];
