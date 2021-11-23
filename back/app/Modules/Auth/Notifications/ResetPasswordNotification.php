@@ -25,8 +25,7 @@ class ResetPasswordNotification extends ResetPassword
         if (static::$createUrlCallback) {
             $url = call_user_func(static::$createUrlCallback, $notifiable, $this->token);
         } else {
-            $url = rtrim(env('FRONTEND_URL'), '/') . route('password.reset', [
-                    'lang' => app()->getLocale(),
+            $url = rtrim(env('APP_URL'), '/') . route('password.reset', [
                     'token' => $this->token,
                     'email' => $notifiable->getEmailForPasswordReset(),
                 ], false);
