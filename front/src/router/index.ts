@@ -1,13 +1,15 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import Install from "@/modules/install/Install.vue";
-import AdminIndex from "@/modules/index/AdminIndex.vue";
+import Index from "@/modules/index/Index.vue";
 import { NavigationGuardNext, Route } from "vue-router/types/router";
 import store from "@/store/index";
 import Login from "@/modules/auth/login/Login.vue";
 import ForgotPassword from "@/modules/auth/forgot-password/ForgotPassword.vue";
 import ResetPassword from "@/modules/auth/reset-password/ResetPassword.vue";
 import i18n from "@/i18n";
+import AdminDashboard from "@/modules/admin/dashboard/AdminDashboard.vue";
+import UserDashboard from "@/modules/user/dashboard/UserDashboard.vue";
 
 Vue.use(VueRouter);
 
@@ -17,19 +19,36 @@ const routes: Array<RouteConfig> = [
     : []),
   {
     path: "/admin",
-    name: "admin-index",
-    component: AdminIndex,
+    component: Index,
     meta: { requiresAuth: true },
-    children: [],
+    children: [
+      {
+        path: "",
+        name: "admin-dashboard",
+        component: AdminDashboard,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "",
+        name: "admin-invitations",
+        component: AdminDashboard,
+        meta: { requiresAuth: true },
+      },
+    ],
   },
   {
     path: "/user",
-    name: "user-index",
-    component: {
-      template: `<div>Users page</div>`,
-    },
+    name: "",
+    component: Index,
     meta: { requiresAuth: true },
-    children: [],
+    children: [
+      {
+        path: "",
+        name: "user-dashboard",
+        component: UserDashboard,
+        meta: { requiresAuth: true },
+      },
+    ],
   },
   {
     path: "/login",
@@ -85,9 +104,10 @@ router.beforeEach(async (to: Route, from: Route, next: NavigationGuardNext) => {
   await store.dispatch("InstallStore/isProjectInstalled").then(({ status }) => {
     if (status || to.name === "install") {
       if (status && to.name === "install") {
-        next({ name: "admin-index" });
+        window.location.href = "/";
+      } else {
+        next();
       }
-      next();
     } else {
       next({ name: "install" });
     }
@@ -109,7 +129,7 @@ router.beforeEach(async (to: Route, from: Route, next: NavigationGuardNext) => {
 router.beforeEach((to: Route, from: Route, next: NavigationGuardNext) => {
   if (to.matched.some((record) => record.meta.guest)) {
     if (store.getters["AuthStore/isAuthorized"]) {
-      next({ name: "admin-index" });
+      next({ name: "admin-dashboard" });
       return;
     }
     next();
