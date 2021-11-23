@@ -125,7 +125,7 @@ export default class Login extends Vue {
       this.$toast.success(this.$t("auth.loginSuccess") as string);
       this.removeAppClass();
       await this.$router.push({
-        name: "admin-index",
+        name: "admin-dashboard",
       });
     } catch (error: any) {
       this.loginErrors = error.response.data.errors;

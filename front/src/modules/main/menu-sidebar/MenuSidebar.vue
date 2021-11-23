@@ -63,7 +63,11 @@ export default class MenuSidebar extends Vue {
 export const MENU = [
   {
     name: "index.dashboard",
-    path: "/",
+    path: "/admin",
+  },
+  {
+    name: "index.user",
+    path: "/user",
   },
 ];
 </script>
