@@ -5,7 +5,7 @@
     <div class="content-wrapper">
       <router-view></router-view>
     </div>
-    <AppFooter v-if="false" />
+    <AppFooter />
     <div
       id="sidebar-overlay"
       v-if="screenSize === 'xs' && isSidebarMenuCollapsed"

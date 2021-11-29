@@ -66,6 +66,10 @@ export const MENU = [
     path: "/admin",
   },
   {
+    name: "index.invitations",
+    path: "/admin/invitations",
+  },
+  {
     name: "index.user",
     path: "/user",
   },

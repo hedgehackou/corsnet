@@ -22,3 +22,4 @@ Route::get('/{any}', 'App\Modules\FrontController\Controllers\FrontController@in
     ->name('spa');
 
 Route::get('reset-password/{token}')->name('password.reset');
+Route::get('accept-invite/{token}')->name('invite.accept');

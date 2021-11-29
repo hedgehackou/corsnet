@@ -1,15 +1,16 @@
 import Vue from "vue";
+import store from "@/store/index";
+import i18n from "@/i18n";
+import { NavigationGuardNext, Route } from "vue-router/types/router";
 import VueRouter, { RouteConfig } from "vue-router";
 import Install from "@/modules/install/Install.vue";
 import Index from "@/modules/index/Index.vue";
-import { NavigationGuardNext, Route } from "vue-router/types/router";
-import store from "@/store/index";
 import Login from "@/modules/auth/login/Login.vue";
 import ForgotPassword from "@/modules/auth/forgot-password/ForgotPassword.vue";
 import ResetPassword from "@/modules/auth/reset-password/ResetPassword.vue";
-import i18n from "@/i18n";
-import AdminDashboard from "@/modules/admin/dashboard/AdminDashboard.vue";
 import UserDashboard from "@/modules/user/dashboard/UserDashboard.vue";
+import AdminInvitations from "@/modules/admin/invitations/AdminInvitations.vue";
+import UserInvite from "@/modules/auth/invite/UserInvite.vue";
 
 Vue.use(VueRouter);
 
@@ -25,13 +26,12 @@ const routes: Array<RouteConfig> = [
       {
         path: "",
         name: "admin-dashboard",
-        component: AdminDashboard,
-        meta: { requiresAuth: true },
+        redirect: { name: "admin-invitations" },
       },
       {
         path: "invitations",
         name: "admin-invitations",
-        component: AdminDashboard,
+        component: AdminInvitations,
         meta: { requiresAuth: true },
       },
     ],
@@ -66,6 +66,11 @@ const routes: Array<RouteConfig> = [
     path: "/reset-password/:token",
     name: "reset-password",
     component: ResetPassword,
+  },
+  {
+    path: "/accept-invite/:token",
+    name: "accept-invite",
+    component: UserInvite,
   },
   {
     path: "/install",
