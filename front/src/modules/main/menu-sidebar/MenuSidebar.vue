@@ -54,25 +54,27 @@ import MenuItem from "@/modules/main/menu-item/MenuItem.vue";
   },
 })
 export default class MenuSidebar extends Vue {
-  public menu = MENU;
+  public menu = [...(this.userProfile.is_admin ? ADMIN_MENU : USER_MENU)];
   get userProfile() {
     return this.$store.getters["AuthStore/userProfile"] || {};
   }
 }
 
-export const MENU = [
-  // {
-  //   name: "index.dashboard",
-  //   path: "/admin",
-  // },
+export const ADMIN_MENU = [
+  {
+    name: "index.dashboard",
+    path: "/admin",
+  },
   {
     name: "index.invitations",
     path: "/admin/invitations",
   },
-  // {
-  //   name: "index.user",
-  //   path: "/user",
-  // },
+];
+export const USER_MENU = [
+  {
+    name: "index.dashboard",
+    path: "/user",
+  },
 ];
 </script>
 

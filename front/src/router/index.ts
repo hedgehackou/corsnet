@@ -21,18 +21,17 @@ const routes: Array<RouteConfig> = [
   {
     path: "/admin",
     component: Index,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, forAdmin: true },
     children: [
       {
         path: "",
         name: "admin-dashboard",
-        redirect: { name: "admin-invitations" },
       },
       {
         path: "invitations",
         name: "admin-invitations",
         component: AdminInvitations,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, forAdmin: true },
       },
     ],
   },
@@ -40,7 +39,7 @@ const routes: Array<RouteConfig> = [
     path: "/user",
     name: "",
     component: Index,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, forUser: true },
     children: [
       {
         path: "",
@@ -131,11 +130,36 @@ router.beforeEach(async (to: Route, from: Route, next: NavigationGuardNext) => {
   }
 });
 
+router.beforeEach(async (to: Route, from: Route, next: NavigationGuardNext) => {
+  if (to.matched.some((record) => record.meta.forAdmin)) {
+    if (store.getters["AuthStore/isAuthorized"]) {
+      if (store.getters["AuthStore/isAdmin"]) {
+        next();
+      } else {
+        next({ name: "user-dashboard" });
+      }
+    }
+  }
+  if (to.matched.some((record) => record.meta.forUser)) {
+    if (store.getters["AuthStore/isAuthorized"]) {
+      if (!store.getters["AuthStore/isAdmin"]) {
+        next();
+      } else {
+        next({ name: "admin-dashboard" });
+      }
+    }
+  }
+  next();
+});
+
 router.beforeEach((to: Route, from: Route, next: NavigationGuardNext) => {
   if (to.matched.some((record) => record.meta.guest)) {
     if (store.getters["AuthStore/isAuthorized"]) {
-      next({ name: "admin-dashboard" });
-      return;
+      if (store.getters["AuthStore/isAdmin"]) {
+        next({ name: "admin-dashboard" });
+      } else {
+        next({ name: "user-dashboard" });
+      }
     }
     next();
   } else {
