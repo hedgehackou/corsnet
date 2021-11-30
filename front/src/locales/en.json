@@ -47,6 +47,31 @@
   },
   "index": {
     "dashboard": "Dashboard",
-    "profile": "Profile"
+    "profile": "Profile",
+    "invitations": "Invitations"
+  },
+  "invite": {
+    "createInvite": "Create invite",
+    "role": "Role",
+    "admin": "Admin",
+    "user": "User",
+    "cancel": "Cancel",
+    "create": "Create",
+    "errorWhileCreating": "An error occurred while invitation creation",
+    "userName": "User name",
+    "success": "Success",
+    "error": "Error",
+    "emptyTable": "There are no records in table",
+    "inviteAccepted": "Invite accepted",
+    "yes": "Yes",
+    "no": "No",
+    "acceptInvite": "Accept invite",
+    "acceptInviteError": "Accept invite error",
+    "send": "Send",
+    "name": "Name",
+    "acceptedSuccessfully": "Invite accepted successfully",
+    "actions": "Actions",
+    "deleteInvite": "Are you sure you want to delete invite?",
+    "confirm": "Confirm"
   }
 }
