@@ -10,13 +10,13 @@ class AcceptInviteRequest extends AbstractFormRequest
 {
     public function authorize()
     {
-        return $this->user()->isUser();
+        return true;
     }
 
     public function rules()
     {
         return [
-            'token' => ['required', 'string', 'email', 'max:255', 'exists:invites,token'],
+            'token' => ['required', 'string', 'max:255', 'exists:invites,token'],
             'name' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'password_confirmation' => ['required', 'string', 'min:6'],

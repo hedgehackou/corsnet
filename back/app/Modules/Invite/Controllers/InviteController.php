@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace App\Modules\Invite\Controllers;
 
 use App\Base\Controllers\AbstractController;
+use App\Modules\Invite\Repositories\InviteRepository;
 use App\Modules\Invite\Requests\AcceptInviteRequest;
 use App\Modules\Invite\Requests\CreateInviteRequest;
 use App\Modules\Invite\Requests\DeleteInviteRequest;
+use App\Modules\Invite\Requests\GetInviteInfoRequest;
+use App\Modules\Invite\Resources\InviteInfoResource;
 use App\Modules\Invite\Resources\InviteListResource;
 use App\Modules\Invite\Services\InviteService;
 use Illuminate\Http\JsonResponse;
@@ -15,13 +18,18 @@ use Illuminate\Http\JsonResponse;
 class InviteController extends AbstractController
 {
     private InviteService $inviteService;
+    private InviteRepository $inviteRepository;
 
     /**
-     * @param InviteService $inviteService
+     * @param InviteService    $inviteService
+     * @param InviteRepository $inviteRepository
      */
-    public function __construct(InviteService $inviteService)
-    {
+    public function __construct(
+        InviteService $inviteService,
+        InviteRepository $inviteRepository
+    ) {
         $this->inviteService = $inviteService;
+        $this->inviteRepository = $inviteRepository;
     }
 
     /**
@@ -58,6 +66,18 @@ class InviteController extends AbstractController
         $this->inviteService->acceptInvite($request->validated());
 
         return response()->json();
+    }
+
+    /**
+     * @param GetInviteInfoRequest $request
+     *
+     * @return InviteInfoResource
+     */
+    public function getInviteInfo(GetInviteInfoRequest $request): InviteInfoResource
+    {
+        $invite = $this->inviteRepository->getInviteByToken($request->route('token'));
+
+        return new InviteInfoResource($invite);
     }
 
     /**

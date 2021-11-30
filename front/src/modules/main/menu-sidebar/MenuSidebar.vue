@@ -69,10 +69,10 @@ export const MENU = [
     name: "index.invitations",
     path: "/admin/invitations",
   },
-  {
-    name: "index.user",
-    path: "/user",
-  },
+  // {
+  //   name: "index.user",
+  //   path: "/user",
+  // },
 ];
 </script>
 

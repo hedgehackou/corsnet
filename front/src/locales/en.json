@@ -64,6 +64,11 @@
     "emptyTable": "There are no records in table",
     "inviteAccepted": "Invite accepted",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "acceptInvite": "Accept invite",
+    "acceptInviteError": "Accept invite error",
+    "send": "Send",
+    "name": "Name",
+    "acceptedSuccessfully": "Invite accepted successfully"
   }
 }

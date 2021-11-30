@@ -21,7 +21,8 @@ Route::group([
     Route::post('invites', 'App\Modules\Invite\Controllers\InviteController@createInvite');
     Route::post('invites/accept', 'App\Modules\Invite\Controllers\InviteController@acceptInvite');
     Route::get('invites', 'App\Modules\Invite\Controllers\InviteController@getInviteList');
-    Route::delete('invites/{inviteId}', 'App\Modules\Invite\Controllers\InviteController@getInviteList');
+    Route::get('invites/{token}', 'App\Modules\Invite\Controllers\InviteController@getInviteInfo');
+    Route::delete('invites/{inviteId}', 'App\Modules\Invite\Controllers\InviteController@deleteInvite');
 });
 
 Route::group([

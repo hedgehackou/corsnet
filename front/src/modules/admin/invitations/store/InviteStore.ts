@@ -36,8 +36,8 @@ const mutations: MutationTree<InviteState> = {
 };
 
 const actions: ActionTree<InviteState, RootState> = {
-  async isProjectInstalled() {
-    const response = await Vue.axios.get(`install/is-project-installed`);
+  async getInviteInfo(options, token) {
+    const response = await Vue.axios.get(`invites/${token}`);
 
     return response.data;
   },
@@ -46,8 +46,10 @@ const actions: ActionTree<InviteState, RootState> = {
     options.commit("setInviteList", data);
   },
   async createInvite(options, payload) {
-    const response = await Vue.axios.post(`invites`, payload);
-    console.log("response", response);
+    await Vue.axios.post(`invites`, payload);
+  },
+  async acceptInvite(options, payload) {
+    await Vue.axios.post(`invites/accept`, payload);
   },
 };
 

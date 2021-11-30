@@ -64,6 +64,11 @@
     "emptyTable": "Записи отсутствуют",
     "inviteAccepted": "Инвайт принят",
     "yes": "Да",
-    "no": "Нет"
+    "no": "Нет",
+    "acceptInvite": "Принять приглашение",
+    "acceptInviteError": "Ошибка подтверждения инвайта",
+    "send": "Отправить",
+    "name": "Имя",
+    "acceptedSuccessfully": "Инвайт успешно принят"
   }
 }

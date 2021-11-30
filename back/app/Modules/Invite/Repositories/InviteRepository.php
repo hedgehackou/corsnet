@@ -17,4 +17,14 @@ class InviteRepository extends AbstractRepository
     {
         return Invite::query();
     }
+
+    /**
+     * @param string $token
+     *
+     * @return mixed
+     */
+    public function getInviteByToken(string $token)
+    {
+        return Invite::where('token', $token)->firstOrFail();
+    }
 }

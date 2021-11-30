@@ -8,5 +8,8 @@ use App\Base\Requests\AbstractFormRequest;
 
 class GetInviteListRequest extends AbstractFormRequest
 {
-
+    public function authorize(): bool
+    {
+        return $this->user()->isAdmin();
+    }
 }

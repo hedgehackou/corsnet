@@ -10,7 +10,7 @@ import ForgotPassword from "@/modules/auth/forgot-password/ForgotPassword.vue";
 import ResetPassword from "@/modules/auth/reset-password/ResetPassword.vue";
 import UserDashboard from "@/modules/user/dashboard/UserDashboard.vue";
 import AdminInvitations from "@/modules/admin/invitations/AdminInvitations.vue";
-import UserInvite from "@/modules/auth/invite/UserInvite.vue";
+import AcceptInvite from "@/modules/auth/invite/AcceptInvite.vue";
 
 Vue.use(VueRouter);
 
@@ -70,7 +70,7 @@ const routes: Array<RouteConfig> = [
   {
     path: "/accept-invite/:token",
     name: "accept-invite",
-    component: UserInvite,
+    component: AcceptInvite,
   },
   {
     path: "/install",

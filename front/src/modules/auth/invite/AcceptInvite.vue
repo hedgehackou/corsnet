@@ -1,8 +1,8 @@
 <template>
-  <div class="login-box">
+  <div class="login-box" v-if="componentLoaded">
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">{{ $t("auth.resetPassword") }}</p>
+        <p class="login-box-msg">{{ $t("invite.acceptInvite") }}</p>
         <form @submit.prevent="resetPassword">
           <div class="input-group mb-1 mt-2">
             <input
@@ -19,7 +19,19 @@
               </div>
             </div>
           </div>
-          <form-error-list-printer :error-list="resetPasswordErrors.email" />
+          <div class="input-group mb-1 mt-3">
+            <input
+              v-model="name"
+              class="form-control"
+              :placeholder="$t('invite.name')"
+            />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fa fa-user"></span>
+              </div>
+            </div>
+          </div>
+          <form-error-list-printer :error-list="acceptInviteErrors.name" />
           <div class="input-group mb-1 mt-3">
             <input
               type="password"
@@ -33,7 +45,7 @@
               </div>
             </div>
           </div>
-          <form-error-list-printer :error-list="resetPasswordErrors.password" />
+          <form-error-list-printer :error-list="acceptInviteErrors.password" />
           <div class="input-group mb-1 mt-3">
             <input
               type="password"
@@ -48,7 +60,7 @@
             </div>
           </div>
           <form-error-list-printer
-            :error-list="resetPasswordErrors.password_confirmation"
+            :error-list="acceptInviteErrors.password_confirmation"
           />
           <div class="row mt-3">
             <div class="col-12">
@@ -56,15 +68,10 @@
                 type="submit"
                 class="btn btn-primary btn-block white-space-no-wrap"
               >
-                <i class="fa fa-sign-in"></i> {{ $t("auth.send") }}
+                <i class="fa fa-sign-in"></i> {{ $t("invite.send") }}
               </button>
             </div>
           </div>
-          <p class="mb-0 mt-2">
-            <router-link :to="{ name: 'login' }">
-              {{ $t("auth.signIn") }}
-            </router-link>
-          </p>
         </form>
       </div>
     </div>
@@ -76,44 +83,61 @@ import { Vue } from "vue-property-decorator";
 import Component from "vue-class-component";
 import Languages from "@/components/languages/Languages.vue";
 import FormErrorListPrinter from "@/components/form/FormErrorListPrinter.vue";
-import { AuthStoreModule } from "@/modules/auth/store/AuthStore";
-import StoreModule from "@/store/StoreModule";
+
 import { namespace } from "vuex-class";
+import StoreModule from "@/store/StoreModule";
+import { InviteStoreModule } from "@/modules/admin/invitations/store/InviteStore";
+import { NavigationGuardNext, Route } from "vue-router/types/router";
 
+const inviteStore = namespace("InviteStoreModule");
 StoreModule.registerMany({
-  AuthStoreModule,
+  InviteStoreModule,
 });
-
-const authStore = namespace("AuthStoreModule");
 
 @Component({
   components: {
     Languages,
     FormErrorListPrinter,
   },
+  beforeRouteEnter(to: Route, from: Route, next: NavigationGuardNext) {
+    next((vm: any) => {
+      vm.getInviteInfoAction(vm.$route.params.token)
+        .then((data: any) => {
+          vm.componentLoaded = true;
+          vm.email = data.data.email;
+        })
+        .catch(() => {
+          vm.$router.push({ name: "login" });
+        });
+    });
+  },
 })
-export default class UserInvite extends Vue {
+export default class AcceptInvite extends Vue {
   private appElement: HTMLElement | null = null;
 
+  public componentLoaded = false;
   public email: string = "";
+  public name: string = "";
   public password: string = "";
   public passwordConfirmation: string = "";
   public token: string = "";
 
-  public resetPasswordErrors = {
-    email: null,
+  public acceptInviteErrors = {
+    name: null,
     password: null,
     passwordConfirmation: null,
   };
 
-  @authStore.Action("resetPassword")
-  resetPasswordAction!: (payload: any) => Promise<any>;
+  @inviteStore.Action("acceptInvite")
+  acceptInviteAction!: (payload: any) => Promise<any>;
+
+  @inviteStore.Action("getInviteInfo")
+  getInviteInfoAction!: (payload: any) => Promise<any>;
 
   public mounted(): void {
     this.appElement = document.getElementById("app") as HTMLElement;
     this.appElement.classList.add("login-page");
     this.token = this.$route.params.token;
-    this.email = this.$route.query.email as string;
   }
 
   public unmounted(): void {
@@ -127,27 +151,27 @@ export default class UserInvite extends Vue {
   public async resetPassword(): Promise<void> {
     let loader = this.$loading.show();
 
-    this.resetPasswordErrors = {
-      email: null,
+    this.acceptInviteErrors = {
+      name: null,
       password: null,
       passwordConfirmation: null,
     };
 
     try {
-      await this.resetPasswordAction({
-        email: this.email,
+      await this.acceptInviteAction({
+        name: this.name,
         password: this.password,
         passwordConfirmation: this.passwordConfirmation,
         token: this.token,
       });
-      this.$toast.success(this.$t("auth.passwordResetSuccessfully") as string);
+      this.$toast.success(this.$t("invite.acceptedSuccessfully") as string);
       this.removeAppClass();
       await this.$router.push({
         name: "login",
       });
     } catch (error: any) {
-      this.resetPasswordErrors = error.response.data.errors;
-      this.$toast.error(this.$t("auth.resetPasswordError") as string);
+      this.acceptInviteErrors = error.response.data.errors;
+      this.$toast.error(this.$t("invite.acceptInviteError") as string);
     } finally {
       loader.hide();
     }
