@@ -12,10 +12,10 @@ use App\Base\Models\AbstractModel;
  */
 class Setting extends AbstractModel
 {
-    protected string $table = 'settings';
+    protected $table = 'settings';
     public $timestamps = false;
 
-    protected array $fillable = [
+    protected $fillable = [
         'network_name',
         'lang'
     ];
