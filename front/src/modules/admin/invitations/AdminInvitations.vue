@@ -56,6 +56,9 @@
             <template #head(is_accepted)="">
               {{ $t("invite.inviteAccepted") }}
             </template>
+            <template #head(actions)="">
+              {{ $t("invite.actions") }}
+            </template>
             <template #cell(is_admin)="{ item }">
               {{ item.is_admin ? $t("invite.admin") : $t("invite.user") }}
             </template>
@@ -66,6 +69,11 @@
               <div v-else class="text-danger">
                 {{ $t("invite.no") }}
               </div>
+            </template>
+            <template #cell(actions)="{ item }">
+              <b-btn variant="danger" @click="openDeleteModal(item.id)">
+                <div class="fa fa-trash"></div>
+              </b-btn>
             </template>
           </b-table>
           <b-pagination
@@ -132,6 +140,9 @@ export default class AdminInvitations extends Vue {
   @inviteStore.Action("createInvite")
   createInviteAction!: (payload: any) => Promise<any>;
 
+  @inviteStore.Action("deleteInvite")
+  deleteInviteAction!: (payload: any) => Promise<any>;
+
   public openInviteModal() {
     this.isShowCreateInviteModal = true;
   }
@@ -146,15 +157,45 @@ export default class AdminInvitations extends Vue {
     ];
   }
 
+  public openDeleteModal(id: number) {
+    this.$bvModal
+      .msgBoxConfirm(this.$t("invite.deleteInvite") as string, {
+        title: this.$t("invite.confirm") as string,
+        size: "sm",
+        buttonSize: "sm",
+        okVariant: "danger",
+        okTitle: this.$t("invite.yes") as string,
+        cancelTitle: this.$t("invite.no") as string,
+        footerClass: "p-2",
+        hideHeaderClose: false,
+        centered: true,
+      })
+      .then(async (value) => {
+        if (value) {
+          let loader = this.$loading.show();
+          try {
+            await this.deleteInviteAction(id);
+            await this.getInviteListAction({});
+          } finally {
+            loader.hide();
+          }
+        }
+      });
+  }
+
   public async createInvite() {
     this.inviteParamsErrors = { ...this.inviteDefaultParams };
+    let loader = this.$loading.show();
     try {
       await this.createInviteAction(this.inviteParams);
       this.isShowCreateInviteModal = false;
       this.$toast.success(this.$t("invite.success") as string);
+      await this.getInviteListAction({});
     } catch (e) {
       this.$toast.error(this.$t("invite.error") as string);
       this.inviteParamsErrors = e.response.data.errors;
+    } finally {
+      loader.hide();
     }
   }
 

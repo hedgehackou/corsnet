@@ -69,6 +69,9 @@
     "acceptInviteError": "Accept invite error",
     "send": "Send",
     "name": "Name",
-    "acceptedSuccessfully": "Invite accepted successfully"
+    "acceptedSuccessfully": "Invite accepted successfully",
+    "actions": "Actions",
+    "deleteInvite": "Are you sure you want to delete invite?",
+    "confirm": "Confirm"
   }
 }

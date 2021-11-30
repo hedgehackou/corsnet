@@ -51,6 +51,9 @@ const actions: ActionTree<InviteState, RootState> = {
   async acceptInvite(options, payload) {
     await Vue.axios.post(`invites/accept`, payload);
   },
+  async deleteInvite(options, inviteId) {
+    await Vue.axios.delete(`invites/${inviteId}`);
+  },
 };
 
 export const InviteStoreModule: Module<InviteState, RootState> = {

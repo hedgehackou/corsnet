@@ -69,6 +69,9 @@
     "acceptInviteError": "Ошибка подтверждения инвайта",
     "send": "Отправить",
     "name": "Имя",
-    "acceptedSuccessfully": "Инвайт успешно принят"
+    "acceptedSuccessfully": "Инвайт успешно принят",
+    "actions": "Действия",
+    "deleteInvite": "Вы уверены, что хотите удалить инвайт?",
+    "confirm": "Подтвердить"
   }
 }
