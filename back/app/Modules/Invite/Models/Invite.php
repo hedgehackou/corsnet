@@ -15,14 +15,14 @@ use App\Base\Models\AbstractModel;
  */
 class Invite extends AbstractModel
 {
-    protected string $table = 'invites';
-    protected array $fillable = [
+    protected $table = 'invites';
+    protected $fillable = [
         'email',
         'token',
         'is_admin',
         'is_accepted',
     ];
-    protected array $casts = [
+    protected $casts = [
         'is_admin' => 'boolean',
         'is_accepted' => 'boolean',
     ];
