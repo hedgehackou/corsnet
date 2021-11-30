@@ -1,15 +1,16 @@
 import Vue from "vue";
+import store from "@/store/index";
+import i18n from "@/i18n";
+import { NavigationGuardNext, Route } from "vue-router/types/router";
 import VueRouter, { RouteConfig } from "vue-router";
 import Install from "@/modules/install/Install.vue";
 import Index from "@/modules/index/Index.vue";
-import { NavigationGuardNext, Route } from "vue-router/types/router";
-import store from "@/store/index";
 import Login from "@/modules/auth/login/Login.vue";
 import ForgotPassword from "@/modules/auth/forgot-password/ForgotPassword.vue";
 import ResetPassword from "@/modules/auth/reset-password/ResetPassword.vue";
-import i18n from "@/i18n";
-import AdminDashboard from "@/modules/admin/dashboard/AdminDashboard.vue";
 import UserDashboard from "@/modules/user/dashboard/UserDashboard.vue";
+import AdminInvitations from "@/modules/admin/invitations/AdminInvitations.vue";
+import AcceptInvite from "@/modules/auth/invite/AcceptInvite.vue";
 
 Vue.use(VueRouter);
 
@@ -20,19 +21,17 @@ const routes: Array<RouteConfig> = [
   {
     path: "/admin",
     component: Index,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, forAdmin: true },
     children: [
       {
         path: "",
         name: "admin-dashboard",
-        component: AdminDashboard,
-        meta: { requiresAuth: true },
       },
       {
         path: "invitations",
         name: "admin-invitations",
-        component: AdminDashboard,
-        meta: { requiresAuth: true },
+        component: AdminInvitations,
+        meta: { requiresAuth: true, forAdmin: true },
       },
     ],
   },
@@ -40,7 +39,7 @@ const routes: Array<RouteConfig> = [
     path: "/user",
     name: "",
     component: Index,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, forUser: true },
     children: [
       {
         path: "",
@@ -66,6 +65,11 @@ const routes: Array<RouteConfig> = [
     path: "/reset-password/:token",
     name: "reset-password",
     component: ResetPassword,
+  },
+  {
+    path: "/accept-invite/:token",
+    name: "accept-invite",
+    component: AcceptInvite,
   },
   {
     path: "/install",
@@ -126,11 +130,36 @@ router.beforeEach(async (to: Route, from: Route, next: NavigationGuardNext) => {
   }
 });
 
+router.beforeEach(async (to: Route, from: Route, next: NavigationGuardNext) => {
+  if (to.matched.some((record) => record.meta.forAdmin)) {
+    if (store.getters["AuthStore/isAuthorized"]) {
+      if (store.getters["AuthStore/isAdmin"]) {
+        next();
+      } else {
+        next({ name: "user-dashboard" });
+      }
+    }
+  }
+  if (to.matched.some((record) => record.meta.forUser)) {
+    if (store.getters["AuthStore/isAuthorized"]) {
+      if (!store.getters["AuthStore/isAdmin"]) {
+        next();
+      } else {
+        next({ name: "admin-dashboard" });
+      }
+    }
+  }
+  next();
+});
+
 router.beforeEach((to: Route, from: Route, next: NavigationGuardNext) => {
   if (to.matched.some((record) => record.meta.guest)) {
     if (store.getters["AuthStore/isAuthorized"]) {
-      next({ name: "admin-dashboard" });
-      return;
+      if (store.getters["AuthStore/isAdmin"]) {
+        next({ name: "admin-dashboard" });
+      } else {
+        next({ name: "user-dashboard" });
+      }
     }
     next();
   } else {

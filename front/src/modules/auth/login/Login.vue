@@ -128,8 +128,10 @@ export default class Login extends Vue {
         name: "admin-dashboard",
       });
     } catch (error: any) {
-      this.loginErrors = error.response.data.errors;
-      this.$toast.error(this.$t("auth.loginError") as string);
+      if (error.response) {
+        this.loginErrors = error.response.data.errors;
+        this.$toast.error(this.$t("auth.loginError") as string);
+      }
     } finally {
       loader.hide();
     }

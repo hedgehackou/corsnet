@@ -1,11 +1,10 @@
 <template>
   <footer class="main-footer">
-    <strong v-if="false">
-      <span>Copyright &copy; 2021</span>
-      <a href="#" target="_blank" rel="noopener noreferrer">
-        <span>test.com</span>
+    <strong v-if="true">
+      <span>Copyright &copy; 2021 </span>
+      <a @click.prevent="" href="#" target="_blank" rel="noopener noreferrer">
+        <span>corsnet.xyz</span>
       </a>
-      <span>.</span>
     </strong>
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b>
@@ -21,7 +20,7 @@ import { Component, Vue } from "vue-property-decorator";
   components: {},
 })
 export default class Footer extends Vue {
-  private version: string = "1.0.0";
+  private version: string = "0.0.1";
 }
 </script>
 

@@ -7,6 +7,7 @@ import Loading from "vue-loading-overlay";
 import axios from "axios";
 import VueAxios from "vue-axios";
 import VueToast from "vue-toast-notification";
+import { BootstrapVue } from "bootstrap-vue";
 
 Vue.config.productionTip = false;
 axios.defaults.baseURL = process.env.VUE_APP_BASE_API_URL;
@@ -19,6 +20,7 @@ if (localStorage.getItem("auth_token")) {
 }
 
 Vue.use(Loading);
+Vue.use(BootstrapVue);
 Vue.use(VueAxios, axios);
 Vue.use(VueToast, { position: "top-right", duration: 3000 });
 
