@@ -13,15 +13,17 @@ class InviteMail extends Mailable
     use Queueable, SerializesModels;
 
     private string $url;
+    private string $networkName;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $url)
+    public function __construct(string $url, string $networkName)
     {
         $this->url = $url;
+        $this->networkName = $networkName;
     }
 
     /**
@@ -33,6 +35,7 @@ class InviteMail extends Mailable
     {
         return $this->markdown('mail.invite', [
             'url' => $this->url,
+            'networkName' => $this->networkName,
         ]);
     }
 }

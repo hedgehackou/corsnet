@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Modules\Invite\Mail\InviteMail;
 use App\Modules\Invite\Models\Invite;
 use App\Modules\Invite\Repositories\InviteRepository;
+use App\Modules\Settings\Models\Setting;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -49,7 +50,9 @@ class InviteService extends AbstractService
                 'email' => $data['email'],
             ], false);
 
-        Mail::to($data['email'])->send(new InviteMail($url));
+        $networkName = Setting::firstOrFail()->network_name;
+
+        Mail::to($data['email'])->send(new InviteMail($url, $networkName));
 
 
         return $invite;
