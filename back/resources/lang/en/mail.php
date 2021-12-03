@@ -6,6 +6,6 @@ return [
     'reset_password' => 'Reset password',
     'password_will_expire' => 'This password reset link will expire in :count minutes.',
     'mistake' => 'If you did not request a password reset, no further action is required.',
-    'welcome' => 'Welcome to the project !',
+    'welcome' => 'Welcome to :network!',
     'accept_invite' => 'Accept invite',
 ];
