@@ -48,7 +48,8 @@
   "index": {
     "dashboard": "Dashboard",
     "profile": "Profile",
-    "invitations": "Invitations"
+    "invitations": "Invitations",
+    "users": "Users"
   },
   "invite": {
     "createInvite": "Create invite",
@@ -73,5 +74,11 @@
     "actions": "Actions",
     "deleteInvite": "Are you sure you want to delete invite?",
     "confirm": "Confirm"
+  },
+  "users": {
+    "admin": "Admin",
+    "user": "User",
+    "emptyTable": "There are no records in table",
+    "role": "Role"
   }
 }
