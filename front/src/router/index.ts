@@ -10,6 +10,7 @@ import ForgotPassword from "@/modules/auth/forgot-password/ForgotPassword.vue";
 import ResetPassword from "@/modules/auth/reset-password/ResetPassword.vue";
 import UserDashboard from "@/modules/user/dashboard/UserDashboard.vue";
 import AdminInvitations from "@/modules/admin/invitations/AdminInvitations.vue";
+import AdminUsers from "@/modules/admin/users/AdminUsers.vue";
 import AcceptInvite from "@/modules/auth/invite/AcceptInvite.vue";
 
 Vue.use(VueRouter);
@@ -31,6 +32,12 @@ const routes: Array<RouteConfig> = [
         path: "invitations",
         name: "admin-invitations",
         component: AdminInvitations,
+        meta: { requiresAuth: true, forAdmin: true },
+      },
+      {
+        path: "users",
+        name: "admin-users",
+        component: AdminUsers,
         meta: { requiresAuth: true, forAdmin: true },
       },
     ],

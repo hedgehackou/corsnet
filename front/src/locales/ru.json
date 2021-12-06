@@ -48,7 +48,8 @@
   "index": {
     "dashboard": "Dashboard",
     "profile": "Профиль",
-    "invitations": "Приглашения"
+    "invitations": "Приглашения",
+    "users": "Пользователи"
   },
   "invite": {
     "createInvite": "Создать приглашение",
@@ -73,5 +74,11 @@
     "actions": "Действия",
     "deleteInvite": "Вы уверены, что хотите удалить инвайт?",
     "confirm": "Подтвердить"
+  },
+  "users": {
+    "admin": "Админ",
+    "user": "Пользователь",
+    "emptyTable": "Записи отсутствуют",
+    "role": "Роль"
   }
 }
