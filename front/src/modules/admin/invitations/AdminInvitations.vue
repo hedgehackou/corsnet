@@ -78,7 +78,8 @@
           </b-table>
           <b-pagination
             class="ml-auto mt-1 mb-0"
-            v-model="getCurrentPage"
+            @change="changePage"
+            :value="getCurrentPage"
             :total-rows="getTotal"
             :per-page="getPerPage"
           ></b-pagination>
@@ -107,7 +108,6 @@ StoreModule.registerMany({
 })
 export default class AdminInvitations extends Vue {
   public isShowCreateInviteModal = false;
-  public items = [{ age: 40, first_name: "Dickerson", last_name: "Macdonald" }];
   public roles = [
     { title: this.$t("invite.admin"), value: "admin" },
     { title: this.$t("invite.user"), value: "user" },
@@ -197,6 +197,10 @@ export default class AdminInvitations extends Vue {
     } finally {
       loader.hide();
     }
+  }
+
+  public changePage(page = 1) {
+    this.getInviteListAction({ page });
   }
 
   async mounted() {
