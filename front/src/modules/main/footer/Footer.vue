@@ -20,7 +20,7 @@ import { Component, Vue } from "vue-property-decorator";
   components: {},
 })
 export default class Footer extends Vue {
-  private version: string = "0.0.1";
+  private version: string = process.env.VUE_APP_VERSION;
 }
 </script>
 
