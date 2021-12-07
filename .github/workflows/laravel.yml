@@ -3,7 +3,7 @@ name: Laravel CI/CD
 on:
   push:
     tags:
-      - '*'
+      - 'v*.*.*'
 
 jobs:
   laravel-tests:
@@ -42,7 +42,7 @@ jobs:
           echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
           RELEASE_VERSION=${GITHUB_REF#refs/*/}"
           echo $RELEASE_VERSION
-          echo ${{ steps.vars.outputs.tag }}
+          echo ${{ env.RELEASE_VERSION }}
           cp .env.example .env.local
           sed -i -r "s/^(VUE_APP_VERSION=).*/\1$RELEASE_VERSION/" .env.local
       - run: make update
