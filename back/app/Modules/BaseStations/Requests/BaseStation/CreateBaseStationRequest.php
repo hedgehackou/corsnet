@@ -31,6 +31,14 @@ class CreateBaseStationRequest extends AbstractFormRequest
         ];
     }
 
+    protected function prepareForValidation()
+    {
+        parent::prepareForValidation();
+        $this->merge([
+            'is_online' => (bool) $this->post('is_online'),
+        ]);
+    }
+
     public function validated(): array
     {
         $data = parent::validated();

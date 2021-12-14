@@ -39,6 +39,7 @@
             </template>
             <template #cell(actions)="{ item }">
               <b-btn
+                v-if="false"
                 class="mr-2"
                 variant="primary"
                 @click="openReceiversPage(item.id)"
