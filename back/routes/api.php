@@ -24,6 +24,13 @@ Route::group([
     Route::get('invites', 'App\Modules\Invite\Controllers\InviteController@getInviteList');
     Route::get('invites/{token}', 'App\Modules\Invite\Controllers\InviteController@getInviteInfo');
     Route::delete('invites/{inviteId}', 'App\Modules\Invite\Controllers\InviteController@deleteInvite');
+    //Base stations
+    Route::post('base-stations', 'App\Modules\BaseStations\Controllers\BaseStationsController@createBaseStation');
+    Route::put('base-stations/{baseStationId}', 'App\Modules\BaseStations\Controllers\BaseStationsController@updateBaseStation');
+    Route::get('base-stations', 'App\Modules\BaseStations\Controllers\BaseStationsController@getBaseStationList');
+    Route::get('base-stations/{baseStationId}', 'App\Modules\BaseStations\Controllers\BaseStationsController@getBaseStation');
+    Route::delete('base-stations/{baseStationId}', 'App\Modules\BaseStations\Controllers\BaseStationsController@deleteBaseStation');
+
     //Users
     Route::get('users', 'App\Modules\Users\Controllers\UsersController@getUserList');
 });

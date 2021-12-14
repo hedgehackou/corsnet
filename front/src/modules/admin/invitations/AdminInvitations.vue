@@ -45,7 +45,6 @@
             show-empty
             :items="getInviteList"
             :fields="getInviteTableFields"
-            :empty-text="$t('devices.empty_val')"
           >
             <template #empty="">
               <h4>{{ $t("invite.emptyTable") }}</h4>

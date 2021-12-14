@@ -12,6 +12,9 @@ import UserDashboard from "@/modules/user/dashboard/UserDashboard.vue";
 import AdminInvitations from "@/modules/admin/invitations/AdminInvitations.vue";
 import AdminUsers from "@/modules/admin/users/AdminUsers.vue";
 import AcceptInvite from "@/modules/auth/invite/AcceptInvite.vue";
+import BaseStations from "@/modules/admin/base-stations/BaseStations.vue";
+import CreateEditBaseStation from "@/modules/admin/base-stations/components/CreateEditBaseStation.vue";
+import Receivers from "@/modules/admin/base-stations/components/Receivers.vue";
 
 Vue.use(VueRouter);
 
@@ -39,6 +42,42 @@ const routes: Array<RouteConfig> = [
         name: "admin-users",
         component: AdminUsers,
         meta: { requiresAuth: true, forAdmin: true },
+      },
+      {
+        path: "base-stations",
+        component: {
+          template: "<router-view />",
+        },
+        children: [
+          {
+            path: "",
+            name: "base-stations",
+            component: BaseStations,
+            meta: { requiresAuth: true, forAdmin: true },
+          },
+          {
+            path: "create",
+            name: "create-base-station",
+            component: CreateEditBaseStation,
+            meta: { requiresAuth: true, forAdmin: true },
+          },
+          {
+            path: "edit/:baseStationId",
+            name: "edit-base-station",
+            component: CreateEditBaseStation,
+            meta: { requiresAuth: true, forAdmin: true },
+            props: (route) => ({
+              baseStationId: +route.params.baseStationId,
+              editMode: true,
+            }),
+          },
+          {
+            path: "edit/:baseStationId/receivers",
+            name: "base-station-receivers",
+            component: Receivers,
+            meta: { requiresAuth: true, forAdmin: true },
+          },
+        ],
       },
     ],
   },

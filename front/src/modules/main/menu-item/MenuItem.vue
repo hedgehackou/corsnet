@@ -66,6 +66,15 @@ export default class MenuItem extends Vue {
     this.isMenuExtended = !this.isMenuExtended;
   }
 
+  public isRootPath(path: string) {
+    const routeName = this.$route.name;
+    if (routeName === "admin-dashboard" || routeName === "user-dashboard") {
+      return false;
+    }
+
+    return ["/admin", "/user"].includes(path);
+  }
+
   public calculateIsActive(url: string) {
     url = url.replace(/\/en|\/ru/i, "/");
     url = url.replace(/\/$/, "");
@@ -73,12 +82,15 @@ export default class MenuItem extends Vue {
     this.isOneOfChildrenActive = false;
     if (this.isExpandable) {
       this.menuItem.children.forEach((item: any) => {
-        if (item.path === url) {
+        if (url.startsWith(item.path)) {
           this.isOneOfChildrenActive = true;
           this.isMenuExtended = true;
         }
       });
-    } else if (this.menuItem.path === url) {
+    } else if (
+      url.startsWith(this.menuItem.path) &&
+      !this.isRootPath(this.menuItem.path)
+    ) {
       this.isMainActive = true;
     }
     if (!this.isMainActive && !this.isOneOfChildrenActive) {
