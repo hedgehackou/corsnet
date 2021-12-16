@@ -100,7 +100,8 @@
     "confirm": "Confirm",
     "deleteBaseStation": "Are you sure you want to delete base?",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "edit": "Edit"
   },
   "receiver": {
     "model": "Модель",

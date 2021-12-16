@@ -15,6 +15,7 @@ import AcceptInvite from "@/modules/auth/invite/AcceptInvite.vue";
 import BaseStations from "@/modules/admin/base-stations/BaseStations.vue";
 import CreateEditBaseStation from "@/modules/admin/base-stations/components/CreateEditBaseStation.vue";
 import Receivers from "@/modules/admin/base-stations/components/Receivers.vue";
+import ViewBaseStation from "@/modules/admin/base-stations/components/ViewBaseStation.vue";
 
 Vue.use(VueRouter);
 
@@ -51,19 +52,19 @@ const routes: Array<RouteConfig> = [
         children: [
           {
             path: "",
-            name: "base-stations",
+            name: "admin-base-stations",
             component: BaseStations,
             meta: { requiresAuth: true, forAdmin: true },
           },
           {
             path: "create",
-            name: "create-base-station",
+            name: "admin-create-base-station",
             component: CreateEditBaseStation,
             meta: { requiresAuth: true, forAdmin: true },
           },
           {
             path: "edit/:baseStationId",
-            name: "edit-base-station",
+            name: "admin-edit-base-station",
             component: CreateEditBaseStation,
             meta: { requiresAuth: true, forAdmin: true },
             props: (route) => ({
@@ -72,8 +73,17 @@ const routes: Array<RouteConfig> = [
             }),
           },
           {
+            path: "view/:baseStationId",
+            name: "admin-view-base-station",
+            component: ViewBaseStation,
+            meta: { requiresAuth: true, forAdmin: true },
+            props: (route) => ({
+              baseStationId: +route.params.baseStationId,
+            }),
+          },
+          {
             path: "edit/:baseStationId/receivers",
-            name: "base-station-receivers",
+            name: "admin-base-station-receivers",
             component: Receivers,
             meta: { requiresAuth: true, forAdmin: true },
           },
@@ -92,6 +102,29 @@ const routes: Array<RouteConfig> = [
         name: "user-dashboard",
         component: UserDashboard,
         meta: { requiresAuth: true },
+      },
+      {
+        path: "base-stations",
+        component: {
+          template: "<router-view />",
+        },
+        children: [
+          {
+            path: "",
+            name: "user-base-stations",
+            component: BaseStations,
+            meta: { requiresAuth: true, forAdmin: false },
+          },
+          {
+            path: "view/:baseStationId",
+            name: "user-view-base-station",
+            component: ViewBaseStation,
+            meta: { requiresAuth: true, forAdmin: false },
+            props: (route) => ({
+              baseStationId: +route.params.baseStationId,
+            }),
+          },
+        ],
       },
     ],
   },

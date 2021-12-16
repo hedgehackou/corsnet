@@ -83,6 +83,10 @@ export const USER_MENU = [
     name: "index.dashboard",
     path: "/user",
   },
+  {
+    name: "index.bases",
+    path: "/user/base-stations",
+  },
 ];
 </script>
 

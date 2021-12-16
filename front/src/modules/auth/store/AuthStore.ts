@@ -21,6 +21,9 @@ const getters: GetterTree<AuthState, RootState> = {
   isAdmin(state: AuthState) {
     return !!state.user.is_admin;
   },
+  getRole(state: AuthState) {
+    return state.user.is_admin ? "admin" : "user";
+  },
 };
 
 const mutations: MutationTree<AuthState> = {

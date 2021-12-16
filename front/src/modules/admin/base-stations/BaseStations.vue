@@ -3,12 +3,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <b-button
-            @click="$router.push({ name: 'create-base-station' })"
-            class="mt-4"
-            variant="primary"
-            >{{ $t("baseStations.create") }}</b-button
-          >
+          <b-button @click="createBaseStation" class="mt-4" variant="primary">{{
+            $t("baseStations.create")
+          }}</b-button>
         </div>
         <div class="col-12">
           <b-table
@@ -39,14 +36,14 @@
             </template>
             <template #cell(actions)="{ item }">
               <b-btn
-                v-if="false"
                 class="mr-2"
                 variant="primary"
-                @click="openReceiversPage(item.id)"
+                @click="openViewPage(item.id)"
               >
-                <div class="fa fa-tools"></div>
+                <div class="fa fa-eye"></div>
               </b-btn>
               <b-btn
+                v-if="role === 'admin'"
                 class="mr-2"
                 variant="primary"
                 @click="editAction(item.id)"
@@ -54,6 +51,7 @@
                 <div class="fa fa-pencil-alt"></div>
               </b-btn>
               <b-btn
+                v-if="role === 'admin'"
                 class="mr-2"
                 variant="danger"
                 @click="openDeleteModal(item.id)"
@@ -82,6 +80,7 @@ import { namespace } from "vuex-class";
 import StoreModule from "@/store/StoreModule";
 import { BaseStationStoreModule } from "@/modules/admin/base-stations/store/BaseStationStore";
 
+const authStore = namespace("AuthStoreModule");
 const baseStationStore = namespace("BaseStationStoreModule");
 StoreModule.registerMany({
   BaseStationStoreModule,
@@ -93,6 +92,9 @@ StoreModule.registerMany({
   },
 })
 export default class BaseStations extends Vue {
+  @authStore.Getter("getRole")
+  public role!: string;
+
   @baseStationStore.Getter("getBaseStationList")
   public getBaseStationList!: any[];
 
@@ -121,15 +123,29 @@ export default class BaseStations extends Vue {
     ];
   }
 
+  public createBaseStation() {
+    this.$router.push({ name: `${this.role}-create-base-station` });
+  }
+
+  public openViewPage(baseStationId: string) {
+    this.$router.push({
+      name: `${this.role}-view-base-station`,
+      params: { baseStationId },
+    });
+  }
+
   public openReceiversPage(baseStationId: string) {
     this.$router.push({
-      name: "base-station-receivers",
+      name: `${this.role}-base-station-receivers`,
       params: { baseStationId },
     });
   }
 
   public editAction(baseStationId: string) {
-    this.$router.push({ name: "edit-base-station", params: { baseStationId } });
+    this.$router.push({
+      name: `${this.role}-edit-base-station`,
+      params: { baseStationId },
+    });
   }
 
   public openDeleteModal(id: number) {

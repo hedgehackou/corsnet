@@ -10,7 +10,7 @@ class GetBaseStationRequest extends AbstractFormRequest
 {
     public function authorize(): bool
     {
-        return $this->user()->isAdmin();
+        return true;
     }
 
     /**
