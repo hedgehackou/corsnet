@@ -88,6 +88,7 @@ import StoreModule from "@/store/StoreModule";
 
 import { BaseStationStoreModule } from "@/modules/admin/base-stations/store/BaseStationStore";
 
+const authStore = namespace("AuthStoreModule");
 const baseStationStore = namespace("BaseStationStoreModule");
 StoreModule.registerMany({
   BaseStationStoreModule,
@@ -121,6 +122,9 @@ export default class CreateEditBaseStation extends Vue {
     { value: "disabled", text: "Disabled" },
   ];
 
+  @authStore.Getter("getRole")
+  public role!: string;
+
   @baseStationStore.Action("createBaseStation")
   createBaseStationAction!: (payload: any) => Promise<any>;
 
@@ -153,7 +157,7 @@ export default class CreateEditBaseStation extends Vue {
     try {
       await this.createBaseStationAction(this.baseStationParams);
       this.$toast.success(this.$t("baseStations.success") as string);
-      await this.$router.push({ name: "base-stations" });
+      await this.$router.push({ name: `${this.role}-base-stations` });
     } catch (e) {
       this.$toast.error(this.$t("baseStations.error") as string);
       this.baseStationErrors = e.response.data.errors;
