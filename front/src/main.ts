@@ -8,6 +8,8 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import VueToast from "vue-toast-notification";
 import { BootstrapVue } from "bootstrap-vue";
+import FormErrorListPrinter from "@/components/form/FormErrorListPrinter.vue";
+import { BaseMixin } from "@/mixins/BaseMixin";
 
 Vue.config.productionTip = false;
 axios.defaults.baseURL = process.env.VUE_APP_BASE_API_URL;
@@ -19,10 +21,12 @@ if (localStorage.getItem("auth_token")) {
   };
 }
 
+Vue.component("form-error-list-printer", FormErrorListPrinter);
 Vue.use(Loading);
 Vue.use(BootstrapVue);
 Vue.use(VueAxios, axios);
 Vue.use(VueToast, { position: "top-right", duration: 3000 });
+Vue.mixin(BaseMixin);
 
 new Vue({
   router,

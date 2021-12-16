@@ -49,7 +49,8 @@
     "dashboard": "Dashboard",
     "profile": "Профиль",
     "invitations": "Приглашения",
-    "users": "Пользователи"
+    "users": "Пользователи",
+    "bases": "Базовые станции"
   },
   "invite": {
     "createInvite": "Создать приглашение",
@@ -80,5 +81,35 @@
     "user": "Пользователь",
     "emptyTable": "Записи отсутствуют",
     "role": "Роль"
+  },
+  "baseStations": {
+    "create": "Создать",
+    "emptyTable": "Записи отсутствуют",
+    "name": "Имя",
+    "city": "Город",
+    "latitude": "Широта",
+    "longitude": "Долгота",
+    "createdAt": "Дата создания",
+    "height": "Высота",
+    "isOnline": "Онлайн",
+    "status": "Статус",
+    "error": "Ошибка",
+    "success": "Базовая станция успешно сохранена",
+    "actions": "Действия",
+    "addReceiver": "Добавить приемник",
+    "confirm": "Подтвердить",
+    "deleteBaseStation": "Вы уверены что хотите удалить базовую станцию?",
+    "yes": "Да",
+    "no": "Нет",
+    "save": "Сохранить",
+    "edit": "Редактировать"
+  },
+  "receiver": {
+    "model": "Модель",
+    "serialNumber": "Серийный номер",
+    "firmwareVersion": "Версия прошивки",
+    "cutoff": "Срез высоты",
+    "installedAt": "Установлено",
+    "removedAt": "Снято"
   }
 }
