@@ -24,11 +24,25 @@ class CreateReceiverRequest extends AbstractFormRequest
             'model' => ['string', 'required'],
             'serial_number' => ['string', 'required'],
             'firmware_version' => ['string', 'required'],
-            'satellite_systems' => ['array', 'required'],
-            'satellite_systems.*' => ['integer', 'required', 'exists:satellite_systems,id'],
-            'cutoff' => ['integer', 'required'],
-            'installed_at' => ['integer', 'required', 'date_format:Y-m-d H:i:s'],
-            'removed_at' => ['integer', 'required', 'date_format:Y-m-d H:i:s'],
+            'satellites' => ['array', 'required'],
+            'satellites.*' => ['integer', 'required', 'exists:satellite_systems,id'],
+            'cutoff' => ['numeric', 'required'],
+            'installed_at' => ['date', 'nullable'],
+            'removed_at' => ['date', 'nullable'],
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        parent::prepareForValidation();
+        $this->merge(['base_station_id' => $this->route('baseStationId')]);
+    }
+
+    public function validated()
+    {
+        $data = parent::validated();
+        $data['base_id'] = $data['base_station_id'];
+
+        return $data;
     }
 }

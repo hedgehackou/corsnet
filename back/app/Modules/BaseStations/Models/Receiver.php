@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace App\Modules\BaseStations\Models;
 
 use App\Base\Models\AbstractModel;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
- * @property int $base_station_id
+ * @property int $base_id
  * @property string $model
  * @property string $serial_number
  * @property string $firmware_version
@@ -26,7 +27,7 @@ class Receiver extends AbstractModel
 
     protected $table = 'receivers';
     protected $fillable = [
-        'base_station_id',
+        'base_id',
         'model',
         'serial_number',
         'firmware_version',
@@ -38,4 +39,9 @@ class Receiver extends AbstractModel
         'deleted_at',
     ];
     protected $casts = [];
+
+    public function satellites(): BelongsToMany
+    {
+        return $this->belongsToMany(SatelliteSystem::class, 'satellite_system_receiver');
+    }
 }

@@ -1,30 +1,40 @@
 <template>
   <section class="content">
     <div class="container-fluid overflow-hidden">
-      <b-table
-        class="base-station-view-table"
-        responsive
-        show-empty
-        stacked
-        :items="tableItems"
-        :fields="getBaseStationTableFields"
-      >
-        <template #cell(is_online)="{ item }">
-          <b-check disabled v-model="item.is_online"></b-check>
-        </template>
-        <template #cell(created_at)="{ item }">
-          {{ item.created_at }}
-        </template>
-      </b-table>
-      <div class="">
-        <b-button
-          v-if="role === 'admin'"
-          @click="editBaseStation"
-          class="mb-3 mt-3"
-          variant="primary"
-          >{{ $t("baseStations.edit") }}</b-button
-        >
-      </div>
+      <b-tabs class="mt-4" content-class="mt-3">
+        <b-tab active :title="$t('baseStations.baseStation')">
+          <b-table
+            class="base-station-view-table mt-4"
+            responsive
+            show-empty
+            stacked
+            :items="tableItems"
+            :fields="getBaseStationTableFields"
+          >
+            <template #cell(is_online)="{ item }">
+              <b-check disabled v-model="item.is_online"></b-check>
+            </template>
+            <template #cell(created_at)="{ item }">
+              {{ item.created_at }}
+            </template>
+          </b-table>
+          <div class="">
+            <b-button
+              v-if="role === 'admin'"
+              @click="editBaseStation"
+              class="mb-3 mt-3"
+              variant="primary"
+              >{{ $t("baseStations.edit") }}</b-button
+            >
+          </div>
+        </b-tab>
+        <b-tab :title="$t('baseStations.receivers')">
+          <Receivers />
+        </b-tab>
+        <b-tab :title="$t('baseStations.antennas')">
+          <Antennas />
+        </b-tab>
+      </b-tabs>
     </div>
   </section>
 </template>
@@ -36,6 +46,8 @@ import { namespace } from "vuex-class";
 import StoreModule from "@/store/StoreModule";
 
 import { BaseStationStoreModule } from "@/modules/admin/base-stations/store/BaseStationStore";
+import Receivers from "@/modules/admin/base-stations/components/Receivers.vue";
+import Antennas from "@/modules/admin/base-stations/components/Antennas.vue";
 
 const authStore = namespace("AuthStoreModule");
 const baseStationStore = namespace("BaseStationStoreModule");
@@ -46,6 +58,8 @@ StoreModule.registerMany({
 @Component({
   components: {
     FormErrorListPrinter,
+    Receivers,
+    Antennas,
   },
 })
 export default class ViewBaseStation extends Vue {
