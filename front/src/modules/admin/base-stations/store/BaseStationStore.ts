@@ -48,6 +48,53 @@ const actions: ActionTree<BaseStationState, RootState> = {
   async createBaseStation(options, payload) {
     await Vue.axios.post(`base-stations`, payload);
   },
+  async getSatelliteList(options, baseStationId) {
+    return await Vue.axios.get(
+      `base-stations/${baseStationId}/receivers/satellite-list`
+    );
+  },
+  async createReceiver(options, receiver) {
+    return await Vue.axios.post(
+      `base-stations/${receiver.baseStationId}/receivers`,
+      receiver
+    );
+  },
+  async createAntenna(options, antenna) {
+    return await Vue.axios.post(
+      `base-stations/${antenna.baseStationId}/antennas`,
+      antenna
+    );
+  },
+  async getReceivers(options, baseStationId) {
+    return await Vue.axios.get(`base-stations/${baseStationId}/receivers`);
+  },
+  async getAntennas(options, baseStationId) {
+    return await Vue.axios.get(`base-stations/${baseStationId}/antennas`);
+  },
+  async updateReceiver(options, receiver) {
+    return await Vue.axios.put(
+      `base-stations/${receiver.baseStationId}/receivers/${receiver.id}`,
+      receiver
+    );
+  },
+  async updateAntenna(options, antenna) {
+    return await Vue.axios.put(
+      `base-stations/${antenna.baseStationId}/antennas/${antenna.id}`,
+      antenna
+    );
+  },
+  async deleteAntenna(options, antenna) {
+    return await Vue.axios.delete(
+      `base-stations/${antenna.baseStationId}/antennas/${antenna.id}`,
+      antenna
+    );
+  },
+  async deleteReceiver(options, receiver) {
+    return await Vue.axios.delete(
+      `base-stations/${receiver.baseStationId}/receivers/${receiver.id}`,
+      receiver
+    );
+  },
   async updateBaseStation(options, payload) {
     await Vue.axios.put(`base-stations/${payload.baseStationId}`, payload);
   },

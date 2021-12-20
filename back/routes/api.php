@@ -30,6 +30,19 @@ Route::group([
     Route::get('base-stations', 'App\Modules\BaseStations\Controllers\BaseStationsController@getBaseStationList');
     Route::get('base-stations/{baseStationId}', 'App\Modules\BaseStations\Controllers\BaseStationsController@getBaseStation');
     Route::delete('base-stations/{baseStationId}', 'App\Modules\BaseStations\Controllers\BaseStationsController@deleteBaseStation');
+    //Receivers
+    Route::post('base-stations/{baseStationId}/receivers', 'App\Modules\BaseStations\Controllers\ReceiverController@createReceiver');
+    Route::get('base-stations/{baseStationId}/receivers', 'App\Modules\BaseStations\Controllers\ReceiverController@getReceiverList');
+    Route::get('base-stations/{baseStationId}/receivers/satellite-list', 'App\Modules\BaseStations\Controllers\ReceiverController@getSatelliteSystemList');
+    Route::put('base-stations/{baseStationId}/receivers/{receiverId}', 'App\Modules\BaseStations\Controllers\ReceiverController@updateReceiver');
+    Route::get('base-stations/{baseStationId}/receivers/{receiverId}', 'App\Modules\BaseStations\Controllers\ReceiverController@getReceiver');
+    Route::delete('base-stations/{baseStationId}/receivers/{receiverId}', 'App\Modules\BaseStations\Controllers\ReceiverController@deleteReceiver');
+    //Antennas
+    Route::post('base-stations/{baseStationId}/antennas', 'App\Modules\BaseStations\Controllers\AntennaController@createAntenna');
+    Route::get('base-stations/{baseStationId}/antennas', 'App\Modules\BaseStations\Controllers\AntennaController@getAntennaList');
+    Route::put('base-stations/{baseStationId}/antennas/{antennaId}', 'App\Modules\BaseStations\Controllers\AntennaController@updateAntenna');
+    Route::get('base-stations/{baseStationId}/antennas/{antennaId}', 'App\Modules\BaseStations\Controllers\AntennaController@getAntenna');
+    Route::delete('base-stations/{baseStationId}/antennas/{antennaId}', 'App\Modules\BaseStations\Controllers\AntennaController@deleteAntenna');
 
     //Users
     Route::get('users', 'App\Modules\Users\Controllers\UsersController@getUserList');

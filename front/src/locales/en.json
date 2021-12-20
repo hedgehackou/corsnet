@@ -50,7 +50,12 @@
     "profile": "Profile",
     "invitations": "Invitations",
     "users": "Users",
-    "bases": "Bases"
+    "bases": "Bases",
+    "yes": "Yes",
+    "no": "No",
+    "confirm": "Confirm",
+    "save": "Save",
+    "since": "Since"
   },
   "invite": {
     "createInvite": "Create invite",
@@ -101,14 +106,41 @@
     "deleteBaseStation": "Are you sure you want to delete base?",
     "yes": "Yes",
     "no": "No",
-    "edit": "Edit"
+    "edit": "Edit",
+    "baseStation": "Base stations",
+    "antennas": "Antennas",
+    "receivers": "Receivers",
+    "deleteReceiver": "Are you sure you want to delete receiver?"
   },
   "receiver": {
-    "model": "Модель",
-    "serialNumber": "Серийный номер",
-    "firmwareVersion": "Версия прошивки",
-    "cutoff": "Срез высоты",
-    "installedAt": "Установлено",
-    "removedAt": "Снято"
+    "model": "Model",
+    "serialNumber": "Serial number",
+    "firmwareVersion": "Firmware version",
+    "cutoff": "Cutoff",
+    "installedAt": "Installed at",
+    "removedAt": "Removed at",
+    "deleteReceiver": "Are you sure you want to delete receiver?",
+    "addReceiver": "Add receiver",
+    "save": "Save",
+    "receiver": "Receiver",
+    "savedSuccessfully": "Receiver saved successfully",
+    "error": "Error while saving receiver",
+    "edit": "Edit",
+    "satellites": "Satellites"
+  },
+  "antenna": {
+    "antenna": "Antenna",
+    "deleteAntenna": "Are you sure you want to delete antenna?",
+    "savedSuccessfully": "Antenna saved successfully",
+    "addAntenna": "Add antenna",
+    "model": "Model",
+    "serialNumber": "Serial number",
+    "upEccentricity": "Up eccentricity",
+    "northEccentricity": "North eccentricity",
+    "eastEccentricity": "East eccentricity",
+    "alignment": "Alignment",
+    "error": "Error while saving antenna",
+    "installedAt": "Installed at",
+    "removedAt": "Removed at"
   }
 }

@@ -55,17 +55,18 @@ class ReceiverController extends AbstractController
         $list = $this->receiverService->getReceiverList();
 
         return response()->json([
-            'data' => ReceiverResource::collection($list)
+            'list' => ReceiverResource::collection($list)
         ]);
     }
 
     /**
      * @param UpdateReceiverRequest $request
+     * @param int                   $baseStationId
      * @param int                   $receiverId
      *
      * @return JsonResponse
      */
-    public function updateReceiver(UpdateReceiverRequest $request, int $receiverId): JsonResponse
+    public function updateReceiver(UpdateReceiverRequest $request, int $baseStationId, int $receiverId): JsonResponse
     {
         $receiver = $this->receiverService->updateReceiver($receiverId, $request->validated());
 
@@ -91,11 +92,12 @@ class ReceiverController extends AbstractController
 
     /**
      * @param DeleteReceiverRequest $request
+     * @param int                   $baseStationId
      * @param int                   $receiverId
      *
      * @return JsonResponse
      */
-    public function deleteReceiver(DeleteReceiverRequest $request, int $receiverId): JsonResponse
+    public function deleteReceiver(DeleteReceiverRequest $request, int $baseStationId, int $receiverId): JsonResponse
     {
         $this->receiverService->deleteReceiver($receiverId);
 
@@ -110,7 +112,7 @@ class ReceiverController extends AbstractController
     public function getSatelliteSystemList(GetSatelliteSystemListRequest $request): JsonResponse
     {
         return response()->json([
-            'data' => $this->receiverService->getSatelliteSystemList()
+            'list' => $this->receiverService->getSatelliteSystemList()
         ]);
     }
 }
