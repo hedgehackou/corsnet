@@ -110,7 +110,11 @@
     "baseStation": "Base stations",
     "antennas": "Antennas",
     "receivers": "Receivers",
-    "deleteReceiver": "Are you sure you want to delete receiver?"
+    "deleteReceiver": "Are you sure you want to delete receiver?",
+    "overview": "Overview",
+    "newBase": "New base",
+    "base": "Base",
+    "selectStatus": "Select status"
   },
   "receiver": {
     "model": "Model",

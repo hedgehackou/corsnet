@@ -26,23 +26,15 @@ class CreateBaseStationRequest extends AbstractFormRequest
             'latitude' => ['required', 'numeric'],
             'longitude' => ['required', 'numeric'],
             'height' => ['required', 'numeric'],
-            'is_online' => ['boolean'],
             'status' => ['required', Rule::in(['active', 'disabled'])],
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        parent::prepareForValidation();
-        $this->merge([
-            'is_online' => (bool) $this->post('is_online'),
-        ]);
     }
 
     public function validated(): array
     {
         $data = parent::validated();
         $data['status_id'] = BaseStation::STATUSES[$data['status']];
+        $data['is_online'] = false;
 
         return $data;
     }

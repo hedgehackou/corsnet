@@ -25,14 +25,7 @@ class UpdateBaseStationRequest extends AbstractFormRequest
             'latitude' => ['required', 'numeric'],
             'longitude' => ['required', 'numeric'],
             'height' => ['required', 'numeric'],
-            'is_online' => ['boolean'],
             'status' => ['required', Rule::in(['active', 'disabled'])],
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        parent::prepareForValidation();
-        $this->merge(['is_online' => (bool) $this->get('is_online', false)]);
     }
 }
