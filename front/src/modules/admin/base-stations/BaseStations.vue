@@ -3,9 +3,13 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <b-button @click="createBaseStation" class="mt-4" variant="primary">{{
-            $t("baseStations.create")
-          }}</b-button>
+          <b-button
+            v-if="role === 'admin'"
+            @click="createBaseStation"
+            class="mt-4"
+            variant="primary"
+            >{{ $t("baseStations.create") }}</b-button
+          >
         </div>
         <div class="col-12">
           <b-table

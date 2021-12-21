@@ -1,8 +1,18 @@
 <template>
   <section class="content">
     <div class="container-fluid overflow-hidden">
+      <div class="base-station-name" v-if="baseStationParams.name">
+        <span>{{ baseStationParams.name }}</span>
+        <div
+          class="base-station-status"
+          :class="{
+            'base-station-status-green': baseStationParams.is_online,
+            'base-station-status-red': !baseStationParams.is_online,
+          }"
+        ></div>
+      </div>
       <b-tabs class="mt-4" content-class="mt-3">
-        <b-tab active :title="$t('baseStations.baseStation')">
+        <b-tab active :title="$t('baseStations.overview')">
           <b-table
             class="base-station-view-table mt-4"
             responsive
@@ -93,12 +103,10 @@ export default class ViewBaseStation extends Vue {
 
   public get getBaseStationTableFields() {
     return [
-      { key: "name", label: this.$t("baseStations.name") + ":" },
       { key: "city", label: this.$t("baseStations.city") + ":" },
       { key: "longitude", label: this.$t("baseStations.longitude") + ":" },
       { key: "latitude", label: this.$t("baseStations.latitude") + ":" },
       { key: "height", label: this.$t("baseStations.height") + ":" },
-      { key: "is_online", label: this.$t("baseStations.isOnline") + ":" },
       { key: "status", label: this.$t("baseStations.status") + ":" },
       { key: "created_at", label: this.$t("baseStations.createdAt") + ":" },
     ];
@@ -125,5 +133,24 @@ export default class ViewBaseStation extends Vue {
   td:before {
     width: auto !important;
   }
+}
+.base-station-name {
+  font-size: 18px;
+  margin-top: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+.base-station-status {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+.base-station-status-green {
+  background-color: green;
+}
+.base-station-status-red {
+  background-color: red;
 }
 </style>

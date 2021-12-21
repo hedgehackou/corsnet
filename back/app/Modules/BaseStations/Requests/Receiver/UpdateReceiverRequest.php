@@ -22,7 +22,7 @@ class UpdateReceiverRequest extends AbstractFormRequest
     {
         return [
             'id' => ['required', 'exists:receivers,id', 'integer'],
-            'base_station_id' => ['integer', 'required', 'exists:base_stations,id'],
+            'base_id' => ['integer', 'required', 'exists:base_stations,id'],
             'model' => ['string', 'required'],
             'serial_number' => ['string', 'required'],
             'firmware_version' => ['string', 'required'],
@@ -37,14 +37,13 @@ class UpdateReceiverRequest extends AbstractFormRequest
     protected function prepareForValidation()
     {
         parent::prepareForValidation();
-        $this->merge(['base_station_id' => $this->route('baseStationId')]);
+        $this->merge(['base_id' => $this->route('baseStationId')]);
         $this->merge(['id' => $this->route('receiverId')]);
     }
 
     public function validated()
     {
         $data = parent::validated();
-        $data['base_id'] = $data['base_station_id'];
         if ($data['installed_at']) {
             $data['installed_at'] = Carbon::parse($data['installed_at'])->format('Y-m-d H:i:s');
         }

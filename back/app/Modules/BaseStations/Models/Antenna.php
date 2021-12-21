@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
- * @property string $base_station_id
+ * @property string $base_id
  * @property string $model
  * @property string $serial_number
  * @property float $up_eccentricity
@@ -28,7 +28,7 @@ class Antenna extends AbstractModel
 
     protected $table = 'antennas';
     protected $fillable = [
-        'base_station_id',
+        'base_id',
         'model',
         'serial_number',
         'up_eccentricity',

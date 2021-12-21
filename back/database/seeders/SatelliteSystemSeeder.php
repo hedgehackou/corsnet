@@ -14,6 +14,7 @@ class SatelliteSystemSeeder extends Seeder
      */
     public function run()
     {
+        SatelliteSystem::query()->truncate();
         SatelliteSystem::query()->insert([
             ['alias' => 'GPS'],
             ['alias' => 'GLO'],

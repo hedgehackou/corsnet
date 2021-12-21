@@ -19,7 +19,7 @@ class CreateAntennaRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
-            'base_station_id' => ['integer', 'required', 'exists:base_stations,id'],
+            'base_id' => ['integer', 'required', 'exists:base_stations,id'],
             'model' => ['string', 'required'],
             'serial_number' => ['string', 'required'],
             'up_eccentricity' => ['numeric', 'required'],
@@ -34,6 +34,6 @@ class CreateAntennaRequest extends AbstractFormRequest
     protected function prepareForValidation()
     {
         parent::prepareForValidation();
-        $this->merge(['base_station_id' => $this->route('baseStationId')]);
+        $this->merge(['base_id' => $this->route('baseStationId')]);
     }
 }

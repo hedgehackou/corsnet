@@ -110,7 +110,11 @@
     "edit": "Редактировать",
     "baseStation": "Базовая станция",
     "antennas": "Антенны",
-    "receivers": "Приемники"
+    "receivers": "Приемники",
+    "overview": "Обзор",
+    "newBase": "Новая база",
+    "base": "База",
+    "selectStatus": "Выберите статус"
   },
   "receiver": {
     "model": "Модель",
