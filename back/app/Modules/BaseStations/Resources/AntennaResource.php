@@ -28,7 +28,7 @@ class AntennaResource extends AbstractResource
     {
         return [
             'id' => $this->resource->id,
-            'base_station_id' => $this->resource->base_station_id,
+            'base_id' => $this->resource->base_id,
             'model' => $this->resource->model,
             'serial_number' => $this->resource->serial_number,
             'up_eccentricity' => $this->resource->up_eccentricity,

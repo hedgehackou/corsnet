@@ -3,7 +3,8 @@
     <div class="container-fluid overflow-hidden">
       <div class="">
         <div class="form-group mb-0">
-          <div class="mt-2">{{ $t("baseStations.name") }}</div>
+          <div v-if="editMode" class="mt-2">{{ $t("baseStations.base") }}</div>
+          <div v-else class="mt-2">{{ $t("baseStations.newBase") }}</div>
           <b-input
             v-model="baseStationParams.name"
             type="text"
@@ -48,16 +49,14 @@
         </div>
         <form-error-list-printer :error-list="baseStationErrors.height" />
         <div class="form-group mb-0">
-          <div class="mt-2">{{ $t("baseStations.isOnline") }}</div>
-          <b-check v-model="baseStationParams.is_online"></b-check>
-        </div>
-        <form-error-list-printer :error-list="baseStationErrors.is_online" />
-        <div class="form-group mb-0">
           <div class="mt-2">{{ $t("baseStations.status") }}</div>
-          <b-select
-            :options="statusOptions"
-            v-model="baseStationParams.status"
-          ></b-select>
+          <b-select :options="statusOptions" v-model="baseStationParams.status">
+            <template #first>
+              <b-form-select-option :value="null" disabled>{{
+                $t("baseStations.selectStatus")
+              }}</b-form-select-option>
+            </template>
+          </b-select>
         </div>
         <form-error-list-printer :error-list="baseStationErrors.status" />
 

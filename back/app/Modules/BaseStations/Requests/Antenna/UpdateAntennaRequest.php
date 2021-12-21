@@ -21,7 +21,7 @@ class UpdateAntennaRequest extends AbstractFormRequest
     {
         return [
             'id' => ['required', 'exists:antennas,id', 'integer'],
-            'base_station_id' => ['integer', 'required', 'exists:base_stations,id'],
+            'base_id' => ['integer', 'required', 'exists:base_stations,id'],
             'model' => ['string', 'required'],
             'serial_number' => ['string', 'required'],
             'up_eccentricity' => ['numeric', 'required'],
@@ -36,7 +36,7 @@ class UpdateAntennaRequest extends AbstractFormRequest
     protected function prepareForValidation()
     {
         parent::prepareForValidation();
-        $this->merge(['base_station_id' => $this->route('baseStationId')]);
+        $this->merge(['base_id' => $this->route('baseStationId')]);
         $this->merge(['id' => $this->route('antennaId')]);
     }
 
