@@ -114,7 +114,8 @@
     "overview": "Overview",
     "newBase": "New base",
     "base": "Base",
-    "selectStatus": "Select status"
+    "selectStatus": "Select status",
+    "mountPoints": "Mount points"
   },
   "receiver": {
     "model": "Model",
@@ -146,5 +147,18 @@
     "error": "Error while saving antenna",
     "installedAt": "Installed at",
     "removedAt": "Removed at"
+  },
+  "mountPoint": {
+    "mountPoint": "Mount points",
+    "name": "Name",
+    "userName": "User name",
+    "password": "password",
+    "ntripVersion": "Ntrip version",
+    "isEncrypted": "Is encrypted",
+    "addMountPoint": "Add mount point",
+    "deleteMountPoint": "Are you sure you want to delete mount point?",
+    "savedSuccessfully": "Mount point saved successfully",
+    "error": "Error while saving",
+    "universal": "Universal"
   }
 }

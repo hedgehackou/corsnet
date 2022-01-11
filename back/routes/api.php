@@ -43,6 +43,12 @@ Route::group([
     Route::put('base-stations/{baseStationId}/antennas/{antennaId}', 'App\Modules\BaseStations\Controllers\AntennaController@updateAntenna');
     Route::get('base-stations/{baseStationId}/antennas/{antennaId}', 'App\Modules\BaseStations\Controllers\AntennaController@getAntenna');
     Route::delete('base-stations/{baseStationId}/antennas/{antennaId}', 'App\Modules\BaseStations\Controllers\AntennaController@deleteAntenna');
+    //Mount points
+    Route::post('base-stations/{baseStationId}/mount-points', 'App\Modules\BaseStations\Controllers\MountPointsController@createMountPoint');
+    Route::get('base-stations/{baseStationId}/mount-points', 'App\Modules\BaseStations\Controllers\MountPointsController@getMountPointList');
+    Route::put('base-stations/{baseStationId}/mount-points/{mountPointId}', 'App\Modules\BaseStations\Controllers\MountPointsController@updateMountPoint');
+    Route::get('base-stations/{baseStationId}/mount-points/{mountPointId}', 'App\Modules\BaseStations\Controllers\MountPointsController@getMountPoint');
+    Route::delete('base-stations/{baseStationId}/mount-points/{mountPointId}', 'App\Modules\BaseStations\Controllers\MountPointsController@deleteMountPoint');
 
     //Users
     Route::get('users', 'App\Modules\Users\Controllers\UsersController@getUserList');

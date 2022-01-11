@@ -47,12 +47,13 @@ class ReceiverController extends AbstractController
 
     /**
      * @param GetReceiverListRequest $request
+     * @param int                    $baseStationId
      *
      * @return JsonResponse
      */
-    public function getReceiverList(GetReceiverListRequest $request): JsonResponse
+    public function getReceiverList(GetReceiverListRequest $request, int $baseStationId): JsonResponse
     {
-        $list = $this->receiverService->getReceiverList();
+        $list = $this->receiverService->getReceiverList($baseStationId);
 
         return response()->json([
             'list' => ReceiverResource::collection($list)

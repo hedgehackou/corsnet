@@ -66,11 +66,11 @@ class ReceiverService extends AbstractService
     }
 
     /**
-     * @return Receiver[]|\Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function getReceiverList()
+    public function getReceiverList(int $baseStationId)
     {
-        return Receiver::all();
+        return Receiver::query()->where('base_id', $baseStationId)->get();
     }
 
     /**
