@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Modules\BaseStations\Models;
 
 use App\Base\Models\AbstractModel;
-use App\Modules\BaseStations\Casts\BaseStationStatus;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
