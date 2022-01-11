@@ -65,11 +65,20 @@ const actions: ActionTree<BaseStationState, RootState> = {
       antenna
     );
   },
+  async createMountPoint(options, mountPoint) {
+    return await Vue.axios.post(
+      `base-stations/${mountPoint.baseStationId}/mount-points`,
+      mountPoint
+    );
+  },
   async getReceivers(options, baseStationId) {
     return await Vue.axios.get(`base-stations/${baseStationId}/receivers`);
   },
   async getAntennas(options, baseStationId) {
     return await Vue.axios.get(`base-stations/${baseStationId}/antennas`);
+  },
+  async getMountPoints(options, baseStationId) {
+    return await Vue.axios.get(`base-stations/${baseStationId}/mount-points`);
   },
   async updateReceiver(options, receiver) {
     return await Vue.axios.put(
@@ -83,10 +92,22 @@ const actions: ActionTree<BaseStationState, RootState> = {
       antenna
     );
   },
+  async updateMountPoint(options, mountPoint) {
+    return await Vue.axios.put(
+      `base-stations/${mountPoint.baseStationId}/mount-points/${mountPoint.id}`,
+      mountPoint
+    );
+  },
   async deleteAntenna(options, antenna) {
     return await Vue.axios.delete(
       `base-stations/${antenna.baseStationId}/antennas/${antenna.id}`,
       antenna
+    );
+  },
+  async deleteMountPoint(options, mountPoint) {
+    return await Vue.axios.delete(
+      `base-stations/${mountPoint.baseStationId}/mount-points/${mountPoint.id}`,
+      mountPoint
     );
   },
   async deleteReceiver(options, receiver) {

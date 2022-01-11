@@ -52,7 +52,7 @@ class AntennaController extends AbstractController
      */
     public function getAntennaList(GetAntennaListRequest $request, int $baseStationId): JsonResponse
     {
-        $list = $this->antennaService->getAntennaList();
+        $list = $this->antennaService->getAntennaList($baseStationId);
 
         return response()->json([
             'list' => AntennaResource::collection($list)

@@ -63,10 +63,10 @@ class AntennaService extends AbstractService
     }
 
     /**
-     * @return Antenna[]|\Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function getAntennaList()
+    public function getAntennaList(int $baseStationId)
     {
-        return Antenna::all();
+        return Antenna::query()->where('base_id', $baseStationId)->get();
     }
 }

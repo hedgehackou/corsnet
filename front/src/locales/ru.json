@@ -114,7 +114,8 @@
     "overview": "Обзор",
     "newBase": "Новая база",
     "base": "База",
-    "selectStatus": "Выберите статус"
+    "selectStatus": "Выберите статус",
+    "mountPoints": "Точки доступа"
   },
   "receiver": {
     "model": "Модель",
@@ -146,5 +147,18 @@
     "error": "Ошибка во время сохранения антенны",
     "installedAt": "Установлено",
     "removedAt": "Снято"
+  },
+  "mountPoint": {
+    "mountPoint": "Точка доступа",
+    "name": "Название",
+    "userName": "Имя пользователя",
+    "password": "Пароль",
+    "ntripVersion": "Ntrip версия",
+    "isEncrypted": "Зашифровано",
+    "addMountPoint": "Добавить точку доступа",
+    "deleteMountPoint": "Вы уверены, что хотите удалить точку доступа?",
+    "savedSuccessfully": "Точка доступа успешно сохранена",
+    "error": "Ошибка сохранения точки доступа",
+    "universal": "Универсальная"
   }
 }

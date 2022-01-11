@@ -44,6 +44,9 @@
         <b-tab :title="$t('baseStations.antennas')">
           <Antennas />
         </b-tab>
+        <b-tab :title="$t('baseStations.mountPoints')">
+          <MountPoints />
+        </b-tab>
       </b-tabs>
     </div>
   </section>
@@ -58,6 +61,7 @@ import StoreModule from "@/store/StoreModule";
 import { BaseStationStoreModule } from "@/modules/admin/base-stations/store/BaseStationStore";
 import Receivers from "@/modules/admin/base-stations/components/Receivers.vue";
 import Antennas from "@/modules/admin/base-stations/components/Antennas.vue";
+import MountPoints from "@/modules/admin/base-stations/components/MountPoints.vue";
 
 const authStore = namespace("AuthStoreModule");
 const baseStationStore = namespace("BaseStationStoreModule");
@@ -70,6 +74,7 @@ StoreModule.registerMany({
     FormErrorListPrinter,
     Receivers,
     Antennas,
+    MountPoints,
   },
 })
 export default class ViewBaseStation extends Vue {
