@@ -40,6 +40,24 @@ const actions: ActionTree<UsersState, RootState> = {
     const { data } = await Vue.axios.get(`users`, { params: payload });
     options.commit("setUserList", data);
   },
+  async createClient(options, client) {
+    return await Vue.axios.post(`users/${client.userId}/clients`, client);
+  },
+  async getClients(options, userId) {
+    return await Vue.axios.get(`users/${userId}/clients`);
+  },
+  async updateClient(options, client) {
+    return await Vue.axios.put(
+      `users/${client.userId}/clients/${client.id}`,
+      client
+    );
+  },
+  async deleteClient(options, client) {
+    return await Vue.axios.delete(
+      `users/${client.userId}/clients/${client.id}`,
+      client
+    );
+  },
 };
 
 export const UserStoreModule: Module<UsersState, RootState> = {

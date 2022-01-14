@@ -52,6 +52,20 @@ Route::group([
 
     //Users
     Route::get('users', 'App\Modules\Users\Controllers\UsersController@getUserList');
+    //Clients
+    Route::post('users/{userId}/clients', 'App\Modules\Users\Controllers\ClientsController@createClient');
+    Route::get('users/{userId}/clients', 'App\Modules\Users\Controllers\ClientsController@getClientList');
+    Route::get('users/{userId}/clients/{clientId}', 'App\Modules\Users\Controllers\ClientsController@getClient');
+    Route::put('users/{userId}/clients/{clientId}', 'App\Modules\Users\Controllers\ClientsController@updateClient');
+    Route::delete('users/{userId}/clients/{clientId}', 'App\Modules\Users\Controllers\ClientsController@deleteClient');
+    //Casters
+    Route::post('casters', 'App\Modules\Casters\Controllers\CasterController@createCaster');
+    Route::get('casters', 'App\Modules\Casters\Controllers\CasterController@getCasterList');
+    Route::get('casters/{casterId}', 'App\Modules\Casters\Controllers\CasterController@getCaster');
+    Route::put('casters/{casterId}', 'App\Modules\Casters\Controllers\CasterController@updateCaster');
+    Route::delete('casters/{casterId}', 'App\Modules\Casters\Controllers\CasterController@deleteCaster');
+    //Countries
+    Route::get('countries', 'App\Modules\Countries\Controllers\CountryController@getCountries');
 });
 
 Route::group([

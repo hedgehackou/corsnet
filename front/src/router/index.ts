@@ -16,6 +16,10 @@ import BaseStations from "@/modules/admin/base-stations/BaseStations.vue";
 import CreateEditBaseStation from "@/modules/admin/base-stations/components/CreateEditBaseStation.vue";
 import Receivers from "@/modules/admin/base-stations/components/Receivers.vue";
 import ViewBaseStation from "@/modules/admin/base-stations/components/ViewBaseStation.vue";
+import UsersView from "@/modules/admin/users/components/UsersView.vue";
+import Casters from "@/modules/admin/casters/Casters.vue";
+import CreateEditCaster from "@/modules/admin/casters/components/CreateEditCaster.vue";
+import ViewCaster from "@/modules/admin/casters/components/ViewCaster.vue";
 
 Vue.use(VueRouter);
 
@@ -40,9 +44,27 @@ const routes: Array<RouteConfig> = [
       },
       {
         path: "users",
-        name: "admin-users",
-        component: AdminUsers,
+        component: {
+          template: "<router-view />",
+        },
         meta: { requiresAuth: true, forAdmin: true },
+        children: [
+          {
+            path: "",
+            name: "admin-users",
+            component: AdminUsers,
+            meta: { requiresAuth: true, forAdmin: true },
+          },
+          {
+            path: "view/:userId",
+            name: "admin-user-view",
+            component: UsersView,
+            meta: { requiresAuth: true, forAdmin: true },
+            props: (route) => ({
+              userId: +route.params.userId,
+            }),
+          },
+        ],
       },
       {
         path: "base-stations",
@@ -86,6 +108,45 @@ const routes: Array<RouteConfig> = [
             name: "admin-base-station-receivers",
             component: Receivers,
             meta: { requiresAuth: true, forAdmin: true },
+          },
+        ],
+      },
+      {
+        path: "casters",
+        component: {
+          template: "<router-view />",
+        },
+        children: [
+          {
+            path: "",
+            name: "admin-casters",
+            component: Casters,
+            meta: { requiresAuth: true, forAdmin: true },
+          },
+          {
+            path: "create",
+            name: "admin-create-caster",
+            component: CreateEditCaster,
+            meta: { requiresAuth: true, forAdmin: true },
+          },
+          {
+            path: "edit/:casterId",
+            name: "admin-edit-caster",
+            component: CreateEditCaster,
+            meta: { requiresAuth: true, forAdmin: true },
+            props: (route) => ({
+              casterId: +route.params.casterId,
+              editMode: true,
+            }),
+          },
+          {
+            path: "view/:casterId",
+            name: "admin-view-caster",
+            component: ViewCaster,
+            meta: { requiresAuth: true, forAdmin: true },
+            props: (route) => ({
+              casterId: +route.params.casterId,
+            }),
           },
         ],
       },

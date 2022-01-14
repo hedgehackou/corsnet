@@ -55,7 +55,8 @@
     "no": "No",
     "confirm": "Confirm",
     "save": "Save",
-    "since": "Since"
+    "since": "Since",
+    "casters": "Casters"
   },
   "invite": {
     "createInvite": "Create invite",
@@ -85,7 +86,9 @@
     "admin": "Admin",
     "user": "User",
     "emptyTable": "There are no records in table",
-    "role": "Role"
+    "role": "Role",
+    "actions": "Actions",
+    "clients": "Clients"
   },
   "baseStations": {
     "create": "Create",
@@ -160,5 +163,40 @@
     "savedSuccessfully": "Mount point saved successfully",
     "error": "Error while saving",
     "universal": "Universal"
+  },
+  "client": {
+    "savedSuccessfully": "Information saved successfully",
+    "error": "Error while saving",
+    "addClient": "Add client",
+    "mountPoint": "Mount point",
+    "name": "Name",
+    "userName": "User name",
+    "password": "Password",
+    "ntripVersion": "Ntrip version",
+    "isEncrypted": "Encrypted",
+    "deleteClient": "Are you sure you want to delete client?",
+    "universal": "Universal"
+  },
+  "caster": {
+    "success": "Caster saved successfully",
+    "error": "Error while saving caster",
+    "emptyTable": "There are no records",
+    "name": "Name",
+    "host": "Host",
+    "port": "Port",
+    "operator": "Operator",
+    "nmea": "Nmea",
+    "country": "Country",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "fallbackHost": "Fallback host",
+    "fallbackPort": "Fallback port",
+    "misc": "Misc",
+    "create": "Create caster",
+    "caster":  "Caster",
+    "selectCountry": "Choose country",
+    "actions": "Actions",
+    "save": "Save caster",
+    "confirm": "Are you sure you want to delete caster?"
   }
 }

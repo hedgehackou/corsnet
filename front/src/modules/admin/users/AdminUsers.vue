@@ -20,6 +20,16 @@
             <template #cell(is_admin)="{ item }">
               {{ item.is_admin ? $t("users.admin") : $t("users.user") }}
             </template>
+            <template #head(actions)="">{{ $t("users.actions") }}</template>
+            <template #cell(actions)="{ item }">
+              <b-btn
+                class="mr-2"
+                variant="primary"
+                @click="openViewPage(item.id)"
+              >
+                <div class="fa fa-eye"></div>
+              </b-btn>
+            </template>
           </b-table>
           <b-pagination
             class="ml-auto mt-1 mb-0"
@@ -42,6 +52,7 @@ import StoreModule from "@/store/StoreModule";
 import { UserStoreModule } from "@/modules/admin/users/store/UsersStore";
 
 const inviteStore = namespace("UserStoreModule");
+const authStore = namespace("AuthStoreModule");
 StoreModule.registerMany({
   UserStoreModule,
 });
@@ -69,11 +80,26 @@ export default class AdminUsers extends Vue {
   @inviteStore.Getter("getCurrentPage")
   public getCurrentPage!: any[];
 
+  @authStore.Getter("getRole")
+  public role!: string;
+
   @inviteStore.Action("getUserList")
   getUserListAction!: (payload: any) => Promise<any>;
 
   public get getInviteTableFields() {
-    return [{ key: "id" }, { key: "is_admin" }, { key: "email" }];
+    return [
+      { key: "id" },
+      { key: "is_admin" },
+      { key: "email" },
+      { key: "actions" },
+    ];
+  }
+
+  public openViewPage(userId: string) {
+    this.$router.push({
+      name: `admin-user-view`,
+      params: { userId },
+    });
   }
 
   public changePage(page = 1) {

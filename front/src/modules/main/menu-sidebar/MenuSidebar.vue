@@ -77,6 +77,10 @@ export const ADMIN_MENU = [
     name: "index.bases",
     path: "/admin/base-stations",
   },
+  {
+    name: "index.casters",
+    path: "/admin/casters",
+  },
 ];
 export const USER_MENU = [
   {
