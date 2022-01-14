@@ -12,6 +12,7 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
+    'url_or_ip' => "Значение должно быть либо url адресом, либо ip",
     'lower_default' => "Значение ниже дефолтного",
     'device_limit_exceeded' => 'Превышен лимит устройств',
     'device_doest_belong_to_client' => "Устройство не принадлежит к клиенту",
