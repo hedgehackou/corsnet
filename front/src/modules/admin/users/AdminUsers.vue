@@ -96,7 +96,6 @@ export default class AdminUsers extends Vue {
   }
 
   public openViewPage(userId: string) {
-    console.log("userId", userId);
     this.$router.push({
       name: `admin-user-view`,
       params: { userId },
