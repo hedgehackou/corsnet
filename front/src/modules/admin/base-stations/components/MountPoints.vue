@@ -96,7 +96,12 @@
                 "
               />
               <div class="mt-3">{{ $t("mountPoint.isEncrypted") }}</div>
-              <b-check v-model="mountPoint.is_encrypted" size="sm" class="" />
+              <b-check
+                :disabled="mountPoint.disabled"
+                v-model="mountPoint.is_encrypted"
+                size="sm"
+                class=""
+              />
               <form-error-list-printer
                 :error-list="
                   mountPointErrors[index]
