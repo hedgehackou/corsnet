@@ -34,4 +34,12 @@ class CreateCasterRequest extends AbstractFormRequest
             'misc' => ['string', 'nullable']
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        parent::prepareForValidation();
+        $this->merge([
+            'nmea' => !!$this->get('nmea')
+        ]);
+    }
 }
