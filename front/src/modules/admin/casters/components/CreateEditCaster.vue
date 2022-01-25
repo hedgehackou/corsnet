@@ -105,6 +105,13 @@
           variant="primary"
           >{{ $t("caster.create") }}</b-button
         >
+        <b-button
+          v-if="editMode"
+          @click="refreshCaster(casterId)"
+          class="mb-3 mt-3 ml-3"
+          variant="primary"
+          ><div class="fa fa-sync"></div
+        ></b-button>
       </div>
     </div>
   </section>
@@ -166,6 +173,9 @@ export default class CreateEditCaster extends Vue {
   @casterStoreModule.Getter("getCountries")
   public getCountries!: any[];
 
+  @casterStoreModule.Action("refreshCaster")
+  refreshCasterAction!: (casterId: string) => Promise<any>;
+
   public async saveCaster() {
     this.casterErrors = { ...this.casterDefaultParams };
     let loader = this.$loading.show();
@@ -178,6 +188,18 @@ export default class CreateEditCaster extends Vue {
     } catch (e) {
       this.$toast.error(this.$t("caster.error") as string);
       this.casterErrors = e.response.data.errors;
+    } finally {
+      loader.hide();
+    }
+  }
+
+  public async refreshCaster(casterId: string) {
+    let loader = this.$loading.show();
+    try {
+      await this.refreshCasterAction(casterId);
+      this.$toast.success(this.$t("caster.updatedSuccessfully") as string);
+    } catch (e) {
+      this.$toast.error(this.$t("caster.updateError") as string);
     } finally {
       loader.hide();
     }

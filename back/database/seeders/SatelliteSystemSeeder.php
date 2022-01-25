@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Modules\BaseStations\Models\SatelliteSystem;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class SatelliteSystemSeeder extends Seeder
 {
@@ -14,6 +15,7 @@ class SatelliteSystemSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
         SatelliteSystem::query()->truncate();
         SatelliteSystem::query()->insert([
             ['alias' => 'GPS'],
@@ -24,5 +26,6 @@ class SatelliteSystemSeeder extends Seeder
             ['alias' => 'SBAS'],
             ['alias' => 'IRNSS'],
         ]);
+        Schema::enableForeignKeyConstraints();
     }
 }

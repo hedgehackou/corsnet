@@ -20,6 +20,7 @@ import UsersView from "@/modules/admin/users/components/UsersView.vue";
 import Casters from "@/modules/admin/casters/Casters.vue";
 import CreateEditCaster from "@/modules/admin/casters/components/CreateEditCaster.vue";
 import ViewCaster from "@/modules/admin/casters/components/ViewCaster.vue";
+import Settings from "@/modules/settings/Settings.vue";
 
 Vue.use(VueRouter);
 
@@ -147,6 +148,20 @@ const routes: Array<RouteConfig> = [
             props: (route) => ({
               casterId: +route.params.casterId,
             }),
+          },
+        ],
+      },
+      {
+        path: "settings",
+        component: {
+          template: "<router-view />",
+        },
+        children: [
+          {
+            path: "",
+            name: "admin-settings",
+            component: Settings,
+            meta: { requiresAuth: true, forAdmin: true },
           },
         ],
       },
