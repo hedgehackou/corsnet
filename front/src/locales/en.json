@@ -56,7 +56,9 @@
     "confirm": "Confirm",
     "save": "Save",
     "since": "Since",
-    "casters": "Casters"
+    "casters": "Casters",
+    "settings": "Settings",
+    "cancel": "Cancel"
   },
   "invite": {
     "createInvite": "Create invite",
@@ -197,6 +199,22 @@
     "selectCountry": "Choose country",
     "actions": "Actions",
     "save": "Save caster",
-    "confirm": "Are you sure you want to delete caster?"
+    "confirm": "Are you sure you want to delete caster?",
+    "updateError": "Caster update error",
+    "updatedSuccessfully": "Caster updated successfully",
+    "edit": "Edit",
+    "details": "Details",
+    "events": "Events",
+    "data": "Data",
+    "date": "Date"
+  },
+  "settings": {
+    "main": "Main",
+    "pages": "Page",
+    "blocks": "Blocks",
+    "networkName": "Network name",
+    "lang": "Language",
+    "googleApiKey": "Google map api key",
+    "addPage": "Add page"
   }
 }

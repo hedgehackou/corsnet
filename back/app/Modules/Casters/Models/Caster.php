@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Modules\Casters\Models;
 
 use App\Base\Models\AbstractModel;
+use App\Modules\Countries\Models\Country;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -19,6 +21,7 @@ use App\Base\Models\AbstractModel;
  * @property string $fallback_host
  * @property int $fallback_port
  * @property string $misc
+ * @property Country $country
  */
 class Caster extends AbstractModel
 {
@@ -40,4 +43,12 @@ class Caster extends AbstractModel
         'nmea' => 'boolean',
     ];
     public $timestamps = false;
+
+    /**
+     * @return BelongsTo
+     */
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class, 'country_id');
+    }
 }
