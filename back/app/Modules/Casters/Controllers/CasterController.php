@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace App\Modules\Casters\Controllers;
 
 use App\Base\Controllers\AbstractController;
+use App\Modules\Casters\Requests\GetCasterEventListRequest;
+use App\Modules\Casters\Requests\HandleCasterEventsRequest;
 use App\Modules\Casters\Requests\CreateCasterRequest;
 use App\Modules\Casters\Requests\DeleteCasterRequest;
 use App\Modules\Casters\Requests\GetCasterListRequest;
 use App\Modules\Casters\Requests\GetCasterRequest;
+use App\Modules\Casters\Requests\RestartCasterRequest;
 use App\Modules\Casters\Requests\UpdateCasterRequest;
+use App\Modules\Casters\Resources\CasterEventResource;
 use App\Modules\Casters\Resources\CasterResource;
 use App\Modules\Casters\Services\CasterService;
-use App\Modules\Users\Requests\Client\GetClientRequest;
 use Illuminate\Http\JsonResponse;
 
 class CasterController extends AbstractController
@@ -45,6 +48,32 @@ class CasterController extends AbstractController
     }
 
     /**
+     * @param RestartCasterRequest $request
+     * @param int                  $casterId
+     *
+     * @return JsonResponse
+     */
+    public function restartCaster(RestartCasterRequest $request, int $casterId): JsonResponse
+    {
+        $this->casterService->restartCaster($casterId);
+
+        return response()->json();
+    }
+
+    /**
+     * @param HandleCasterEventsRequest $request
+     * @param int                       $casterId
+     *
+     * @return JsonResponse
+     */
+    public function handleCasterEvents(HandleCasterEventsRequest $request, int $casterId): JsonResponse
+    {
+        $this->casterService->handleCasterEvents($request->validated(), $casterId);
+
+        return response()->json();
+    }
+
+    /**
      * @param GetCasterListRequest $request
      *
      * @return JsonResponse
@@ -58,6 +87,24 @@ class CasterController extends AbstractController
             'per_page' => $list->perPage(),
             'total' => $list->total(),
             'list' => CasterResource::collection($list),
+        ]);
+    }
+
+    /**
+     * @param GetCasterEventListRequest $request
+     * @param int                       $casterId
+     *
+     * @return JsonResponse
+     */
+    public function getEventList(GetCasterEventListRequest $request, int $casterId): JsonResponse
+    {
+        $list = $this->casterService->getEventList($casterId);
+
+        return response()->json([
+            'current_page' => $list->currentPage(),
+            'per_page' => $list->perPage(),
+            'total' => $list->total(),
+            'list' => CasterEventResource::collection($list),
         ]);
     }
 

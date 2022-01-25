@@ -4,4 +4,8 @@ export interface CasterState {
   currentPage: number;
   perPage: number;
   total: number;
+  eventList: any[];
+  eventCurrentPage: number;
+  eventPerPage: number;
+  eventTotal: number;
 }

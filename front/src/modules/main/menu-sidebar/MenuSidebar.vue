@@ -81,6 +81,10 @@ export const ADMIN_MENU = [
     name: "index.casters",
     path: "/admin/casters",
   },
+  // {
+  //   name: "index.settings",
+  //   path: "/admin/settings",
+  // },
 ];
 export const USER_MENU = [
   {

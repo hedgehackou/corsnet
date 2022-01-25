@@ -1,35 +1,57 @@
 <template>
   <section class="content">
     <div class="container-fluid overflow-hidden">
-      <b-table
-        class="caster-view-table mt-4"
-        responsive
-        show-empty
-        stacked
-        :items="tableItems"
-        :fields="getBaseStationTableFields"
-      >
-        <template #cell(nmea)="{ item }">
-          <b-check disabled v-model="item.nmea"></b-check>
-        </template>
-        <template #cell(country_id)="{ item }">
-          <b-select
-            disabled
-            style="max-width: 100px"
-            :options="getCountries"
-            v-model="item.country_id"
+      <b-tabs class="mt-4" content-class="mt-3">
+        <b-tab active :title="$t('caster.details')">
+          <b-table
+            class="caster-view-table mt-4"
+            responsive
+            show-empty
+            stacked
+            :items="tableItems"
+            :fields="getCasterTableFields"
           >
-          </b-select>
-        </template>
-      </b-table>
-      <div class="">
-        <b-button
-          @click="editBaseStation"
-          class="mb-3 mt-3"
-          variant="primary"
-          >{{ $t("baseStations.edit") }}</b-button
-        >
-      </div>
+            <template #cell(nmea)="{ item }">
+              <b-check disabled v-model="item.nmea"></b-check>
+            </template>
+            <template #cell(country_id)="{ item }">
+              <b-select
+                disabled
+                style="max-width: 100px"
+                :options="getCountries"
+                v-model="item.country_id"
+              >
+              </b-select>
+            </template>
+          </b-table>
+          <div class="">
+            <b-button
+              @click="editBaseStation"
+              class="mb-3 mt-3"
+              variant="primary"
+              >{{ $t("caster.edit") }}</b-button
+            >
+          </div>
+        </b-tab>
+        <b-tab active :title="$t('caster.events')">
+          <b-table
+            class="caster-view-table mt-4"
+            responsive
+            show-empty
+            striped
+            :items="getCasterEventList"
+            :fields="getCasterEventsTableFields"
+          >
+          </b-table>
+          <b-pagination
+            class="ml-auto mt-1 mb-0"
+            @change="changeEventPage"
+            :value="getEventCurrentPage"
+            :total-rows="getEventTotal"
+            :per-page="getEventPerPage"
+          ></b-pagination>
+        </b-tab>
+      </b-tabs>
     </div>
   </section>
 </template>
@@ -76,14 +98,29 @@ export default class ViewCaster extends Vue {
   @casterStoreModule.Action("getCountries")
   getCountriesAction!: () => Promise<any>;
 
+  @casterStoreModule.Action("getCasterEvents")
+  getCasterEventsAction!: (payload: any) => Promise<any>;
+
   @casterStoreModule.Getter("getCountries")
   public getCountries!: any[];
+
+  @casterStoreModule.Getter("getEventList")
+  public getCasterEventList!: any[];
+
+  @casterStoreModule.Getter("getEventTotal")
+  public getEventTotal!: any[];
+
+  @casterStoreModule.Getter("getEventPerPage")
+  public getEventPerPage!: any[];
+
+  @casterStoreModule.Getter("getEventCurrentPage")
+  public getEventCurrentPage!: any[];
 
   public get tableItems() {
     return [this.casterParams];
   }
 
-  public get getBaseStationTableFields() {
+  public get getCasterTableFields() {
     return [
       { key: "name", label: this.$t("caster.name") + ":" },
       { key: "host", label: this.$t("caster.host") + ":" },
@@ -99,6 +136,18 @@ export default class ViewCaster extends Vue {
     ];
   }
 
+  public get getCasterEventsTableFields() {
+    return [
+      { key: "name", label: this.$t("caster.name") },
+      { key: "timestamp", label: this.$t("caster.date") },
+      { key: "data", label: this.$t("caster.data") },
+    ];
+  }
+
+  public changeEventPage(page = 1) {
+    this.getCasterEventsAction({ page, casterId: this.casterId });
+  }
+
   public editBaseStation() {
     this.$router.push({
       name: `admin-edit-caster`,
@@ -110,6 +159,7 @@ export default class ViewCaster extends Vue {
     const { data: result } = await this.getCasterAction(this.casterId);
     Object.assign(this.casterParams, result);
     await this.getCountriesAction();
+    await this.getCasterEventsAction({ casterId: this.casterId });
   }
 }
 </script>

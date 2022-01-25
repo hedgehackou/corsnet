@@ -61,11 +61,16 @@ Route::group([
     //Casters
     Route::post('casters', 'App\Modules\Casters\Controllers\CasterController@createCaster');
     Route::get('casters', 'App\Modules\Casters\Controllers\CasterController@getCasterList');
+    Route::get('casters/{casterId}/events', 'App\Modules\Casters\Controllers\CasterController@getEventList');
     Route::get('casters/{casterId}', 'App\Modules\Casters\Controllers\CasterController@getCaster');
     Route::put('casters/{casterId}', 'App\Modules\Casters\Controllers\CasterController@updateCaster');
+    Route::post('casters/{casterId}/restart', 'App\Modules\Casters\Controllers\CasterController@restartCaster');
     Route::delete('casters/{casterId}', 'App\Modules\Casters\Controllers\CasterController@deleteCaster');
     //Countries
     Route::get('countries', 'App\Modules\Countries\Controllers\CountryController@getCountries');
+    //Settings
+    Route::get('settings', 'App\Modules\Settings\Controllers\SettingsController@getSettings');
+    Route::put('settings', 'App\Modules\Settings\Controllers\SettingsController@updateSettings');
 });
 
 Route::group([
@@ -82,5 +87,7 @@ Route::group([
     Route::post('install/installation', 'App\Modules\Installation\Controllers\InstallationController@installation');
     Route::get('install/is-project-installed', 'App\Modules\Installation\Controllers\InstallationController@isProjectInstalled');
     Route::get('install/get-project-settings', 'App\Modules\Installation\Controllers\InstallationController@getProjectSettings');
+    //Casters
+    Route::post('casters/{casterId}/events', 'App\Modules\Casters\Controllers\CasterController@handleCasterEvents');
 });
 

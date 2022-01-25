@@ -48,6 +48,13 @@
               <b-btn
                 class="mr-2"
                 variant="primary"
+                @click="refreshCaster(item.id)"
+              >
+                <div class="fa fa-sync"></div>
+              </b-btn>
+              <b-btn
+                class="mr-2"
+                variant="primary"
                 @click="editAction(item.id)"
               >
                 <div class="fa fa-pencil-alt"></div>
@@ -107,6 +114,9 @@ export default class Casters extends Vue {
   @casterStore.Action("getCasterList")
   getCasterListAction!: (payload: any) => Promise<any>;
 
+  @casterStore.Action("refreshCaster")
+  refreshCasterAction!: (casterId: string) => Promise<any>;
+
   @casterStore.Action("deleteCaster")
   deleteCasterAction!: (payload: any) => Promise<any>;
 
@@ -130,6 +140,18 @@ export default class Casters extends Vue {
       name: `admin-view-caster`,
       params: { casterId },
     });
+  }
+
+  public async refreshCaster(casterId: string) {
+    let loader = this.$loading.show();
+    try {
+      await this.refreshCasterAction(casterId);
+      this.$toast.success(this.$t("caster.updatedSuccessfully") as string);
+    } catch (e) {
+      this.$toast.error(this.$t("caster.updateError") as string);
+    } finally {
+      loader.hide();
+    }
   }
 
   public editAction(casterId: string) {
