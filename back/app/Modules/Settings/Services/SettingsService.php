@@ -72,6 +72,38 @@ class SettingsService extends AbstractService
     }
 
     /**
+     * @return array
+     */
+    public function getPageHeader(): array
+    {
+        /** @var Page $page */
+        $page = Page::query()->where('is_deletable', false)->firstOrFail();
+
+        return $page->headerBlocks()->firstOrFail()->toArray();
+    }
+
+    /**
+     * @return array
+     */
+    public function getPageFooter(): array
+    {
+        /** @var Page $page */
+        $page = Page::query()->where('is_deletable', false)->firstOrFail();
+
+        return $page->footerBlocks()->firstOrFail()->toArray();
+    }
+
+    public function getNavigation(): array
+    {
+        return array_map(function ($item) {
+            return [
+              'title' => $item['title'],
+              'slug' => $item['slug'],
+            ];
+        }, $this->settingsRepository->getPages()->toArray());
+    }
+
+    /**
      * @param int $pageId
      *
      * @return void

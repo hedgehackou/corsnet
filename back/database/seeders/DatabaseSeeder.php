@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            //SatelliteSystemSeeder::class,
+            SatelliteSystemSeeder::class,
             PagesSeeder::class,
         ]);
     }

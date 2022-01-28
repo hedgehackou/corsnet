@@ -166,6 +166,7 @@
                     <div v-if="block.type === TEXT_BLOCK">
                       <div>{{ $t("blocks.title") }}</div>
                       <b-input size="sm" v-model="block.title" />
+                      <markdown-editor v-model="block.text" class="mt-4" />
                     </div>
                   </b-card-body>
                 </b-collapse>
