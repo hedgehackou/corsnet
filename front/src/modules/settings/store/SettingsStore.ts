@@ -18,6 +18,19 @@ const actions: ActionTree<SettingsState, RootState> = {
   async updateSettings(options, payload) {
     await Vue.axios.put(`settings`, payload);
   },
+  async getPages(options, payload = {}) {
+    const { data } = await Vue.axios.get(`settings/pages`, { params: payload });
+    return data;
+  },
+  async savePages(options, payload = {}) {
+    await Vue.axios.post(`settings/pages`, payload);
+  },
+  async deleteBlock(options, { pageId, blockId }) {
+    await Vue.axios.delete(`settings/pages/${pageId}/blocks/${blockId}`);
+  },
+  async deletePage(options, pageId) {
+    await Vue.axios.delete(`settings/pages/${pageId}`);
+  },
 };
 
 export const SettingsStoreModule: Module<SettingsState, RootState> = {

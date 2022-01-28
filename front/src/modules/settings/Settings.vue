@@ -5,7 +5,10 @@
         <b-tab :title="$t('settings.main')">
           <MainUnit />
         </b-tab>
-        <b-tab active :title="$t('settings.pages')">
+        <b-tab active :title="null">
+          <template #title>
+            {{ $t("settings.pages") }}
+          </template>
           <PagesUnit />
         </b-tab>
       </b-tabs>

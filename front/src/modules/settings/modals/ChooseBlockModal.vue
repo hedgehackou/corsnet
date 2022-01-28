@@ -1,23 +1,68 @@
 <template>
   <b-modal
+    v-model="show"
+    centered
+    @shown="shown"
     :cancel-title="$t('settings.cancel')"
-    :title="$t('settings.addBlock')"
+    :title="
+      currentStep === FIRST_STEP
+        ? $t('settings.chooseBlock')
+        : $t('settings.chooseBlockTitle')
+    "
   >
-    <div>test</div>
+    <div class="d-flex flex-column" v-if="currentStep === FIRST_STEP">
+      <b-btn
+        :key="index"
+        v-for="(block, index) in blocks"
+        class="mt-2"
+        :variant="chosenBlock === block.type ? 'primary' : 'secondary'"
+        @click="chosenBlock = block.type"
+        >{{ $t(`blocks.${block.title}`) }}</b-btn
+      >
+    </div>
+    <div v-else class="d-flex flex-column">
+      <b-input v-model="blockTitle"></b-input>
+    </div>
+    <template slot="modal-footer">
+      <b-btn
+        class="d-flex align-items-center"
+        :disabled="currentStep === FIRST_STEP"
+        @click="prevStep"
+        size="sm"
+        variant="danger"
+      >
+        <i class="fa fa-arrow-left mr-1" /> {{ $t("index.prev") }}
+      </b-btn>
+      <b-btn
+        v-if="currentStep === FIRST_STEP"
+        class="d-flex align-items-center"
+        @click="nextStep"
+        :disabled="chosenBlock === null"
+        size="sm"
+        variant="success"
+      >
+        {{ $t("index.next") }}
+        <i class="fa fa-arrow-right ml-1" />
+      </b-btn>
+      <b-btn
+        v-else
+        class="d-flex align-items-center"
+        @click="selectBlock"
+        :disabled="!blockTitle"
+        size="sm"
+        variant="success"
+      >
+        {{ $t("index.save") }}
+        <i class="fa fa-save ml-1" />
+      </b-btn>
+    </template>
   </b-modal>
 </template>
 
 <script lang="ts">
 import { Component, PropSync, Vue } from "vue-property-decorator";
 import FormErrorListPrinter from "@/components/form/FormErrorListPrinter.vue";
-import { namespace } from "vuex-class";
-import StoreModule from "@/store/StoreModule";
-import { SettingsStoreModule } from "@/modules/settings/store/SettingsStore";
-
-const settingsStore = namespace("SettingsStoreModule");
-StoreModule.registerMany({
-  SettingsStoreModule,
-});
+import { BLOCKS } from "@/modules/settings/modals/blocks";
 
 @Component({
   components: {
@@ -26,85 +71,35 @@ StoreModule.registerMany({
 })
 export default class ChooseBlockModal extends Vue {
   @PropSync("showModal", { type: Boolean, default: true }) show!: boolean;
-  test = true;
+  public FIRST_STEP = 1;
+  public currentStep = 1;
+  public chosenBlock: string | null = null;
+  public blocks = BLOCKS;
+  public blockTitle: string = "";
 
-  public pages: any = [];
-
-  public pageDefaultParams = {
-    id: null,
-    title: null,
-    description: null,
-    slug: null,
-    sort: null,
-    is_deletable: null,
-  };
-  public pageErrors: any = {};
-
-  @settingsStore.Action("deletePage")
-  deletePageAction!: (payload: any) => Promise<any>;
-
-  @settingsStore.Action("createPage")
-  createPageAction!: (payload: any) => Promise<any>;
-
-  @settingsStore.Action("updatePage")
-  updatePageAction!: (payload: any) => Promise<any>;
-
-  @settingsStore.Action("getPages")
-  getPagesAction!: () => Promise<any>;
-
-  async removePage(page: any) {
-    this.$bvModal
-      .msgBoxConfirm(this.$t("settings.deletePage") as string, {
-        title: this.$t("index.confirm") as string,
-        size: "sm",
-        buttonSize: "sm",
-        okVariant: "danger",
-        okTitle: this.$t("index.yes") as string,
-        cancelTitle: this.$t("index.no") as string,
-        footerClass: "p-2",
-        hideHeaderClose: false,
-        centered: true,
-      })
-      .then(async (value) => {
-        if (value) {
-          let loader = this.$loading.show();
-          try {
-            if (page.id) {
-              await this.deletePageAction(page.id);
-            }
-            this.pages.splice(this.pages.indexOf(page), 1);
-          } finally {
-            loader.hide();
-          }
-        }
-      });
+  public nextStep() {
+    this.currentStep += 1;
   }
 
-  public async savePage(page: any, index: number) {
-    let loader = this.$loading.show();
-    try {
-      this.$set(this.pageErrors, index, {});
-      page.baseStationId = this.$route.params.baseStationId;
-      if (page.id) {
-        await this.updatePageAction(page);
-      } else {
-        let { data } = await this.createPageAction(page);
-        page.id = data.data.id;
-      }
-      this.$toast.success(this.$t("settings.pageSavedSuccessfully") as string);
-    } catch (e) {
-      this.$toast.error(this.$t("settings.pageError") as string);
-      this.$set(this.pageErrors, index, e.response.data.errors);
-    } finally {
-      loader.hide();
+  public selectBlock() {
+    this.$emit("blockSelected", {
+      title: this.blockTitle,
+      type: this.chosenBlock,
+    });
+    this.show = false;
+  }
+
+  public prevStep() {
+    if (this.currentStep === this.FIRST_STEP) {
+      return;
     }
+    this.currentStep -= 1;
   }
 
-  mounted() {
-    console.log("showModal: ", this.show);
-    // this.getPagesAction().then(({ data }) => {
-    //   this.pages = data.list;
-    // });
+  public shown() {
+    this.currentStep = this.FIRST_STEP;
+    this.chosenBlock = null;
+    this.blockTitle = "";
   }
 }
 </script>
