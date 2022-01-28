@@ -71,6 +71,10 @@ Route::group([
     //Settings
     Route::get('settings', 'App\Modules\Settings\Controllers\SettingsController@getSettings');
     Route::put('settings', 'App\Modules\Settings\Controllers\SettingsController@updateSettings');
+    Route::post('settings/pages', 'App\Modules\Settings\Controllers\SettingsController@savePages');
+    Route::get('settings/pages', 'App\Modules\Settings\Controllers\SettingsController@getPages');
+    Route::delete('settings/pages/{pageId}', 'App\Modules\Settings\Controllers\SettingsController@deletePage');
+    Route::delete('settings/pages/{pageId}/blocks/{blockId}', 'App\Modules\Settings\Controllers\SettingsController@deleteBlock');
 });
 
 Route::group([

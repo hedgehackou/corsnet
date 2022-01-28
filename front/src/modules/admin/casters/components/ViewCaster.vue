@@ -33,7 +33,7 @@
             >
           </div>
         </b-tab>
-        <b-tab active :title="$t('caster.events')">
+        <b-tab :title="$t('caster.events')">
           <b-table
             class="caster-view-table mt-4"
             responsive
