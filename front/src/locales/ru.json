@@ -58,7 +58,9 @@
     "since": "С",
     "casters": "Кастеры",
     "settings": "Настройки",
-    "cancel": "Отмена"
+    "cancel": "Отмена",
+    "prev": "Назад",
+    "next": "Вперед"
   },
   "invite": {
     "createInvite": "Создать приглашение",
@@ -215,6 +217,29 @@
     "networkName": "Имя сети",
     "lang": "Язык",
     "googleApiKey": "Google map api ключ",
-    "addPage": "Добавить страницу"
+    "addPage": "Добавить страницу",
+    "chooseBlock": "Выберите блок",
+    "chooseBlockTitle": "Выберите название блока",
+    "deletePage": "Вы уверены, что хотите удалить страницу?",
+    "addBlock": "Добавить блок",
+    "reorderPages": "Изменить порядок страниц",
+    "pageName": "Название страницы",
+    "cancel": "Отменить",
+    "pagesSavedSuccessfully": "Страницы успешно сохранены"
+  },
+  "blocks": {
+    "text": "Текст",
+    "googleMap": "Гугл карта",
+    "title": "Заголовок",
+    "header": "Хедер",
+    "footer": "Футер",
+    "deleteBlock": "Вы уверены что хотите удалить блок?",
+    "address": "Адрес",
+    "phone": "Телефон",
+    "email": "Email",
+    "logo": "Логотип",
+    "latitude": "Широта",
+    "longitude": "Долгота",
+    "zoom": "Зум"
   }
 }

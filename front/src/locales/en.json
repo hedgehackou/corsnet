@@ -58,7 +58,9 @@
     "since": "Since",
     "casters": "Casters",
     "settings": "Settings",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "prev": "Prev",
+    "next": "Next"
   },
   "invite": {
     "createInvite": "Create invite",
@@ -215,6 +217,29 @@
     "networkName": "Network name",
     "lang": "Language",
     "googleApiKey": "Google map api key",
-    "addPage": "Add page"
+    "addPage": "Add page",
+    "chooseBlock": "Choose block",
+    "chooseBlockTitle": "Choose block title",
+    "deletePage": "Are you sure you want to delete page?",
+    "addBlock": "Add block",
+    "reorderPages": "Reorder pages",
+    "pageName": "Page name",
+    "cancel": "Cancel",
+    "pagesSavedSuccessfully": "Pages saved successfully"
+  },
+  "blocks": {
+    "text": "Text",
+    "googleMap": "Google map",
+    "title": "Title",
+    "header": "Header",
+    "footer": "Footer",
+    "deleteBlock": "Are you sure you want to delete block?",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "logo": "Logo",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "zoom": "Zoom"
   }
 }
