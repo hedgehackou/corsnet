@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\Modules\Settings\Models\FooterBlock;
 use App\Modules\Settings\Models\HeaderBlock;
 use App\Modules\Settings\Models\NetworkMapBlock;
@@ -33,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
             'text' => TextBlock::class,
             'footer' => FooterBlock::class,
             'google-map' => NetworkMapBlock::class,
+            'user' => User::class,
         ]);
     }
 }
