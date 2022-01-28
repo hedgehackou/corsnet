@@ -25,7 +25,7 @@ class CasterService extends AbstractService
         $caster = Caster::create($data);
         File::makeDirectory("/var/instances/" . $caster->id . '/log', 0775, true, true);
         File::put("/var/instances/" . $caster->id . '/log/caster.log', "");
-        File::put("/var/instances/" . $caster->id . '/log/caster.yml', "");
+        File::put("/var/instances/" . $caster->id . '/caster.yml', "");
         $this->updateCasterConfig($caster);
         exec("systemctl enable --now caster@" . $caster->id);
 
@@ -173,6 +173,6 @@ class CasterService extends AbstractService
             'license-key' => ""
         ];
 
-        File::put("/var/instances/" . $caster->id . '/log/caster.yml', Yaml::dump($data, 6, 2));
+        File::put("/var/instances/" . $caster->id . '/caster.yml', Yaml::dump($data, 6, 2));
     }
 }
