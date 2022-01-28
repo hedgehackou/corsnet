@@ -14,6 +14,7 @@ use App\Modules\Settings\Models\TextBlock;
 use App\Modules\Settings\Repositories\SettingsRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class SettingsService extends AbstractService
 {
@@ -96,7 +97,7 @@ class SettingsService extends AbstractService
             $pageObj = Page::query()->updateOrCreate(['id' => $page['id'] ?? null], [
                 'title' => $page['title'] ?? '',
                 'description' => $page['description'] ?? '',
-                'slug' => $page['slug'] ?? '',
+                'slug' => $this->resolveSlug($page, $pageInd),
                 'sort' => $page['sort']
             ]);
             $this->detachAllBlocks($pageObj);
@@ -150,5 +151,19 @@ class SettingsService extends AbstractService
         $page->networkMapBlocks()->detach();
         $page->textBlocks()->detach();
         $page->headerBlocks()->detach();
+    }
+
+    /**
+     * @param array $pageData
+     * @param int  $pageInd
+     *
+     * @return int|string
+     */
+    private function resolveSlug(array $pageData, int $pageInd)
+    {
+        if (!$pageData['is_deletable']) {
+            return '';
+        }
+        return $pageData['slug'] ?? $pageInd;
     }
 }

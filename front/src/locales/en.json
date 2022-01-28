@@ -225,7 +225,9 @@
     "reorderPages": "Reorder pages",
     "pageName": "Page name",
     "cancel": "Cancel",
-    "pagesSavedSuccessfully": "Pages saved successfully"
+    "pagesSavedSuccessfully": "Pages saved successfully",
+    "slug": "Slug",
+    "savePageError": "Error while page saving"
   },
   "blocks": {
     "text": "Text",

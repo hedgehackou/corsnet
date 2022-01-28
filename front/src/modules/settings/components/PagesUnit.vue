@@ -48,6 +48,12 @@
           </template>
           <div class="mt-2">{{ $t("settings.pageName") }}</div>
           <b-input class="mt-2" v-model="page.title" />
+          <div class="mt-2">{{ $t("settings.slug") }}</div>
+          <b-input
+            :disabled="!page.is_deletable"
+            class="mt-2"
+            v-model="page.slug"
+          />
           <draggable
             v-model="page.blocks"
             group="blocks"
@@ -415,7 +421,7 @@ export default class PagesUnit extends Vue {
       await this.savePagesAction(pages);
       this.$toast.success(this.$t("settings.pagesSavedSuccessfully") as string);
     } catch (e) {
-      this.$toast.error(this.$t("settings.pageError") as string);
+      this.$toast.error(this.$t("settings.savePageError") as string);
     } finally {
       loader.hide();
     }

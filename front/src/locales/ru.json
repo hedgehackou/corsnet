@@ -225,7 +225,9 @@
     "reorderPages": "Изменить порядок страниц",
     "pageName": "Название страницы",
     "cancel": "Отменить",
-    "pagesSavedSuccessfully": "Страницы успешно сохранены"
+    "pagesSavedSuccessfully": "Страницы успешно сохранены",
+    "slug": "Slug",
+    "savePageError": "Ошибка сохранения страницы"
   },
   "blocks": {
     "text": "Текст",

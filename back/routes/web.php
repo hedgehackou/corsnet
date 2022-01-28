@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'App\Modules\FrontController\Controllers\FrontController@mainPage');
+Route::get('/{page:slug}', 'App\Modules\FrontController\Controllers\FrontController@regularPage');
 
 Route::get('/{any}', 'App\Modules\FrontController\Controllers\FrontController@index')
     ->where('any', '.*')

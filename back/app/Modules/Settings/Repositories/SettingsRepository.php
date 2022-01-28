@@ -11,7 +11,7 @@ class SettingsRepository extends AbstractRepository
 {
     public function getPages()
     {
-        return Page::query()->where('slug', '')->with([
+        return Page::with([
             'headerBlocks',
             'footerBlocks',
             'networkMapBlocks',
