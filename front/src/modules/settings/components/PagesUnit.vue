@@ -78,9 +78,14 @@
                       <b-input v-model="headerBlock.title" />
 
                       <div class="mt-2">{{ $t("blocks.logo") }}</div>
+                      <b-img
+                        width="100"
+                        v-if="headerBlock.logo"
+                        thumbnail
+                        :src="headerBlock.logo"
+                      ></b-img>
                       <b-form-file
                         @change="fileChanged($event, headerBlock, 'logo')"
-                        :value="headerBlock.logo ? headerBlock.logo : null"
                         accept=".jpg, .png, .jpeg"
                         placeholder=""
                         drop-placeholder=""
@@ -308,14 +313,13 @@ export default class PagesUnit extends Vue {
   @settingsStore.Action("getPages")
   getPagesAction!: () => Promise<any>;
 
-  fileChanged(file: any, obj: any, key: string) {
-    console.log("fole: ", file);
+  fileChanged(element: any, obj: any, key: string) {
+    const [file] = element.target.files;
     const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      console.log(reader.result);
+    reader.onloadend = function () {
       obj[key] = reader.result;
     };
+    reader.readAsDataURL(file);
   }
 
   public reorderBlocks() {
