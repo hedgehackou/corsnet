@@ -227,7 +227,9 @@
     "cancel": "Cancel",
     "pagesSavedSuccessfully": "Pages saved successfully",
     "slug": "Slug",
-    "savePageError": "Error while page saving"
+    "savePageError": "Error while page saving",
+    "updatedSuccessfully": "Settings updated successfully",
+    "error": "Error while saving settings"
   },
   "blocks": {
     "text": "Text",
