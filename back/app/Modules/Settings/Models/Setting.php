@@ -15,6 +15,8 @@ class Setting extends AbstractModel
 {
     protected $table = 'settings';
     public $timestamps = false;
+    protected $primaryKey = null;
+    public $incrementing = false;
 
     protected $fillable = [
         'network_name',

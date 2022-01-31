@@ -42,7 +42,10 @@ class SettingsService extends AbstractService
     {
         /** @var Setting $settings */
         $settings = Setting::firstOrFail();
-        $settings->update($data);
+        $settings->network_name = $data['network_name'] ?? '';
+        $settings->lang = $data['lang'] ?? '';
+        $settings->google_map_key = $data['google_map_key'] ?? null;
+        $settings->save();
 
         return $settings;
     }

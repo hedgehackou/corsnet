@@ -227,7 +227,9 @@
     "cancel": "Отменить",
     "pagesSavedSuccessfully": "Страницы успешно сохранены",
     "slug": "Slug",
-    "savePageError": "Ошибка сохранения страницы"
+    "savePageError": "Ошибка сохранения страницы",
+    "updatedSuccessfully": "Настройки успешно обновлены",
+    "error": "Ошибка при сохранении настроек"
   },
   "blocks": {
     "text": "Текст",

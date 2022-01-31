@@ -50,7 +50,7 @@
                         scrolling="no"
                         marginheight="0"
                         marginwidth="0"
-                        src="https://maps.google.com/maps?q={{ $block['latitude'] }},{{ $block['longitude'] }}&hl=us&z={{ (int) $block['zoom'] }}&amp;output=embed"
+                        src="https://www.google.com/maps/embed/v1/view?key={{ $settings['google_map_key'] }}&center={{ $block['latitude'] }},{{ $block['longitude'] }}&zoom={{ $block['zoom'] }}"
                     >
                     </iframe>
                 </section>
