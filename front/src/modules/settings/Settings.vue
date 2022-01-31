@@ -2,10 +2,10 @@
   <section class="content">
     <div class="container-fluid overflow-hidden">
       <b-tabs class="mt-4" content-class="mt-3">
-        <b-tab :title="$t('settings.main')">
+        <b-tab active :title="$t('settings.main')">
           <MainUnit />
         </b-tab>
-        <b-tab active :title="null">
+        <b-tab :title="null">
           <template #title>
             {{ $t("settings.pages") }}
           </template>

@@ -39,7 +39,8 @@ class FrontController extends AbstractController
             'header' => $this->settingsService->getPageHeader(),
             'footer' => $this->settingsService->getPageFooter(),
             'navigation' => $this->settingsService->getNavigation(),
-            'page' => $this->frontControllerService->getPageData($page)
+            'page' => $this->frontControllerService->getPageData($page),
+            'settings' => $this->settingsService->getSettings()->toArray(),
         ]);
     }
 
@@ -54,7 +55,8 @@ class FrontController extends AbstractController
             'header' => $this->settingsService->getPageHeader(),
             'footer' => $this->settingsService->getPageFooter(),
             'navigation' => $this->settingsService->getNavigation(),
-            'page' => $this->frontControllerService->getPageData($page)
+            'page' => $this->frontControllerService->getPageData($page),
+            'settings' => $this->settingsService->getSettings()->toArray(),
         ]);
     }
 
