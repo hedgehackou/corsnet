@@ -45,6 +45,7 @@ export default class MainUnit extends Vue {
     network_name: null,
     lang: null,
     google_map_key: null,
+    allow_user_sign_up: null,
   };
   public settingsParams: any = { ...this.settingsDefaultParams };
   public settingsErrors: any = { ...this.settingsDefaultParams };

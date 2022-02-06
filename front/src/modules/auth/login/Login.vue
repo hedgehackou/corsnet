@@ -3,7 +3,7 @@
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="#" class="h1"><b>Admin</b>LTE</a>
+        <a href="#" class="h1">{{ settings.network_name }}</a>
       </div>
       <div class="card-body">
         <p class="login-box-msg">{{ $t("auth.signInToStart") }}</p>
@@ -91,6 +91,9 @@ export default class Login extends Vue {
     email: null,
     password: null,
   };
+
+  @authStore.Getter("getSettings")
+  public settings!: { network_name: string };
 
   @authStore.Action("login")
   loginAction!: (payload: any) => Promise<any>;

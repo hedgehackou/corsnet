@@ -2,7 +2,7 @@
   <div class="login-box">
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="#" class="h1"><b>Admin</b>LTE</a>
+        <a href="#" class="h1">{{ settings.network_name }}</a>
       </div>
       <div class="card-body">
         <p class="login-box-msg">
@@ -80,6 +80,9 @@ export default class ForgotPassword extends Vue {
 
   @authStore.Action("sendResetLink")
   sendResetLinkAction!: (payload: any) => Promise<any>;
+
+  @authStore.Getter("getSettings")
+  public settings!: { network_name: string };
 
   public mounted(): void {
     this.appElement = document.getElementById("app") as HTMLElement;
