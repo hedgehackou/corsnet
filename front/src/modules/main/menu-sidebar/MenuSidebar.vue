@@ -1,13 +1,9 @@
 <template>
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <router-link to="/" class="brand-link">
-      <img
-        src="@/assets/logo.png"
-        alt="AdminLTE Logo"
-        class="brand-image img-circle elevation-3"
-        style="opacity: 0.8"
-      />
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light ml-4">
+        {{ settings.network_name }}
+      </span>
     </router-link>
 
     <div class="sidebar">
@@ -47,6 +43,14 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import MenuItem from "@/modules/main/menu-item/MenuItem.vue";
+import { namespace } from "vuex-class";
+import StoreModule from "@/store/StoreModule";
+import { AuthStoreModule } from "@/modules/auth/store/AuthStore";
+const authStore = namespace("AuthStoreModule");
+
+StoreModule.registerMany({
+  AuthStoreModule,
+});
 
 @Component({
   components: {
@@ -55,6 +59,10 @@ import MenuItem from "@/modules/main/menu-item/MenuItem.vue";
 })
 export default class MenuSidebar extends Vue {
   public menu = [...(this.userProfile.is_admin ? ADMIN_MENU : USER_MENU)];
+
+  @authStore.Getter("getSettings")
+  public settings!: { network_name: string };
+
   get userProfile() {
     return this.$store.getters["AuthStore/userProfile"] || {};
   }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\BaseStations\Requests\BaseStation;
 
 use App\Base\Requests\AbstractFormRequest;
+use App\Modules\BaseStations\Models\BaseStation;
 use Illuminate\Validation\Rule;
 
 class UpdateBaseStationRequest extends AbstractFormRequest
@@ -27,5 +28,13 @@ class UpdateBaseStationRequest extends AbstractFormRequest
             'height' => ['required', 'numeric'],
             'status' => ['required', Rule::in(['active', 'disabled'])],
         ];
+    }
+
+    public function validated(): array
+    {
+        $data = parent::validated();
+        $data['status_id'] = BaseStation::STATUSES[$data['status']];
+
+        return $data;
     }
 }

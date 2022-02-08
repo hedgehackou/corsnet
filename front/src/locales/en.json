@@ -43,7 +43,13 @@
     "confirmNewPassword": "New password confirmation",
     "passwordResetSuccessfully": "Password reset successfully",
     "signOut": "Sign out",
-    "logoutSuccess": "Sign out has been successful"
+    "logoutSuccess": "Sign out has been successful",
+    "signUp": "Sign up",
+    "signUpSuccess": "User successfully signed up",
+    "signUpError": "Sign up error",
+    "signUpToStart": "Sign up to start",
+    "emailVerifiedSuccessfully": "Email successfully verified",
+    "emailAlreadyVerified": "Email has already verified"
   },
   "index": {
     "dashboard": "Dashboard",
@@ -166,7 +172,33 @@
     "deleteMountPoint": "Are you sure you want to delete mount point?",
     "savedSuccessfully": "Mount point saved successfully",
     "error": "Error while saving",
-    "universal": "Universal"
+    "universal": "Universal",
+    "info": "Info",
+    "description": "Description",
+    "identifier": "Identifier",
+    "format": "Format",
+    "formatDetails": "Format details",
+    "carrier": "Carrier",
+    "navSystem": "Nav system",
+    "network": "Network",
+    "country": "Country",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "nmea": "Nmea",
+    "solution": "Solution",
+    "generator": "Generator",
+    "comprEncryp": "Compression/encryption algorithm",
+    "authentication": "Authentication",
+    "fee": "Fee",
+    "bitrate": "Bitrate",
+    "misc": "misc",
+    "carriesOptions": ["No", "Yes, L1", "Yes, L1&L2"],
+    "nmeaOptions": [
+      "Client must not send NMEA message with approximate position to Caster",
+      "Client must send NMEA GGA message with approximate position to Caster"
+    ],
+    "solutionOptions": ["Single base", "Network"],
+    "feeOptions": ["No user fee", "Usage is charged"]
   },
   "client": {
     "savedSuccessfully": "Information saved successfully",
@@ -229,7 +261,8 @@
     "slug": "Slug",
     "savePageError": "Error while page saving",
     "updatedSuccessfully": "Settings updated successfully",
-    "error": "Error while saving settings"
+    "error": "Error while saving settings",
+    "allowUserSignUp": "Allow user sign up"
   },
   "blocks": {
     "text": "Text",

@@ -20,9 +20,7 @@ Route::group([
     Route::post('auth/fetch-profile', 'App\Modules\Auth\Controllers\AuthController@fetchProfile');
     //Invites
     Route::post('invites', 'App\Modules\Invite\Controllers\InviteController@createInvite');
-    Route::post('invites/accept', 'App\Modules\Invite\Controllers\InviteController@acceptInvite');
     Route::get('invites', 'App\Modules\Invite\Controllers\InviteController@getInviteList');
-    Route::get('invites/{token}', 'App\Modules\Invite\Controllers\InviteController@getInviteInfo');
     Route::delete('invites/{inviteId}', 'App\Modules\Invite\Controllers\InviteController@deleteInvite');
     //Base stations
     Route::post('base-stations', 'App\Modules\BaseStations\Controllers\BaseStationsController@createBaseStation');
@@ -82,6 +80,7 @@ Route::group([
 ], function ($router) {
     //Auth
     Route::post('auth/login', 'App\Modules\Auth\Controllers\AuthController@login');
+    Route::post('auth/sign-up', 'App\Modules\Auth\Controllers\AuthController@signUp');
     Route::post('auth/send-reset-link', 'App\Modules\Auth\Controllers\AuthController@sendResetLink');
     Route::post('auth/reset-password', 'App\Modules\Auth\Controllers\AuthController@resetPassword');
     //Install
@@ -93,5 +92,10 @@ Route::group([
     Route::get('install/get-project-settings', 'App\Modules\Installation\Controllers\InstallationController@getProjectSettings');
     //Casters
     Route::post('casters/{casterId}/events', 'App\Modules\Casters\Controllers\CasterController@handleCasterEvents');
+    //Invites
+    Route::post('email/verify/{token}', 'App\Modules\Invite\Controllers\InviteController@verifyEmail');
+    Route::post('invites/accept', 'App\Modules\Invite\Controllers\InviteController@acceptInvite');
+    Route::get('invites/{token}', 'App\Modules\Invite\Controllers\InviteController@getInviteInfo');
+    Route::get('settings/allow-user-sign-up', 'App\Modules\Settings\Controllers\SettingsController@allowUserSignUp');
 });
 

@@ -23,6 +23,7 @@ class UpdateSettingsRequest extends AbstractFormRequest
             'network_name' => ['required', 'string'],
             'lang' => ['required', 'string', Rule::in(['ru', 'en'])],
             'google_map_key' => ['nullable', 'string'],
+            'allow_user_sign_up' => ['nullable', 'boolean'],
         ];
     }
 
@@ -30,7 +31,8 @@ class UpdateSettingsRequest extends AbstractFormRequest
     {
         parent::prepareForValidation();
         $this->merge([
-            'nmea' => !!$this->get('nmea')
+            'nmea' => !!$this->get('nmea'),
+            'allow_user_sign_up' => !!$this->get('allow_user_sign_up'),
         ]);
     }
 }

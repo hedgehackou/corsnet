@@ -20,6 +20,7 @@
                     @foreach($navigation ?? [] as $link)
                         <li class="ml-2"><a href="/{{ $link['slug'] }}" class="text-white">{{ $link['title'] }}</a></li>
                     @endforeach
+                    <li class="ml-2"><a href="/login" class="text-white">{{ __('common.sign_in') }}</a></li>
                 </ul>
             </div>
         </div>
@@ -29,7 +30,7 @@
 
 @section('main')
     <main role="main">
-        @foreach($page['blocks'] ?? [] as $block)
+        @foreach($page['blocks'] ?? [] as $index => $block)
             @if($block['type'] === 'text')
                 <section class="jumbotron text-center mb-0">
                     <div class="container">
@@ -39,21 +40,7 @@
                 </section>
             @endif
             @if($block['type'] === 'google-map')
-                <section class="jumbotron text-center mb-0 pb-0">
-                    {{ $block['text'] }}
-                </section>
-                <section class="jumbotron text-center mb-0 google-map-wrap">
-                    <iframe
-                        height="300"
-                        width="1000"
-                        frameborder="0"
-                        scrolling="no"
-                        marginheight="0"
-                        marginwidth="0"
-                        src="https://www.google.com/maps/embed/v1/view?key={{ $settings['google_map_key'] }}&center={{ $block['latitude'] }},{{ $block['longitude'] }}&zoom={{ $block['zoom'] }}"
-                    >
-                    </iframe>
-                </section>
+                @include('_blocks/google-map', compact('index', 'block', 'settings'))
             @endif
         @endforeach
     </main>
@@ -63,7 +50,7 @@
     <footer id="footer" class="text-muted">
         <div class="container d-flex align-items-center">
             <p class="my-4">
-                Copyright © 2021 CORSNET. All Rights Reserved
+                Copyright © {{ date("Y") }} CORSNET. All Rights Reserved
             </p>
             <div class="ml-auto my-2">
                 <div>{{ $footer['phone'] }}</div>
@@ -72,4 +59,7 @@
             </div>
         </div>
     </footer>
+    <script>
+        window.baseStations = {{ \Illuminate\Support\Js::from($baseStations) }};
+    </script>
 @endsection

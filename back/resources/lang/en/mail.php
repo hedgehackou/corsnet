@@ -8,4 +8,5 @@ return [
     'mistake' => 'If you did not request a password reset, no further action is required.',
     'welcome' => 'Welcome to :network!',
     'accept_invite' => 'Accept invite',
+    'verify_email' => 'Verify email',
 ];
