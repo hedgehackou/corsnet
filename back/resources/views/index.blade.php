@@ -20,7 +20,7 @@
                     @foreach($navigation ?? [] as $link)
                         <li class="ml-2"><a href="/{{ $link['slug'] }}" class="text-white">{{ $link['title'] }}</a></li>
                     @endforeach
-                    <li class="ml-2"><a href="{{ route("sign-in") }}" class="text-white">{{ __('common.sign_in') }}</a></li>
+                    <li class="ml-2"><a href="/login" class="text-white">{{ __('common.sign_in') }}</a></li>
                 </ul>
             </div>
         </div>

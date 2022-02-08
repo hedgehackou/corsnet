@@ -8,5 +8,6 @@ return [
     'failed_to_register_user' => 'Не удалось зарегистрировать пользователя',
     'login_restriction' => 'Вам закрыт доступ в личный кабинет',
     'credentials_incorrect' => 'Неверные учетные данные',
-    'invite_accepted' => 'Инвайт был использован'
+    'invite_accepted' => 'Инвайт был использован',
+    'unverified_email' => 'Email неверифицирован',
 ];

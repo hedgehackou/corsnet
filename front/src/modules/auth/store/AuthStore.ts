@@ -47,6 +47,14 @@ const actions: ActionTree<AuthState, RootState> = {
 
     return response.data;
   },
+  async signUp(options, payload) {
+    const response = await Vue.axios.post(`auth/sign-up`, payload);
+
+    return response.data;
+  },
+  async verifyEmail(options, token) {
+    await Vue.axios.post(`email/verify/${token}`);
+  },
   async logout({ commit }) {
     localStorage.removeItem("auth_token");
     localStorage.removeItem("auth_abilities");

@@ -28,12 +28,14 @@ class InstallationService extends AbstractService
                 'network_name' => $data['network_name'],
                 'lang' => $data['lang'],
             ]);
-            User::create([
+            /** @var User $user */
+            $user = User::create([
                 'email' => $data['email'],
                 'name' => $data['name'],
                 'is_admin' => true,
                 'password' => Hash::make($data['password'])
             ]);
+            $user->markEmailAsVerified();
         });
         SettingsHelper::setEnv([
             'IS_INSTALLED' => 1,

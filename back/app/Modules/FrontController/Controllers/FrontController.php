@@ -41,6 +41,7 @@ class FrontController extends AbstractController
      */
     public function mainPage()
     {
+        $this->resolveLang();
         $page = Page::where('slug', '')->firstOrFail();
         return view('index', [
             'header' => $this->settingsService->getPageHeader(),
@@ -59,6 +60,7 @@ class FrontController extends AbstractController
      */
     public function regularPage(Page $page)
     {
+        $this->resolveLang();
         return view('index', [
             'header' => $this->settingsService->getPageHeader(),
             'footer' => $this->settingsService->getPageFooter(),

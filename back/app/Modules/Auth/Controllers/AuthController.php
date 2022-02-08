@@ -50,23 +50,11 @@ class AuthController extends AbstractController
         return new UserResources(Auth::user());
     }
 
-    public function signUpPage()
-    {
-
-    }
-
     public function signUp(SignUpRequest $request): UserResources
     {
-        $this->authService->signUp($request->validated());
+        $user = $this->authService->signUp($request->validated());
 
         return new UserResources($user);
-    }
-
-    public function signInPage()
-    {
-        return view('auth.sign-in', [
-            'settings' => $this->settingsService->getSettings()->toArray(),
-        ]);
     }
 
     /**
@@ -85,6 +73,11 @@ class AuthController extends AbstractController
 
         /** @var User $user */
         $user = Auth::user();
+        if (!$user->hasVerifiedEmail()) {
+            throw ValidationException::withMessages([
+                'email' => [__('auth.unverified_email')],
+            ]);
+        }
         $user->tokens()->delete();
         $token = $user->createToken('auth', [
             'is_admin' => $user->isAdmin(),

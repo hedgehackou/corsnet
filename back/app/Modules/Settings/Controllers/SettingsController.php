@@ -46,6 +46,18 @@ class SettingsController extends AbstractController
     }
 
     /**
+     * @return JsonResponse
+     */
+    public function allowUserSignUp(): JsonResponse
+    {
+        $settings = $this->settingsService->getSettings();
+
+        return response()->json([
+            'allow_user_sign_up' => !!$settings->allow_user_sign_up
+        ]);
+    }
+
+    /**
      * @param UpdateSettingsRequest $request
      *
      * @return JsonResponse

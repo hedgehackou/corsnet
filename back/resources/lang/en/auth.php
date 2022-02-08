@@ -20,5 +20,6 @@ return [
     'failed_to_register_user' => 'Failed to register user',
     'login_restriction' => 'You are denied access to your personal account',
     'credentials_incorrect' => 'Invalid credentials',
-    'invite_accepted' => 'Invite already accepted'
+    'invite_accepted' => 'Invite already accepted',
+    'unverified_email' => 'Email unverified',
 ];

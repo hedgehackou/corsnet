@@ -21,6 +21,7 @@ import Casters from "@/modules/admin/casters/Casters.vue";
 import CreateEditCaster from "@/modules/admin/casters/components/CreateEditCaster.vue";
 import ViewCaster from "@/modules/admin/casters/components/ViewCaster.vue";
 import Settings from "@/modules/settings/Settings.vue";
+import SignUp from "@/modules/auth/sign-up/SignUp.vue";
 
 Vue.use(VueRouter);
 
@@ -208,6 +209,12 @@ const routes: Array<RouteConfig> = [
     path: "/login",
     name: "login",
     component: Login,
+    meta: { guest: true },
+  },
+  {
+    path: "/sign-up",
+    name: "sign-up",
+    component: SignUp,
     meta: { guest: true },
   },
   {

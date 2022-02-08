@@ -43,7 +43,13 @@
     "confirmNewPassword": "Подтверждение нового пароля",
     "passwordResetSuccessfully": "Пароль сброшен успешно",
     "signOut": "Выход",
-    "logoutSuccess": "Выход выполнен успешно"
+    "logoutSuccess": "Выход выполнен успешно",
+    "signUp": "Зарегистрироваться",
+    "signUpSuccess": "Пользователь успешно зарегистрировался",
+    "signUpError": "Ошибка регистрации",
+    "signUpToStart": "Зарегистрируйтесь, чтобы начать",
+    "emailVerifiedSuccessfully": "Email успешно верифицирован",
+    "emailAlreadyVerified": "Email уже верифицирован"
   },
   "index": {
     "dashboard": "Dashboard",

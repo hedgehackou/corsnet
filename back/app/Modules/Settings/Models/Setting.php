@@ -10,6 +10,7 @@ use App\Base\Models\AbstractModel;
  * @property string $network_name
  * @property string $lang
  * @property string $google_map_key
+ * @property string $allow_user_sign_up
  */
 class Setting extends AbstractModel
 {
@@ -21,6 +22,11 @@ class Setting extends AbstractModel
     protected $fillable = [
         'network_name',
         'lang',
-        'google_map_key'
+        'google_map_key',
+        'allow_user_sign_up',
+    ];
+
+    protected $casts = [
+        'allow_user_sign_up' => 'boolean'
     ];
 }

@@ -43,7 +43,13 @@
     "confirmNewPassword": "New password confirmation",
     "passwordResetSuccessfully": "Password reset successfully",
     "signOut": "Sign out",
-    "logoutSuccess": "Sign out has been successful"
+    "logoutSuccess": "Sign out has been successful",
+    "signUp": "Sign up",
+    "signUpSuccess": "User successfully signed up",
+    "signUpError": "Sign up error",
+    "signUpToStart": "Sign up to start",
+    "emailVerifiedSuccessfully": "Email successfully verified",
+    "emailAlreadyVerified": "Email has already verified"
   },
   "index": {
     "dashboard": "Dashboard",
