@@ -50,6 +50,7 @@ class MountPointService extends AbstractService
     {
         /** @var MountPoint $mountPoint */
         $mountPoint = MountPoint::findOrFail($mountPointId);
+        $mountPoint->mountPointDescription()->delete();
         $mountPoint->delete();
     }
 

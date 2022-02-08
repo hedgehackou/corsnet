@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\FrontController\Controllers;
 
 use App\Base\Controllers\AbstractController;
+use App\Modules\BaseStations\Services\BaseStationService;
 use App\Modules\FrontController\Services\FrontControllerService;
 use App\Modules\Settings\Models\Page;
 use App\Modules\Settings\Services\SettingsService;
@@ -18,15 +19,21 @@ class FrontController extends AbstractController
 {
     private FrontControllerService $frontControllerService;
     private SettingsService $settingsService;
+    private BaseStationService $baseStationService;
 
     /**
      * @param FrontControllerService $frontControllerService
      * @param SettingsService        $settingsService
+     * @param BaseStationService     $baseStationService
      */
-    public function __construct(FrontControllerService $frontControllerService, SettingsService $settingsService)
-    {
+    public function __construct(
+        FrontControllerService $frontControllerService,
+        SettingsService $settingsService,
+        BaseStationService $baseStationService
+    ) {
         $this->frontControllerService = $frontControllerService;
         $this->settingsService = $settingsService;
+        $this->baseStationService = $baseStationService;
     }
 
     /**
@@ -41,6 +48,7 @@ class FrontController extends AbstractController
             'navigation' => $this->settingsService->getNavigation(),
             'page' => $this->frontControllerService->getPageData($page),
             'settings' => $this->settingsService->getSettings()->toArray(),
+            'baseStations' => $this->baseStationService->getAll(),
         ]);
     }
 
@@ -57,6 +65,7 @@ class FrontController extends AbstractController
             'navigation' => $this->settingsService->getNavigation(),
             'page' => $this->frontControllerService->getPageData($page),
             'settings' => $this->settingsService->getSettings()->toArray(),
+            'baseStations' => $this->baseStationService->getAll(),
         ]);
     }
 

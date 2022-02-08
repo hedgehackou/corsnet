@@ -7,6 +7,7 @@ namespace App\Modules\BaseStations\Services;
 use App\Base\Services\AbstractService;
 use App\Modules\BaseStations\Models\BaseStation;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class BaseStationService extends AbstractService
 {
@@ -51,6 +52,14 @@ class BaseStationService extends AbstractService
     public function getList()
     {
         return BaseStation::query()->paginate($this->getPerPage(), ['*'], $this->getPageName(), $this->getPage());
+    }
+
+    /**
+     * @return BaseStation[]|Collection
+     */
+    public function getAll()
+    {
+        return BaseStation::all();
     }
 
     /**

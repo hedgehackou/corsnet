@@ -258,9 +258,9 @@
                   />
                   <div class="mt-3">{{ $t("mountPoint.comprEncryp") }}</div>
                   <b-input
+                    disabled
                     size="sm"
                     v-model="mountPoint.compr_encryp"
-                    :disabled="mountPoint.disabled"
                   />
                   <form-error-list-printer
                     :error-list="getMountPointErrors(index, 'compr_encryp')"
@@ -269,7 +269,7 @@
                   <b-input
                     size="sm"
                     v-model="mountPoint.authentication"
-                    :disabled="mountPoint.disabled"
+                    disabled
                   />
                   <form-error-list-printer
                     :error-list="getMountPointErrors(index, 'authentication')"
@@ -364,27 +364,27 @@ export default class MountPoints extends Vue {
     { text: this.$t("mountPoint.universal"), value: "universal" },
   ];
   public carrierOptions = [
-    { text: "No", value: 0 },
-    { text: "Yes, L1", value: 1 },
-    { text: "Yes, L1&L2", value: 2 },
+    { text: this.$t("mountPoint.carriesOptions.0"), value: 0 },
+    { text: this.$t("mountPoint.carriesOptions.1"), value: 1 },
+    { text: this.$t("mountPoint.carriesOptions.2"), value: 2 },
   ];
   public nmeaOptions = [
     {
-      text: "Client must not send NMEA message with approximate position to Caster",
+      text: this.$t("mountPoint.nmeaOptions.0"),
       value: 0,
     },
     {
-      text: "Client must send NMEA GGA message with approximate posotion to Caster",
+      text: this.$t("mountPoint.nmeaOptions.1"),
       value: 1,
     },
   ];
   public solutionOptions = [
-    { text: "Single base", value: 0 },
-    { text: "Network", value: 1 },
+    { text: this.$t("mountPoint.solutionOptions.0"), value: 0 },
+    { text: this.$t("mountPoint.solutionOptions.1"), value: 1 },
   ];
   public feeOptions = [
-    { text: "No user fee", value: "N" },
-    { text: "Usage is charged", value: "Y" },
+    { text: this.$t("mountPoint.feeOptions.0"), value: "N" },
+    { text: this.$t("mountPoint.feeOptions.1"), value: "Y" },
   ];
 
   public mountPointDefaultParams = {

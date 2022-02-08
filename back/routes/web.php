@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'App\Modules\FrontController\Controllers\FrontController@mainPage');
+Route::get('/sign-up', 'App\Modules\Auth\Controllers\AuthController@signUp')->name('sign-up');
+Route::get('/sign-in', 'App\Modules\Auth\Controllers\AuthController@signInPage')->name('sign-in');
 Route::get('/{page:slug}', 'App\Modules\FrontController\Controllers\FrontController@regularPage');
 
 Route::get('/{any}', 'App\Modules\FrontController\Controllers\FrontController@index')
