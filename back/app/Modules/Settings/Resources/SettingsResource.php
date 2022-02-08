@@ -30,6 +30,7 @@ class SettingsResource extends AbstractResource
             'lang' => $this->resource->lang,
             'network_name' => $this->resource->network_name,
             'google_map_key' => $this->resource->google_map_key,
+            'allow_user_sign_up' => $this->resource->allow_user_sign_up,
         ];
     }
 }

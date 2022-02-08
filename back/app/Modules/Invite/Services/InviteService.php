@@ -69,6 +69,19 @@ class InviteService extends AbstractService
     }
 
     /**
+     * @param string $token
+     *
+     * @return void
+     */
+    public function verifyEmail(string $token)
+    {
+        /** @var User $user */
+        $user = User::where('email_verification_token', $token)->firstOrFail();
+        $user->markEmailAsVerified();
+        $user->update(['email_verification_token' => null]);
+    }
+
+    /**
      * @param array $data
      */
     public function acceptInvite(array $data)
@@ -80,12 +93,14 @@ class InviteService extends AbstractService
             ->firstOrFail();
 
         DB::transaction(function () use ($invite, $data) {
-            User::create([
+            /** @var User $user */
+            $user = User::create([
                 'email' => $invite->email,
                 'name' => $data['name'],
                 'is_admin' => $invite->is_admin,
                 'password' => Hash::make($data['password'])
             ]);
+            $user->markEmailAsVerified();
             $invite->is_accepted = true;
             $invite->save();
         });

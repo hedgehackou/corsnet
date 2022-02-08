@@ -14,6 +14,8 @@
       <div class="mt-3">{{ $t("settings.googleApiKey") }}</div>
       <b-input v-model="settingsParams.google_map_key" class="" />
       <form-error-list-printer :error-list="settingsErrors.google_map_key" />
+      <div class="mt-3">{{ $t("settings.allowUserSignUp") }}</div>
+      <b-check v-model="settingsParams.allow_user_sign_up"></b-check>
       <div class="d-flex">
         <b-btn @click="updateSettings" variant="primary" class="mt-3 ml-auto">{{
           $t("index.save")
@@ -45,6 +47,7 @@ export default class MainUnit extends Vue {
     network_name: null,
     lang: null,
     google_map_key: null,
+    allow_user_sign_up: null,
   };
   public settingsParams: any = { ...this.settingsDefaultParams };
   public settingsErrors: any = { ...this.settingsDefaultParams };

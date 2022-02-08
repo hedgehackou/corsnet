@@ -45,6 +45,7 @@ class SettingsService extends AbstractService
         $settings->network_name = $data['network_name'] ?? '';
         $settings->lang = $data['lang'] ?? '';
         $settings->google_map_key = $data['google_map_key'] ?? null;
+        $settings->allow_user_sign_up = $data['allow_user_sign_up'] ?? false;
         $settings->save();
 
         return $settings;

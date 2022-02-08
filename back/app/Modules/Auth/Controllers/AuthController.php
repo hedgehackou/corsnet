@@ -10,7 +10,10 @@ use App\Modules\Auth\Requests\FetchProfileRequest;
 use App\Modules\Auth\Requests\LoginRequest;
 use App\Modules\Auth\Requests\ResetPasswordRequest;
 use App\Modules\Auth\Requests\SendResetLinkRequest;
+use App\Modules\Auth\Requests\SignUpRequest;
 use App\Modules\Auth\Resources\UserResources;
+use App\Modules\Auth\Services\AuthService;
+use App\Modules\Settings\Services\SettingsService;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +25,22 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends AbstractController
 {
     /**
+     * @var AuthService $authService
+     */
+    private AuthService $authService;
+    private SettingsService $settingsService;
+
+    /**
+     * @param AuthService     $authService
+     * @param SettingsService $settingsService
+     */
+    public function __construct(AuthService $authService, SettingsService $settingsService)
+    {
+        $this->authService = $authService;
+        $this->settingsService = $settingsService;
+    }
+
+    /**
      * @param FetchProfileRequest $request
      *
      * @return UserResources
@@ -29,6 +48,13 @@ class AuthController extends AbstractController
     public function fetchProfile(FetchProfileRequest $request): UserResources
     {
         return new UserResources(Auth::user());
+    }
+
+    public function signUp(SignUpRequest $request): UserResources
+    {
+        $user = $this->authService->signUp($request->validated());
+
+        return new UserResources($user);
     }
 
     /**
@@ -47,6 +73,11 @@ class AuthController extends AbstractController
 
         /** @var User $user */
         $user = Auth::user();
+        if (!$user->hasVerifiedEmail()) {
+            throw ValidationException::withMessages([
+                'email' => [__('auth.unverified_email')],
+            ]);
+        }
         $user->tokens()->delete();
         $token = $user->createToken('auth', [
             'is_admin' => $user->isAdmin(),

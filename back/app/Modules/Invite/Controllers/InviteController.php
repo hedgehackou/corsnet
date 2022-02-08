@@ -10,6 +10,7 @@ use App\Modules\Invite\Requests\AcceptInviteRequest;
 use App\Modules\Invite\Requests\CreateInviteRequest;
 use App\Modules\Invite\Requests\DeleteInviteRequest;
 use App\Modules\Invite\Requests\GetInviteInfoRequest;
+use App\Modules\Invite\Requests\VerifyEmailRequest;
 use App\Modules\Invite\Resources\InviteInfoResource;
 use App\Modules\Invite\Resources\InviteListResource;
 use App\Modules\Invite\Services\InviteService;
@@ -78,6 +79,19 @@ class InviteController extends AbstractController
         $invite = $this->inviteRepository->getInviteByToken($request->route('token'));
 
         return new InviteInfoResource($invite);
+    }
+
+    /**
+     * @param VerifyEmailRequest $request
+     * @param string             $token
+     *
+     * @return JsonResponse
+     */
+    public function verifyEmail(VerifyEmailRequest $request, string $token): JsonResponse
+    {
+        $this->inviteService->verifyEmail($token);
+
+        return response()->json();
     }
 
     /**

@@ -15,6 +15,11 @@ const actions: ActionTree<SettingsState, RootState> = {
     const { data } = await Vue.axios.get(`settings`, { params: payload });
     return data;
   },
+  async allowUserSignUp() {
+    const { data } = await Vue.axios.get("settings/allow-user-sign-up");
+    // @ts-ignore
+    return data.allow_user_sign_up;
+  },
   async updateSettings(options, payload) {
     await Vue.axios.put(`settings`, payload);
   },

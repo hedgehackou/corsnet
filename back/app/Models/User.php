@@ -14,6 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $name
  * @property string $email
  * @property string $password
+ * @property string $email_verification_token
  * @property bool $is_admin
  */
 class User extends Authenticatable
@@ -32,6 +33,7 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
+        'email_verification_token',
     ];
 
     /**

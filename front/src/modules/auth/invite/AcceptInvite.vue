@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body login-card-body">
         <p class="login-box-msg">{{ $t("invite.acceptInvite") }}</p>
-        <form @submit.prevent="resetPassword">
+        <form @submit.prevent="acceptInvite">
           <div class="input-group mb-1 mt-2">
             <input
               type="email"
@@ -148,7 +148,7 @@ export default class AcceptInvite extends Vue {
     (this.appElement as HTMLElement).classList.remove("login-page");
   }
 
-  public async resetPassword(): Promise<void> {
+  public async acceptInvite(): Promise<void> {
     let loader = this.$loading.show();
 
     this.acceptInviteErrors = {

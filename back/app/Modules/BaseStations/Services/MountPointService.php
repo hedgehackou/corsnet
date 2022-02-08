@@ -6,6 +6,8 @@ namespace App\Modules\BaseStations\Services;
 
 use App\Base\Services\AbstractService;
 use App\Modules\BaseStations\Models\MountPoint;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 class MountPointService extends AbstractService
 {
@@ -16,7 +18,11 @@ class MountPointService extends AbstractService
      */
     public function createMountPoint(array $data): MountPoint
     {
-        return MountPoint::create($data);
+        /** @var MountPoint $mountPoint */
+        $mountPoint = MountPoint::create($data);
+        $mountPoint->mountPointDescription()->updateOrCreate(['mount_point_id' => $mountPoint->id], $data);
+
+        return $mountPoint;
     }
 
     /**
@@ -30,6 +36,7 @@ class MountPointService extends AbstractService
         /** @var MountPoint $mountPoint */
         $mountPoint = MountPoint::findOrFail($mountPointId);
         $mountPoint->update($data);
+        $mountPoint->mountPointDescription()->updateOrCreate(['mount_point_id' => $mountPointId], $data);
 
         return $mountPoint;
     }
@@ -43,6 +50,7 @@ class MountPointService extends AbstractService
     {
         /** @var MountPoint $mountPoint */
         $mountPoint = MountPoint::findOrFail($mountPointId);
+        $mountPoint->mountPointDescription()->delete();
         $mountPoint->delete();
     }
 
@@ -59,7 +67,7 @@ class MountPointService extends AbstractService
     /**
      * @param int $baseStationId
      *
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     * @return Builder[]|Collection
      */
     public function getMountPointList(int $baseStationId)
     {
